@@ -27,6 +27,28 @@ const MintPage = () => {
     }
   }
 
+  const connectWallet = async () => {
+    try {
+      const {ethereum} = window;
+
+      if (!ethereum) {
+        message.error("Get MetaMask!", 3);
+      }
+
+      const accounts = await ethereum.request({method: "eth_requestAccounts"});
+
+      message.success(`Connected ${accounts[0]}`);
+      setCurrentAccount(accounts[0]);
+
+
+
+    } catch (error) {
+
+    }
+    
+
+  }
+  
 
   useEffect(() => {
     checkIfWalletIsConnected()
@@ -34,7 +56,7 @@ const MintPage = () => {
 
   const renderNotConnectedContainer = (
     <div>
-      <Button style={{flex: '0 0 120px'}} >Connect to Metamask</Button>
+      <Button onClick={connectWallet} style={{flex: '0 0 120px'}} >Connect to Metamask</Button>
     </div>
   )
 
