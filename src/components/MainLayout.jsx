@@ -3,6 +3,7 @@ import './Main.css'
 
 import { Layout, Menu } from 'antd';
 import { UploadOutlined, PlusCircleOutlined, UnorderedListOutlined } from '@ant-design/icons';
+import { Link } from 'react-router-dom';
 
 
 const { Content, Footer, Sider } = Layout;
@@ -33,7 +34,7 @@ const MainLayout = ({children}) => {
         <div className="logo" />
         <Menu theme="dark" mode="inline" defaultSelectedKeys={['4']}>
           <Menu.Item key="1" icon={<PlusCircleOutlined />}>
-            Mint an NFT
+            <Link to="/mint" >Mint an NFT</Link>
           </Menu.Item>
           <Menu.Item key="2" icon={<UnorderedListOutlined />}>
             Mint a collection
