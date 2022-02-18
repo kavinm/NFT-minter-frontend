@@ -2,7 +2,9 @@ import React, {useState} from 'react'
 import {Space, Input, Form, Row, Col, InputNumber, Radio, Button, Card} from 'antd'
 import { DeleteOutlined } from '@ant-design/icons';
 
+import { Typography } from 'antd';
 
+const { Title } = Typography;
 const {TextArea} = Input;
 
 
@@ -42,6 +44,7 @@ const MintingForm = () => {
 
   return (
     <>
+    <Title level={2} >Minting Tool</Title>
       <Row justify="center">
         <Col span={12}>
           <Form layout="horizontal">

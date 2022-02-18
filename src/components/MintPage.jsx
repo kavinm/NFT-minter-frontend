@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import MintingForm from './MintingForm'
-import {Button, Row, Col, message} from 'antd'
+import {Button, message} from 'antd'
 
 const MintPage = () => {
 
@@ -39,17 +39,11 @@ const MintPage = () => {
 
       message.success(`Connected ${accounts[0]}`);
       setCurrentAccount(accounts[0]);
-
-
-
     } catch (error) {
-
-    }
-    
-
+      console.log(error)
+    } 
   }
   
-
   useEffect(() => {
     checkIfWalletIsConnected()
   }, [])
@@ -59,7 +53,6 @@ const MintPage = () => {
       <Button onClick={connectWallet} style={{flex: '0 0 120px'}} >Connect to Metamask</Button>
     </div>
   )
-
 
   return (
     <>
