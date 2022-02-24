@@ -9,12 +9,16 @@ import {
   Radio,
   Button,
   Card,
+  message
 } from "antd";
 import { DeleteOutlined } from "@ant-design/icons";
 import { ethers } from "ethers";
 
+import Axios from 'axios'
 import { Typography } from "antd";
 import myEpicNft from "../utils/MyEpicNFT.json";
+
+require('dotenv').config({path: '../../.env'})
 
 const { Title } = Typography;
 const { TextArea } = Input;
@@ -58,7 +62,23 @@ const MintingForm = () => {
     </>
   );
 
-  const mintNFT = () => {
+  const mintNFT = async () => {
+
+    console.log("STARTED")
+
+    const data = new FormData()
+    data.append("file", image)
+
+    Axios.post('https://api.pinata.cloud/pinning/pinFileToIPFS', data, {
+      headers: {
+        Authorization: `Bearer ${process.env.JWT}`
+      }
+    }).then(response => {
+      console.log(response.data)
+    }).catch(error => console.log(error))
+
+
+    
     try {
       const { ethereum } = window;
 
@@ -71,15 +91,17 @@ const MintingForm = () => {
           signer
         );
 
-        console.log("Going to pop wallet now to pay gas...");
-        let nftTx = connectedContract.makeAnEpicNFT();
-        console.log();
+        message.info("Going to pop wallet now to pay gas...");
+        let nftTx = await connectedContract.makeAnEpicNFT();
+        message.info(`Mined, see transaction: https://rinkeby.etherscan.io/tx/${nftTx.hash}`);
+
       } else {
         console.log("Ethereum object doesn't exist!");
       }
     } catch (error) {
       console.log(error);
     }
+    
   };
 
   return (
