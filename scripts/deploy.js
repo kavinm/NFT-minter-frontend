@@ -21,9 +21,9 @@ async function main() {
 
   console.log("Greeter deployed to:", nft.address);
 
-  let txn = await nftContract.makeAnEpicNFT();
+  let txn = await nft.makeAnEpicNFT();
   await txn.wait();
-  let txn = await nftContract.makeAnEpicNFT();
+  txn = await nft.makeAnEpicNFT();
   await txn.wait();
 }
 

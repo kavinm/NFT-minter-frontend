@@ -473,8 +473,8 @@
       ]
     },
     "/Users/kavinmohan/Code/NFT-minter-frontend/contracts/MyEpicNFT.sol": {
-      "lastModificationDate": 1645632747901,
-      "contentHash": "d38bf55ad712edb17c2593eba3e5ddc9",
+      "lastModificationDate": 1645738057375,
+      "contentHash": "a13711594fe873ec6858cce86bc53653",
       "sourceName": "contracts/MyEpicNFT.sol",
       "solcConfig": {
         "version": "0.8.4",
