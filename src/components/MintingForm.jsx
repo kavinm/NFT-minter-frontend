@@ -13,11 +13,11 @@ import {
 } from "antd";
 import { DeleteOutlined } from "@ant-design/icons";
 import { ethers } from "ethers";
-
 import Axios from "axios";
 import { Typography } from "antd";
 import myEpicNft from "../utils/MyEpicNFT.json";
-
+import { useDispatch } from "react-redux";
+import { addAccount } from "../actions/accountActions";
 const { Title } = Typography;
 const { TextArea } = Input;
 
@@ -34,6 +34,8 @@ const MintingForm = () => {
   const [nftType, setNftType] = useState("");
   const [socialMediaURL, setSocialMediaURL] = useState("");
 
+
+  const dispatch = useDispatch()
   const fileUploadHandler = (e) => {
     const the_file = e.target.files[0];
     var reader = new FileReader();
@@ -79,6 +81,9 @@ const MintingForm = () => {
 
       if (ethereum) {
         const provider = new ethers.providers.Web3Provider(ethereum);
+
+        addAccount(provider, dispatch)
+
         const signer = provider.getSigner();
         const connectedContract = new ethers.Contract(
           CONTRACT_ADDRESS,
