@@ -30,7 +30,7 @@ abstract contract ERC721URIStorage is ERC721 {
         );
 
         string memory _tokenURI = _tokenURIs[tokenId];
-        string memory base = baseURI();
+        string memory base = _baseURI();
 
         // If there is no base URI, return the token URI.
         if (bytes(base).length == 0) {
