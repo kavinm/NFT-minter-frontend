@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Space,
   Input,
@@ -13,15 +13,16 @@ import {
 } from "antd";
 import { DeleteOutlined } from "@ant-design/icons";
 import { ethers } from "ethers";
-import Axios from "axios";
+import axios from "axios";
 import { Typography } from "antd";
 import myEpicNft from "../utils/MyEpicNFT.json";
+
 import { useDispatch } from "react-redux";
 import { addAccount } from "../actions/accountActions";
 const { Title } = Typography;
 const { TextArea } = Input;
 
-const MintingForm = () => {
+const MintingForm = (props) => {
   const CONTRACT_ADDRESS = "0x23080098F529202270AEb79acE0285c9b210Cda3";
   const TOTAL_MINT = 500;
 
@@ -34,6 +35,7 @@ const MintingForm = () => {
   const [nftType, setNftType] = useState("");
   const [socialMediaURL, setSocialMediaURL] = useState("");
 
+  const {address} = props
 
   const dispatch = useDispatch()
   const fileUploadHandler = (e) => {
@@ -63,18 +65,24 @@ const MintingForm = () => {
   );
 
   const mintNFT = async () => {
-    console.log("STARTED");
 
-    // const data = new FormData()
-    // data.append("file", image)
+    const url = `https://api.pinata.cloud/pinning/pinJSONToIPFS`;
+    const data = {
+      "title": title,
+      "description": description,
+      "count": count,
+      "social": socialMediaURL,
+      "imageSRC": imgSRC
+    }
 
-    // Axios.post('https://api.pinata.cloud/pinning/pinFileToIPFS', data, {
-    //   headers: {
-    //     Authorization: `Bearer ${process.env.JWT}`
-    //   }
-    // }).then(response => {
-    //   console.log(response.data)
-    // }).catch(error => console.log(error))
+    const response_value = await axios.post(url, data, {
+      headers: {
+        'pinata_api_key': "6dc806852197ca3a8e7b",
+        "pinata_secret_api_key": "334eed80fbabe379df3d8df9cc48198488dfb5d6d68f022c562fdba4af48de0f",
+      }
+    })
+
+    const CID = response_value.data.IpfsHash
 
     try {
       const { ethereum } = window;
@@ -92,7 +100,7 @@ const MintingForm = () => {
         );
 
         message.info("Going to pop wallet now to pay gas...");
-        let nftTx = await connectedContract.makeAnEpicNFT();
+        let nftTx = await connectedContract.makeAnEpicNFT(address, CID);
         message.info(
           `Mined, see transaction: https://rinkeby.etherscan.io/tx/${nftTx.hash}`
         );
@@ -104,6 +112,7 @@ const MintingForm = () => {
     }
   };
 
+// Logi
   return (
     <>
       <Title level={2}>Minting Tool</Title>
@@ -133,7 +142,7 @@ const MintingForm = () => {
             </Form.Item>
             <Form.Item>
               <Space style={{ width: "100%" }}>
-                <InputNumber
+                <Input
                   style={{ width: "100%" }}
                   placeholder="Count"
                   value={count}
