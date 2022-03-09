@@ -22,7 +22,7 @@ const { Title } = Typography;
 const { TextArea } = Input;
 
 const MintingForm = () => {
-  const CONTRACT_ADDRESS = "0x23080098F529202270AEb79acE0285c9b210Cda3";
+  const CONTRACT_ADDRESS = "0x4C4a07F737Bf57F6632B6CAB089B78f62385aCaE";
   const TOTAL_MINT = 500;
 
   const [imgSRC, setImgSRC] = useState("");
@@ -62,6 +62,38 @@ const MintingForm = () => {
     </>
   );
 
+  require("dotenv").config();
+  const key = "3907fd528edb97a7e58c";
+  const secret =
+    "c536ad0ed40bf391e796d462b22234cf710f5d7935d06d46e408e01263d4b5b7";
+
+  const axios = require("axios");
+
+  const pinJSONToIPFS = async (JSONBody) => {
+    const url = `https://api.pinata.cloud/pinning/pinJSONToIPFS`;
+    //making axios POST request to Pinata ⬇️
+    return axios
+      .post(url, JSONBody, {
+        headers: {
+          pinata_api_key: key,
+          pinata_secret_api_key: secret,
+        },
+      })
+      .then(function (response) {
+        return {
+          success: true,
+          pinataUrl:
+            "https://gateway.pinata.cloud/ipfs/" + response.data.IpfsHash,
+        };
+      })
+      .catch(function (error) {
+        console.log(error);
+        return {
+          success: false,
+          message: error.message,
+        };
+      });
+  };
   const mintNFT = async () => {
     console.log("STARTED");
 
