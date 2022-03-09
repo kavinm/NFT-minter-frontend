@@ -15,7 +15,7 @@ import { DeleteOutlined } from "@ant-design/icons";
 import { ethers } from "ethers";
 import axios from "axios";
 import { Typography } from "antd";
-import myEpicNft from "../utils/MyEpicNFT.json";
+import myNFT from "../utils/MyNFT.json";
 
 import { useDispatch } from "react-redux";
 import { addAccount } from "../actions/accountActions";
@@ -41,6 +41,7 @@ const MintingForm = (props) => {
   const fileUploadHandler = (e) => {
     const the_file = e.target.files[0];
     var reader = new FileReader();
+    setImage(the_file);
     var url = reader.readAsDataURL(the_file);
     reader.onloadend = (e) => {
       setImgSRC(reader.result);
@@ -74,16 +75,20 @@ const MintingForm = (props) => {
       "social": socialMediaURL,
       "imageSRC": imgSRC
     }
+    console.log(image);
+    console.log(imgSRC)
 
     const response_value = await axios.post(url, data, {
+      maxBodyLength: 'Infinity',
+
       headers: {
         'pinata_api_key': "6dc806852197ca3a8e7b",
         "pinata_secret_api_key": "334eed80fbabe379df3d8df9cc48198488dfb5d6d68f022c562fdba4af48de0f",
       }
     })
 
-    const CID = response_value.data.IpfsHash
-
+    const Jsonhash= response_value.data.IpfsHash
+    const JsonUrl = "https://ipfs.io/ipfs/" + Jsonhash;
     try {
       const { ethereum } = window;
 
@@ -95,12 +100,12 @@ const MintingForm = (props) => {
         const signer = provider.getSigner();
         const connectedContract = new ethers.Contract(
           CONTRACT_ADDRESS,
-          myNFTAbi.abi,
+          myNFT.abi,
           signer
         );
         
         message.info("Going to pop wallet now to pay gas...");
-        let nftTx = await connectedContract.myNFT(address, CID);
+        let nftTx = await connectedContract.mintNFT(address, JsonUrl);
         message.info(
           `Mined, see transaction: https://rinkeby.etherscan.io/tx/${nftTx.hash}`
         );
