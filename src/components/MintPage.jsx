@@ -67,7 +67,7 @@ const MintPage = () => {
   );
 
   return (
-    <>{currentAccount === "" ? renderNotConnectedContainer : <MintingForm />}</>
+    <>{currentAccount === "" ? renderNotConnectedContainer : <MintingForm address={currentAccount} />}</>
   );
 };
 

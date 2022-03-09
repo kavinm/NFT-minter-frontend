@@ -25,7 +25,7 @@ module.exports = {
     },
     rinkeby: {
       url: "https://eth-rinkeby.alchemyapi.io/v2/iExNDawOnqHH63N9c0-2_o3NKqMUNAbU",
-      accounts: [privateKey],
+      accounts: ["66b70d2a73651d6755cbe40a9aa41ee9ee29a785edfa4f32cfc7394318ce0b3e"],
     },
   },
   solidity: "0.8.4",
