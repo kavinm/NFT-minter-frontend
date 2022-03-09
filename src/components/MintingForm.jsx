@@ -67,27 +67,40 @@ const MintingForm = (props) => {
 
   const mintNFT = async () => {
 
+
+    let imageData = new FormData();
+    imageData.append('file', image)
+    const imageURL = `https://api.pinata.cloud/pinning/pinFileToIPFS`
     const url = `https://api.pinata.cloud/pinning/pinJSONToIPFS`;
-    const data = {
-      "title": title,
-      "description": description,
-      "count": count,
-      "social": socialMediaURL,
-      "imageSRC": imgSRC
-    }
-    console.log(image);
-    console.log(imgSRC)
 
-    const response_value = await axios.post(url, data, {
+    const response_value = await axios.post(imageURL, imageData, {
       maxBodyLength: 'Infinity',
+      headers: {
+        'pinata_api_key': "6dc806852197ca3a8e7b",
+        "pinata_secret_api_key": "334eed80fbabe379df3d8df9cc48198488dfb5d6d68f022c562fdba4af48de0f",
+        'Content-Type': `multipart/form-data; boundary=${imageData._boundary}`,
 
+      }
+    })
+
+    const data = {
+      "name": title,
+      "description": description,
+      "external_url": socialMediaURL,
+      "image": "https://ipfs.io/ipfs/" + response_value.data.IpfsHash
+    }
+
+    const meta_data_response = await axios.post(url, data, {
       headers: {
         'pinata_api_key': "6dc806852197ca3a8e7b",
         "pinata_secret_api_key": "334eed80fbabe379df3d8df9cc48198488dfb5d6d68f022c562fdba4af48de0f",
       }
     })
 
-    const Jsonhash= response_value.data.IpfsHash
+    console.log(meta_data_response.data.IpfsHash)
+
+
+    const Jsonhash = meta_data_response.data.IpfsHash
     const JsonUrl = "https://ipfs.io/ipfs/" + Jsonhash;
     try {
       const { ethereum } = window;
