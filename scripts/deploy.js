@@ -14,16 +14,17 @@ async function main() {
   // await hre.run('compile');
 
   // We get the contract to deploy
-  const NFT = await hre.ethers.getContractFactory("MyEpicNFT");
+  const NFT = await hre.ethers.getContractFactory("MyNFT");
   const nft = await NFT.deploy();
 
   await nft.deployed();
 
-  console.log("Greeter deployed to:", nft.address);
+  console.log("NFT deployed to:", nft.address);
 
-  let txn = await nft.makeAnEpicNFT();
-  await txn.wait();
-  txn = await nft.makeAnEpicNFT();
+  let txn = await nft.mintNFT(
+    "0xf228F1B867445c5cD36e8210aa6EA3608D3D4622",
+    " https://wow-prod-nftribe.s3.eu-west-2.amazonaws.com/t/2681"
+  );
   await txn.wait();
 }
 

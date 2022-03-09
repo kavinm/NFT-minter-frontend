@@ -23,7 +23,7 @@ const { Title } = Typography;
 const { TextArea } = Input;
 
 const MintingForm = (props) => {
-  const CONTRACT_ADDRESS = "0x23080098F529202270AEb79acE0285c9b210Cda3";
+  const CONTRACT_ADDRESS = "0x93b9439e2a89019dee11306e78adcf77c7431caf";
   const TOTAL_MINT = 500;
 
   const [imgSRC, setImgSRC] = useState("");
@@ -95,12 +95,12 @@ const MintingForm = (props) => {
         const signer = provider.getSigner();
         const connectedContract = new ethers.Contract(
           CONTRACT_ADDRESS,
-          myEpicNft.abi,
+          myNFTAbi.abi,
           signer
         );
-
+        
         message.info("Going to pop wallet now to pay gas...");
-        let nftTx = await connectedContract.makeAnEpicNFT(address, CID);
+        let nftTx = await connectedContract.myNFT(address, CID);
         message.info(
           `Mined, see transaction: https://rinkeby.etherscan.io/tx/${nftTx.hash}`
         );
