@@ -166,7 +166,7 @@ const MintingForm = (props) => {
                   value={count}
                   onChange={(e) => setCount(e.target.value)}
                 />
-                <Radio.Group>
+                <Radio.Group style={{ width: "200px" }}>
                   <Radio.Button
                     value="ERC721"
                     style={{ width: "50%" }}

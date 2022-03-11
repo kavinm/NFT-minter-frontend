@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import MintingForm from "./MintingForm";
 import { Button, message } from "antd";
+import MintOneNFT from "./MintOneNFT";
 
 const MintPage = () => {
   const [currentAccount, setCurrentAccount] = useState("");

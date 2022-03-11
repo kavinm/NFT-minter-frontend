@@ -4,16 +4,20 @@ import {BrowserRouter, Route, Routes, Link} from 'react-router-dom'
 import MainLayout from './components/MainLayout'
 import MintingForm from './components/MintingForm'
 import MintPage from './components/MintPage'
+import LandingPage from './components/LandingPage'
+import MintOneNFT from './components/MintOneNFT'
+import ImagePreview from './components/ImagePreview'
 
 const App = () => {
   return (
     <>
     <BrowserRouter>
-      <MainLayout>
         <Routes>
-          <Route path="/mint" element={<MintPage/>}/>
+          <Route path="/" element={<LandingPage/>}/>
+          <Route path="/mint" element={<MainLayout><MintPage/></MainLayout>}/>
+          <Route path="/img" element={<ImagePreview/>}/>
+
         </Routes>
-      </MainLayout>
     </BrowserRouter>
 
     </>
