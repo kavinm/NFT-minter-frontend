@@ -37,7 +37,7 @@ const MainLayout = ({children}) => {
             <Link to="/mint" >Mint an NFT</Link>
           </Menu.Item>
           <Menu.Item key="2" icon={<UnorderedListOutlined />}>
-            Mint a collection
+            <Link to="/collection" >Mint a collection</Link>
           </Menu.Item>
           <Menu.Item key="3" icon={<UploadOutlined />}>
             Other random tag

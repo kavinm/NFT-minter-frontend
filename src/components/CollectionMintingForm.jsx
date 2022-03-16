@@ -22,9 +22,9 @@ import { addAccount } from "../actions/accountActions";
 const { Title } = Typography;
 const { TextArea } = Input;
 
-const MintingForm = (props) => {
+const CollectionMintingForm = (props) => {
   
-  const CONTRACT_ADDRESS = props.contract_address ? props.contract_address :  "0x93b9439e2a89019dee11306e78adcf77c7431caf";
+  const CONTRACT_ADDRESS = props.contractAddress ? props.contractAddress :  "0x93b9439e2a89019dee11306e78adcf77c7431caf";
   console.log(CONTRACT_ADDRESS)
   const TOTAL_MINT = 500;
 
@@ -135,7 +135,6 @@ const MintingForm = (props) => {
 // Logi
   return (
     <>
-      <Title level={2}>Minting Tool</Title>
       <Row justify="center">
         <Col span={12}>
           <Form layout="horizontal">
@@ -214,4 +213,4 @@ const MintingForm = (props) => {
   );
 };
 
-export default MintingForm;
+export default CollectionMintingForm;

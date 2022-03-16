@@ -7,6 +7,7 @@ import MintPage from './components/MintPage'
 import LandingPage from './components/LandingPage'
 import MintOneNFT from './components/MintOneNFT'
 import ImagePreview from './components/ImagePreview'
+import CollectionPage from './components/CollectionPage'
 
 const App = () => {
   return (
@@ -15,6 +16,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<LandingPage/>}/>
           <Route path="/mint" element={<MainLayout><MintPage/></MainLayout>}/>
+          <Route path="/collection" element={<MainLayout><CollectionPage/></MainLayout>}/>
           <Route path="/img" element={<ImagePreview/>}/>
 
         </Routes>

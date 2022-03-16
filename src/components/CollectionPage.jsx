@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import MintingForm from "./MintingForm";
+import CollectionForm from "./CollectionForm";
 import { Button, message } from "antd";
 
-const MintPage = () => {
+const CollectionPage = () => {
   const [currentAccount, setCurrentAccount] = useState("");
 
   const checkIfWalletIsConnected = async () => {
@@ -67,8 +67,8 @@ const MintPage = () => {
   );
 
   return (
-    <>{currentAccount === "" ? renderNotConnectedContainer : <MintingForm address={currentAccount} />}</>
+    <>{currentAccount === "" ? renderNotConnectedContainer : <CollectionForm address={currentAccount} />}</>
   );
 };
 
-export default MintPage;
+export default CollectionPage;
