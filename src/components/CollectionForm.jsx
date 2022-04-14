@@ -206,7 +206,7 @@ const CollectionForm = (props) => {
                   />
                 }
                 actions={[
-                  <EyeOutlined />,
+                  <a href={`https://rinkeby.rarible.com/collection/${item.address}/items`}><EyeOutlined/></a>,
                   <PlusCircleOutlined key="setting" onClick={() => openModal(item)} />,
                 ]}
                 hoverable={true}
