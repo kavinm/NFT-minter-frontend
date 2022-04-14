@@ -23,7 +23,10 @@ contract AddressToCollection {
 
     //will return all the contract addresses for a organization EOA
     function getCollections() public view returns (address[] memory) {
-        require(addressMapping[msg.sender].verified);
+        if (addressMapping[msg.sender].verified) {
+            address[] memory emptyArray;
+            return emptyArray;
+        }
         return addressMapping[msg.sender].addresses;
     }
 
