@@ -23,8 +23,9 @@ const { Title } = Typography;
 const { TextArea } = Input;
 
 const CollectionMintingForm = (props) => {
-  
+
   const CONTRACT_ADDRESS = props.contractAddress.address;
+
   const TOTAL_MINT = 500;
 
   const [imgSRC, setImgSRC] = useState("");
@@ -67,7 +68,9 @@ const CollectionMintingForm = (props) => {
   );
 
   const mintNFT = async () => {
+
     console.log(CONTRACT_ADDRESS)
+
 
     let imageData = new FormData();
     imageData.append('file', image)
@@ -119,7 +122,9 @@ const CollectionMintingForm = (props) => {
         );
         
         message.info("Going to pop wallet now to pay gas...");
+
         console.log(address)
+
         let nftTx = await connectedContract.mintNFT(address, JsonUrl);
         message.info(
           `Mined, see transaction: https://rinkeby.etherscan.io/tx/${nftTx.hash}`

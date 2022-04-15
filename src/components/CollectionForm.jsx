@@ -1,3 +1,4 @@
+
 import React, {useState, useEffect} from 'react'
 import { Card, Avatar, Button, Modal, Space, Form, Input } from 'antd';
 import { EditOutlined, EyeOutlined, PlusCircleOutlined } from '@ant-design/icons';
@@ -25,13 +26,16 @@ const sampleData = [
   }
 ]
 
+
 const FACTORY_ADDRESS = "0xde18f6d98a24bac341dd36c3d0c28e05613e447d"
+
 
 
 
 const CollectionForm = (props) => {
 
   const [visible, setVisible] = useState(false)
+
   const [addCollectionModal, setAddCollectionModal] = useState(false)
   const [modalDetails, setModalDetails] = useState({})
   const [collectionAddresses, setCollectionAddresses] = useState([])
@@ -107,10 +111,12 @@ const CollectionForm = (props) => {
   const openModal = (item) => {
     setModalDetails(() => {
       return item
+
     })
 
     setVisible(true)
   }
+
 
   const createCollection = async () => {
     try {
@@ -150,7 +156,9 @@ const CollectionForm = (props) => {
       <Space direction='vertical'>
         <Modal
           visible={visible}
+
           title={`Mint Collection: Test`}
+
           width={1000}
           footer={[
             <Button onClick={() => setVisible(false)}>
@@ -158,6 +166,7 @@ const CollectionForm = (props) => {
             </Button>
           ]}
         >
+
           <CollectionMintingForm contractAddress={modalDetails} address={props.address}/>
         </Modal>
         <Modal
@@ -196,24 +205,29 @@ const CollectionForm = (props) => {
         <Space wrap>
           {
             collectionAddresses.map(item => {
+
               return (
                 <Card
                 style={{ width: 250 }}
                 cover={
                   <img
                     alt="example"
+
                     src={item.image}
                   />
                 }
                 actions={[
                   <a href={`https://rinkeby.rarible.com/collection/${item.address}/items`}><EyeOutlined/></a>,
+
                   <PlusCircleOutlined key="setting" onClick={() => openModal(item)} />,
                 ]}
                 hoverable={true}
               >
                 <Meta
+
                   title={item.name}
                   description={"Symbol: " + item.symbol}
+
                 />
               </Card>
               )
