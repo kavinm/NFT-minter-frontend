@@ -21,7 +21,7 @@ import { addAccount } from "../actions/accountActions";
 const { TextArea } = Input;
 
 const CollectionMintingForm = (props) => {
-  
+
   const CONTRACT_ADDRESS = props.contractAddress.address;
 
   const [imgSRC, setImgSRC] = useState("");
@@ -132,6 +132,7 @@ const CollectionMintingForm = (props) => {
   );
 
   const mintNFT = async () => {
+
 
     let imageData = new FormData();
     imageData.append('file', image)
