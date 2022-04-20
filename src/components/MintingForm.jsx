@@ -99,8 +99,6 @@ const MintingForm = (props) => {
       }
     })
 
-    console.log(meta_data_response.data.IpfsHash)
-
 
     const Jsonhash = meta_data_response.data.IpfsHash
     const JsonUrl = "https://ipfs.io/ipfs/" + Jsonhash;
