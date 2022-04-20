@@ -152,22 +152,28 @@ const CollectionMintingForm = (props) => {
       "name": title,
       "description": description,
       "external_url": socialMediaURL,
-      "image": "https://ipfs.io/ipfs/" + response_value.data.IpfsHash
+      "image": "https://ipfs.io/ipfs/" + response_value.data.IpfsHash,
+      "attributes": [],
     }
 
     if (engagementType === "Internal" && internalType === "Recognition") {
-      data["recipient_name"] = recipientName
-      data["recipient_email"] = recipientEmail
-      data["reason"] = reason
+
+      data["attributes"].push({trait_type: "Recipient Name", value: recipientName})
+      data["attributes"].push({trait_type: "Recipient Email", value: recipientEmail})
+      data["attributes"].push({trait_type: "Recognition Type", value: recognitionType})
       data["recognition_type"] = recognitionType
     } else if (engagementType === "Internal" && internalType === "Service Award") {
-      data["recipient_name"] = recipientName
-      data["number_of_years"] = numberOfYears
-      data["recognition_title"] = title
+      
+      data["attributes"].push({trait_type: "Recipient Name", value: recipientName})
+      data["attributes"].push({trait_type: "Number of Years", value: numberOfYears})
+      data["attributes"].push({trait_type: "Recognition Title", value: title})
+
     } else if (engagementType === "Internal" && internalType === "Participation Record") {
-      data["recipient_name"] = recipientName
-      data["event_name"] = eventName
-      data["date"] = eventDate
+      
+      data["attributes"].push({trait_type: "Recipient Name", value: recipientName})
+      data["attributes"].push({trait_type: "Event Name", value: eventName})
+      data["attributes"].push({trait_type: "Date", value: eventDate})
+
       data["note"] = eventNote
     }
 
