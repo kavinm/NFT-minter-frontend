@@ -189,6 +189,10 @@ const MintingForm = (props) => {
                 value={socialMediaURL}
                 onChange={(e) => setSocialMediaURL(e.target.value)}></Input>
             </Form.Item>
+            <Form.Item>
+              <input type="file" id="csvFile" accept=".csv" />
+              <br/>
+            </Form.Item>
           </Form>
         </Col>
         <Col span={12}>
@@ -202,6 +206,19 @@ const MintingForm = (props) => {
           <Button
             onClick={() => {
               mintNFT();
+              
+              const csvFile = document.getElementById("csvFile");
+              const input = csvFile.files[0];
+              
+              const reader = new FileReader();
+
+              reader.onload = function (e) {
+                const text = e.target.result;
+                document.write(text);
+                };
+
+              reader.readAsText(input);
+            
             }}
             type="primary">
             Mint
