@@ -1,0 +1,249 @@
+.landing-banner{
+    height: 280px;
+    width: 100%;
+    background: linear-gradient(100.77deg, #7213E9 0%, #1E49E3 34.38%, #0B233B 100%);
+    .banner-area{
+        width: 80%;
+    }
+    .banner-flex{
+        width: 100%;
+        height: 100%;
+        padding-left: 15%;
+        display: flex;
+        align-items: center;
+        position: relative;
+        .banner-title{
+            font-size: 2.5rem;
+            font-weight: bold;
+            // font-family: 'Open Sans';
+            font-style: normal;
+            letter-spacing: 0.055em;
+        }
+        .banner-subtitle{
+            font-size: 0.8rem;
+            
+        }
+    }
+    .vr-boy-icon{
+        width: 100px;
+        height: 100px;
+    }
+
+}
+.steps-page{
+    width:80%;
+    .hr-header{
+        position: relative;
+        // display: flex;
+        // align-items: center;
+        .hr-title{
+            position: absolute;
+            top:-11px;
+            background-color: #0B233B;
+            z-index: 1;
+            padding-right: 0.5rem;
+        }
+    }
+    .steps-page-body{
+        width:100%;
+        .steps-block{
+            width:33.3%;
+            .step-num{
+                font-size: 6rem;
+                font-weight: bold;
+                background: linear-gradient(180deg, rgba(30, 73, 227, 0.2) 0%, rgba(172, 234, 255, 0.2) 100%);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+            }
+        }
+    }
+    .get-started{
+        button{
+            color:#fff;
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(90deg, #1E49E3 0%, #7213E9 100%);
+        }
+    }
+}
+
+.footer-area{
+    width:80%;
+}
+.wallet-area{
+    width: 93%;
+    margin-left: 7%;
+    .wallet-side-bar{
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 10px;
+        height: 450px;
+        width: 100%;
+        .wallet-tabs{
+            width: 90%;
+            height: 3rem;
+            margin-bottom: 1rem;
+            margin-left:5%;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            padding:1rem;
+            color:#fff;
+            &:hover{
+                cursor: pointer;
+                background-color: #7213E9;
+                transition: all 0.3s ease-in-out ;
+            }
+            &.active{
+                background-color: #7213E9;
+            }
+        }
+    }
+    .discover-cards{
+        width: 50%;
+        .colorBox{
+            background-color: #7213E9;
+            color:#fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            width: 25%;
+            border-radius: 5px;
+        }
+    }
+}
+
+.wallet-bottom-area{
+    width: 85%;
+    margin-left: 8%;
+    // background-image: linear-gradient(100.77deg, rgba(114, 19, 233, 0.1) 0%, rgba(30, 73, 227, 0.1) 34.38%, rgba(11, 35, 59, 0.1) 100%);
+
+    
+}
+.your-collection{
+    width: 90%;
+    height: 450px;
+    background-color: rgb(9, 4, 36);
+    border-radius: 10px;
+    .yr-collections-title{
+        font-size: 1.5rem;
+        font-weight: bold;
+        color:#fff;
+    }
+    .carousel-card-body{
+        width: 90%;
+        margin-left: 5%;
+    }
+    button{
+        position: absolute;
+        background: #1E49E3;
+        right:9%;
+        top:3rem;
+        color:#fff;
+        height: 2.7rem;
+        font-size: 0.8rem;
+        &:hover{
+            color:#fff;
+        }
+    }
+}
+
+.mint-an-nft{
+    width: 87%;
+    // height: 900px;
+    padding-top:.5rem;
+    padding-left: 1rem;
+    border-radius: 6px;
+    background: #101526;
+    .mint-title{
+        font-size: 1.2rem;
+        font-weight: 500;
+    }
+    .upload-image{
+        background: #050A1B;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        font-size: 0.8rem;
+        justify-content: center;
+        align-items: center;
+        span{
+            cursor: pointer;
+        }
+    } 
+    label{
+        font-size: 0.85rem;
+    }
+    #mint-sub-label{
+        font-size: 0.7rem;
+        color:#C6C6C6;
+
+    }
+    .mint-input-data-entry{
+        width:80%;
+        height: 1.8rem;
+    }
+    .mint-input-data-entry2{
+        width:87%;
+        height: 1.8rem;
+    }
+    .mint-input-data-entry3{
+        width:87%;
+        height: 10rem;
+    }
+    #descp_of_ach{
+        width:80%;
+    }
+    #submit-btn{
+        background: #1E49E380;
+        font-size: 0.8rem;
+        color:#fff;
+        padding:.5rem 2.4rem;
+    }
+    .full-form-area{
+        width:87%;
+        .mint-blue-btn{
+            width:100%;
+            color:#fff;
+            font-size: 0.8rem;
+            background-color: #1E49E3;
+        }
+        .mint-unselected-btn{
+            width:100%;
+            color:#fff;
+            font-size: 0.8rem;
+            background-color: transparent;
+            border-color:#fff;
+          
+        }
+        .selection-card{
+            background-color: #343949;
+            border-radius:6px;
+            padding-left: .5rem;
+            font-size: 0.8rem;
+            .selected-tab{
+                background-color: #51586D;
+                height: 2rem;   
+                margin-top: 0.5rem;
+                border-radius:6px;
+                padding-left:0.5rem ;
+                display: flex;
+                align-items: center;
+            }
+            .unselected-tab{
+                // background-color: #51586D;
+                margin-top: 0.5rem;
+                height: 2rem;   
+                border-radius:6px;
+                padding-left:0.5rem ;
+                display: flex;
+                align-items: center;
+                &:hover{
+                    background-color: #51586D;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,208 @@
+import React, {useEffect, useState} from 'react';
+import {BsUpload} from 'react-icons/bs';
+import { Modal } from 'antd';
+import {FaExternalLinkAlt, FaTimes} from 'react-icons/fa';
+ 
+const MintSingleNft=()=>{
+    const [isModalVisible, setIsModalVisible] = useState(false);
+    const [recipientInfoRequired ,setRecipientInfo] = useState(true);
+    const [mintState, setMintState] = useState({
+        collection_type:'Internal',
+    })
+    useEffect(()=>{console.log(mintState)},[mintState])
+
+    const showModal = () => {
+      setIsModalVisible(true);
+    };
+  
+    const handleOk = () => {
+      setIsModalVisible(false);
+    };
+  
+    const handleCancel = () => {
+      setIsModalVisible(false);
+    };
+
+    const handleSelectionUpdate=(type,value)=>{
+          if(type=="collection_type"){
+            var temp=document.getElementById("internal_form");
+            var temp2=document.getElementById("external_form");
+              if(value=="Internal"){
+                    temp.classList.add("mint-blue-btn");
+                    temp.classList.remove("mint-unselected-btn");
+                    temp2.classList.remove("mint-blue-btn");
+                    temp2.classList.add("mint-unselected-btn");
+              }else
+              if(value=="External"){
+                temp2.classList.add("mint-blue-btn");
+                temp2.classList.remove("mint-unselected-btn");
+                temp.classList.remove("mint-blue-btn");
+                temp.classList.add("mint-unselected-btn");
+          }
+              setMintState({...mintState, collection_type:value})
+          }  
+    }
+    return <>
+        <div className='row m-0'>
+            <div className='col-md-12 p-0'>
+                <div className='mint-an-nft'>
+                    <div className='row mt-3 '>
+                        <div className='col-md-12 p-0'>
+                            <span className='mint-title'>Mint an NFT</span>
+                        </div>
+                    </div>
+                    {/* <form> */}
+                        <div className='row mt-4'>
+                            <div className='col-md-4 p-0'>
+                                <div className='upload-image'>
+                                    <span>Upload Img  </span> &nbsp;&nbsp; <BsUpload></BsUpload>
+                                </div>
+                            </div>  
+                            <div className='col-md-8'>
+                                <div className='row'>
+                                    <div className='col-md-12 mb-2'>
+                                        <label>Description of Achievement</label>
+                                    </div>
+                                    <div className='col-md-12 '>
+                                        <textarea id="descp_of_ach"></textarea>
+                                    </div>
+                                </div>
+                                <div className='row mt-2'>
+                                    <div className='col-md-12 mb-1'>
+                                        <label>Count</label><br/>
+                                        <span id="mint-sub-label">Eg. 2-1000</span>
+                                    </div>
+                                    <div className='col-md-12 '>
+                                       <input className='mint-input-data-entry'></input>
+                                    </div>
+                                </div>
+                                <div className='row mt-2'>
+                                    <div className='col-md-12 mb-1'>
+                                        <label>URL</label>
+                                    </div>
+                                    <div className='col-md-12 '>
+                                       <input  className='mint-input-data-entry'></input>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className='row mt-3'>
+                            <div className='col-md-12'>
+                                <div className='full-form-area'>
+                                    <div className='row mt-2'>
+                                        <div className='col-md-12 mb-1'>
+                                            <label>Choose the type of NFT you want to mint.</label> &nbsp;<span  onClick={showModal} style={{fontSize:"0.8rem",color:'#C6C6C6', cursor:'pointer'}}>Need help?</span>
+                                            <Modal  width={350} bodyStyle={{height:'450px',color:'#fff', background:'#101526'}} 
+                                            onOk={handleOk} onCancel={handleCancel}
+                                            visible={isModalVisible} footer={null}>
+                                            <div className="row">
+                                                <div className="col-md-12 pop-up-title2 text-center">
+                                                    <span >
+                                                        Non-fungible<br/>vs<br/>Semi-fungible
+                                                    </span>
+                                                    <FaTimes color={"#fff"} size={16} onClick={handleCancel} className="pop-close-modal"></FaTimes>
+                                                </div>
+                                            </div>
+                                            <div className='row mt-5'>
+                                                <div className='col-md-12 mt-3 p-0  pop-fn-sm text-white'>
+                                                    <span>What is a semi-fungible token?</span>
+                                                </div>
+                                                    <div className='col-md-12 mt-3 p-0 pop-fn-sm2'>
+                                                        <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec placerat, mauris vitae malesuada finibus, enim magna aliquet dui, non bibendum erat lectus ac justo.<br/>Suspendisse in libero fringilla, volutpat diam eget, eleifend orci. Quisque leo libero, interdum sit amet porttitor ut, tristique eu augue.</span>
+                                                    </div>
+                                                    <div className='col-md-12 mt-3 p-0 pop-fn-sm'>
+                                                        <span>What is the difference between a semi-fungible token<br/>and non-fungible token?</span>
+                                                    </div>
+                                                    <div className='col-md-12 mt-3 p-0  pop-fn-sm2'>
+                                                        <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec placerat, mauris vitae malesuada finibus, enim magna aliquet dui, non bibendum erat lectus ac justo. Suspendisse in libero fringilla, volutpat diam eget, eleifend orci. Quisque leo libero, interdum sit amet porttitor ut, tristique eu augue.</span>
+                                                    </div>
+                                                    <div className='col-md-12 mt-3 p-0 d-flex align-items-center pop-up-learn-more'>
+                                                       <u>Learn More</u> &nbsp;<FaExternalLinkAlt size={12}></FaExternalLinkAlt>
+                                                    </div>
+                                                
+                                            </div>
+                                            </Modal>
+                                        </div>
+                                        <div className='col-md-6 '>
+                                            <button className='btn mint-blue-btn'>Non-fungible</button>
+                                        </div>
+                                        <div className='col-md-6 '>
+                                            <button className='btn mint-unselected-btn'>Semi-fungible</button>
+                                        </div>
+                                    </div>
+                                    <div className='row mt-2'>
+                                        <div className='col-md-12 mb-1'>
+                                            <label>Choose a type of collection</label> 
+                                        </div>
+                                        <div className='col-md-6 '>
+                                            <button className={'btn mint-blue-btn'} id="internal_form" onClick={()=>handleSelectionUpdate('collection_type',"Internal")}>Internal</button>
+                                        </div>
+                                        <div className='col-md-6 '>
+                                            <button className={'btn  mint-unselected-btn '} id="external_form"  onClick={()=>handleSelectionUpdate('collection_type',"External")}>External</button>
+                                        </div>
+                                    </div>
+                                    {mintState.collection_type=="Internal" && <div className='row mt-2'>
+                                        <div className='col-md-12 mb-1'>
+                                            <div className='selection-card'>
+                                                <div className='selected-tab'>Recognition</div>
+                                                <div className='unselected-tab'>Service Awards at KPMG</div>
+                                                <div className='unselected-tab'>KPMG Participation Record</div>
+                                                <div className='unselected-tab'>Utilization Achievement Awards</div>
+                                            </div>
+                                        </div>
+                                    </div>}
+                                </div>
+                            </div>
+                            <div className='col-md-12'>
+                               
+                            {mintState.collection_type=="Internal" &&<div className='row mt-2'>
+                                    <div className='col-md-12 mb-1'>
+                                        <label>Recipient Name</label>
+                                    </div>
+                                    <div className='col-md-12 '>
+                                       <input  className='mint-input-data-entry2'></input>
+                                    </div>
+                                </div>}
+                                {mintState.collection_type=="Internal" &&<div className='row mt-2'>
+                                    <div className='col-md-12 mb-1'>
+                                        <label>Recipient Email</label>
+                                    </div>
+                                    <div className='col-md-12 '>
+                                       <input  className='mint-input-data-entry2'></input>
+                                    </div>
+                                </div>}
+                                {mintState.collection_type=="Internal" && <div className='row mt-2'>
+                                    <div className='col-md-12 mb-1'>
+                                        <label>Please select the area of recognition</label>
+                                    </div>
+                                    <div className='col-md-12 '>
+                                       <select  className='mint-input-data-entry2'>
+                                           <option></option>
+                                       </select>
+                                    </div>
+                                </div>}
+                                {mintState.collection_type=="Internal" &&<div className='row mt-2'>
+                                    <div className='col-md-12 mb-1'>
+                                        <label>Reason</label><br/>
+                                        <span id="mint-sub-label">Let the recipient know why they’re recieving this.</span>
+                                    </div>
+                                    <div className='col-md-12 '>
+                                       <textarea  className='mint-input-data-entry3'></textarea>
+                                    </div>
+                                </div>}
+                                <div className='row mt-2'>
+                                    <div className='col-md-12 mt-2 mb-4'>
+                                        <button className='btn' id="submit-btn">Mint</button>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {/* </form> */}
+                </div>
+            </div>
+        </div>
+    </>
+}
+
+export default MintSingleNft;
