@@ -3,9 +3,13 @@ import {BsUpload} from 'react-icons/bs';
 import { Modal } from 'antd';
 import {FaExternalLinkAlt, FaTimes} from 'react-icons/fa';
 import {AiOutlineUpload} from 'react-icons/ai';
- 
+import papa from 'papaparse';
+import readXlsxFile from 'read-excel-file';
+
+  
 const MintSingleNft=({mode})=>{
     const [isModalVisible, setIsModalVisible] = useState(false);
+    const [csvFile,setFile] = useState(null);
     const [recipientInfoRequired ,setRecipientInfo] = useState(true);
     const [mintState, setMintState] = useState({
         collection_type:'Internal',
@@ -24,6 +28,14 @@ const MintSingleNft=({mode})=>{
       setIsModalVisible(false);
     };
 
+    const handleChangeFile=async(e)=>{
+         readXlsxFile(e.target.files[0]).then((rows) => {
+            console.log(rows);
+            // `rows` is an array of rows
+            // each row being an array of cells.
+            setFile(rows)
+          })
+    }
     const handleSelectionUpdate=(type,value)=>{
           if(type=="collection_type"){
             var temp=document.getElementById("internal_form");
@@ -48,6 +60,7 @@ const MintSingleNft=({mode})=>{
             <div className='col-md-12 p-0'>
                 <div className='mint-an-nft'>
                     <div className='row mt-3 '>
+                        {console.log('mycsv -- ',csvFile)}
                         <div className='col-md-12 p-0'>
                             <span className='mint-title'>Mint an NFT</span>
                         </div>
@@ -165,9 +178,8 @@ const MintSingleNft=({mode})=>{
                                             <div className='col-md-12 p-0 mt-1'>
                                                 <label htmlFor="uploadCsv" className="btn mt-2" >
                                                     <div className='upload-csv'>Upload csv &nbsp; <AiOutlineUpload size={19}></AiOutlineUpload></div>
-                                                    <input type="file" accept=".csv, .xls, .xlsx" style={{display:"none"}} id="uploadCsv" name="file" multiple></input>
-                                                </label>
-                                                
+                                                    <input type="file" accept=".csv, .xls, .xlsx" style={{display:"none"}} onChange={handleChangeFile} id="uploadCsv" name="file" multiple></input>
+                                                </label>                            
                                             </div>
                                         </div>
                                     </div>
@@ -177,7 +189,7 @@ const MintSingleNft=({mode})=>{
                                                 <label style={{fontSize:"0.8rem"}}>Number of recipients</label>
                                             </div>
                                             <div className='col-md-12'>
-                                                <span style={{fontSize:"1.5rem", fontWeight:"bold"}}>0</span>
+                                                <span style={{fontSize:"1.5rem", fontWeight:"bold"}}>{csvFile!=null?csvFile.length:0}</span>
                                             </div>
                                         </div>
                                     </div>
