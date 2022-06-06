@@ -2,15 +2,16 @@ import React, {useEffect, useState} from 'react';
 import {BsUpload} from 'react-icons/bs';
 import { Modal } from 'antd';
 import {FaExternalLinkAlt, FaTimes} from 'react-icons/fa';
+import {AiOutlineUpload} from 'react-icons/ai';
  
-const MintSingleNft=()=>{
+const MintSingleNft=({mode})=>{
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [recipientInfoRequired ,setRecipientInfo] = useState(true);
     const [mintState, setMintState] = useState({
         collection_type:'Internal',
     })
     useEffect(()=>{console.log(mintState)},[mintState])
-
+    // useEffect(()=>{if(mode)},[])
     const showModal = () => {
       setIsModalVisible(true);
     };
@@ -55,8 +56,9 @@ const MintSingleNft=()=>{
                         <div className='row mt-4'>
                             <div className='col-md-4 p-0'>
                                 <div className='upload-image'>
-                                    <span>Upload Img  </span> &nbsp;&nbsp; <BsUpload></BsUpload>
+                                    <span>Select Collection  </span> 
                                 </div>
+                                
                             </div>  
                             <div className='col-md-8'>
                                 <div className='row'>
@@ -67,7 +69,7 @@ const MintSingleNft=()=>{
                                         <textarea id="descp_of_ach"></textarea>
                                     </div>
                                 </div>
-                                <div className='row mt-2'>
+                                {/* <div className='row mt-2'>
                                     <div className='col-md-12 mb-1'>
                                         <label>Count</label><br/>
                                         <span id="mint-sub-label">Eg. 2-1000</span>
@@ -83,14 +85,14 @@ const MintSingleNft=()=>{
                                     <div className='col-md-12 '>
                                        <input  className='mint-input-data-entry'></input>
                                     </div>
-                                </div>
+                                </div> */}
                             </div>
                         </div>
                         <div className='row mt-3'>
                             <div className='col-md-12'>
                                 <div className='full-form-area'>
                                     <div className='row mt-2'>
-                                        <div className='col-md-12 mb-1'>
+                                        {/* <div className='col-md-12 mb-1'>
                                             <label>Choose the type of NFT you want to mint.</label> &nbsp;<span  onClick={showModal} style={{fontSize:"0.8rem",color:'#C6C6C6', cursor:'pointer'}}>Need help?</span>
                                             <Modal  width={350} bodyStyle={{height:'450px',color:'#fff', background:'#101526'}} 
                                             onOk={handleOk} onCancel={handleCancel}
@@ -122,13 +124,13 @@ const MintSingleNft=()=>{
                                                 
                                             </div>
                                             </Modal>
-                                        </div>
-                                        <div className='col-md-6 '>
+                                        </div> */}
+                                        {/* <div className='col-md-6 '>
                                             <button className='btn mint-blue-btn'>Non-fungible</button>
                                         </div>
                                         <div className='col-md-6 '>
                                             <button className='btn mint-unselected-btn'>Semi-fungible</button>
-                                        </div>
+                                        </div> */}
                                     </div>
                                     <div className='row mt-2'>
                                         <div className='col-md-12 mb-1'>
@@ -153,9 +155,37 @@ const MintSingleNft=()=>{
                                     </div>}
                                 </div>
                             </div>
+                            {mode!="employee" &&<div className='col-md-12 p-0 mt-2 mb-2'>
+                                <div className='row'>
+                                    <div className='col-md-4'>
+                                        <div className='row'>
+                                            <div className='col-md-12'>
+                                                <label style={{fontSize:"0.8rem"}}>Recipient list</label>
+                                            </div>
+                                            <div className='col-md-12 p-0 mt-1'>
+                                                <label htmlFor="uploadCsv" className="btn mt-2" >
+                                                    <div className='upload-csv'>Upload csv &nbsp; <AiOutlineUpload size={19}></AiOutlineUpload></div>
+                                                    <input type="file" accept=".csv, .xls, .xlsx" style={{display:"none"}} id="uploadCsv" name="file" multiple></input>
+                                                </label>
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className='col-md-8 p-0'>
+                                        <div className='row'>
+                                            <div className='col-md-12'>
+                                                <label style={{fontSize:"0.8rem"}}>Number of recipients</label>
+                                            </div>
+                                            <div className='col-md-12'>
+                                                <span style={{fontSize:"1.5rem", fontWeight:"bold"}}>0</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>}
                             <div className='col-md-12'>
                                
-                            {mintState.collection_type=="Internal" &&<div className='row mt-2'>
+                            {mode=="employee" && mintState.collection_type=="Internal" &&<div className='row mt-2'>
                                     <div className='col-md-12 mb-1'>
                                         <label>Recipient Name</label>
                                     </div>
@@ -163,7 +193,7 @@ const MintSingleNft=()=>{
                                        <input  className='mint-input-data-entry2'></input>
                                     </div>
                                 </div>}
-                                {mintState.collection_type=="Internal" &&<div className='row mt-2'>
+                                {mode=="employee" && mintState.collection_type=="Internal" &&<div className='row mt-2'>
                                     <div className='col-md-12 mb-1'>
                                         <label>Recipient Email</label>
                                     </div>
