@@ -11,7 +11,7 @@ import { Menu, Modal } from 'antd';
 const DarkCards=({title, cardImg})=>{
     return <>
         <div className='dark-cards'>
-            <div className='row'>
+            {/* <div className='row'>
                 <div className='col-md-12 pt-2 dropdown'>
                 
                     <BiDotsVerticalRounded 
@@ -25,9 +25,9 @@ const DarkCards=({title, cardImg})=>{
                         <li><a class="dropdown-item" href="#">Something else here</a></li>
                     </ul>
                 </div>
-            </div>
-            <div className='row mt-3'>
-                <div className='col-md-12' style={{width:'200px',height:'180px',borderRadius:'10px'}}>
+            </div> */}
+            <div className='row mt-2'>
+                <div className='col-md-12 mt-3' style={{width:'200px',height:'180px',borderRadius:'10px'}}>
                     <img src={cardImg} style={{width:"100%",height:'100%'}}/>
                 </div>
                 <div className='col-md-12 mt-3'>

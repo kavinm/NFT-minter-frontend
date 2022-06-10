@@ -88,6 +88,7 @@
             border-radius: 10px;
             display: flex;
             align-items: center;
+            font-weight:650;
             padding:1rem;
             color:#fff;
             &:hover{
@@ -163,8 +164,8 @@
     }
     .upload-image{
         background: #050A1B;
-        width: 90%;
-        height: 12rem;
+        width: 14rem;
+        height: 14rem;
         margin-left: 10%;
         display: flex;
         font-size: 0.8rem;
