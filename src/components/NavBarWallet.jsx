@@ -6,7 +6,7 @@ import {FaTimes} from 'react-icons/fa';
 import Metamask from '../assets/icon/Metamask.svg';
 import coinbase from '../assets/icon/coinbase.svg';
 import walletconnect from '../assets/icon/wallet-connect.svg';
-
+import connectIllustration from  '../assets/images/Metaverse Connect.png';
 
 const NavBarWallet=()=>{
     const [currentAccount, setCurrentAccount] = useState("");
@@ -59,8 +59,10 @@ const NavBarWallet=()=>{
         });
   
         message.success(`Connected ${accounts[0]}`);
-        setStatus(true);
+        
         handleOk();
+        setStatus(true);
+        showModal();
         //check if user is connected to rinkeby
         const rinkebyChainId = "0x4";
         let chainId = await ethereum.request({ method: "eth_chainId" });
@@ -90,7 +92,7 @@ const NavBarWallet=()=>{
                     <Modal  width={300} bodyStyle={{height:'410px',color:'#fff', background:'#101526'}} 
                     onOk={handleOk} onCancel={handleCancel}
                     visible={isModalVisible} footer={null}>
-                      <div className="row">
+                      {walletConnectionStatus!=true? <div className="row">
                         <div className="col-md-12 pop-up-title text-center">
                           <span>Select a wallet</span>
                           <FaTimes color={"#fff"} onClick={handleCancel} className="title-icon"></FaTimes>
@@ -103,7 +105,24 @@ const NavBarWallet=()=>{
                             <div className="pop-up-tab mt-2"><img src={coinbase} />&nbsp;&nbsp;Coinbase Wallet</div>
                             <div className="pop-up-tab mt-2"><img src={walletconnect} />&nbsp;&nbsp;Wallet Connect</div>
                         </div>
-                      </div>
+                      </div>:
+                      <div className="row">
+                        <div className="col-md-12 pop-up-title text-center">
+                          <span>Wallet Connected</span>
+                          <FaTimes color={"#fff"} onClick={handleCancel} className="title-icon"></FaTimes>
+                        </div>
+                        <div className="col-md-12 mt-3 mb-2 pop-up-icon">
+                            <img src={connectIllustration} style={{height:'180px'}}/>
+                        </div>
+                        <div className="col-md-12 mt-5 d-flex justify-content-center">
+                         
+                              <button onClick={handleCancel} className="btn text-white" style={{width:"7rem",height:'2.5rem',fontSize:'0.8rem',borderRadius:'7px',border: "1px solid #FFFFFF"}}>Fill wallet</button>
+                              &nbsp;&nbsp;
+                              <button onClick={handleOk} className="btn text-white" style={{width:"7rem",height:'2.5rem',fontSize:'0.8rem',borderRadius:'7px',background:'linear-gradient(90deg, #1E49E3 0%, #7213E9 100%)'}}>Continue</button>
+                          
+                           
+                        </div>
+                      </div>}
                     </Modal>
                 </div>
             </div>

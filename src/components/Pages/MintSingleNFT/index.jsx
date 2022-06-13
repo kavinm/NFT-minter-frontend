@@ -48,8 +48,9 @@ const MintSingleNft=({mode})=>{
     const [csvFile,setFile] = useState(null);
     const [recipientInfoRequired ,setRecipientInfo] = useState(true);
     const [mintState, setMintState] = useState({
-        collection_type:'Internal',
+        collection_type:'Recognition',
     })
+    const [selectedNFT, setNFTSelection] = useState(null);
     useEffect(()=>{console.log(mintState)},[mintState])
     const [dynamicCardsData, setCards]=useState([
         {title:'Recognition Awards', subtitle:'Offered by Parner Name', cardImg:_2mGraphic},// contactList:multiPplImg},
@@ -105,13 +106,13 @@ const MintSingleNft=({mode})=>{
           if(type=="collection_type"){
             var temp=document.getElementById("internal_form");
             var temp2=document.getElementById("external_form");
-              if(value=="Internal"){
+              if(value=="Recognition"){
                     temp.classList.add("mint-blue-btn");
                     temp.classList.remove("mint-unselected-btn");
                     temp2.classList.remove("mint-blue-btn");
                     temp2.classList.add("mint-unselected-btn");
               }else
-              if(value=="External"){
+              if(value=="General"){
                 temp2.classList.add("mint-blue-btn");
                 temp2.classList.remove("mint-unselected-btn");
                 temp.classList.remove("mint-blue-btn");
@@ -120,12 +121,19 @@ const MintSingleNft=({mode})=>{
               setMintState({...mintState, collection_type:value})
           }  
     }
+
+    const handleNFTSelection=(val)=>{
+        console.log(val)
+        setNFTSelection(val);
+        handleOk();
+    }
+
     return <>
         <div className='row m-0'>
             <div className='col-md-12 p-0'>
                 <div className='mint-an-nft'>
                     <div className='row mt-3 '>
-                        {console.log('mycsv -- ',csvFile)}
+                        {console.log('mycsv -- ',csvFile,selectedNFT)}
                         <div className='col-md-12 p-0'>
                             <span className='mint-title'>Mint an NFT</span>
                         </div>
@@ -134,7 +142,7 @@ const MintSingleNft=({mode})=>{
                         <div className='row mt-4'>
                             <div className='col-md-4 p-0'>
                                 <div className='upload-image' onClick={showModal}>
-                                    <span>Select Collection  </span> 
+                                    {selectedNFT==null ?<span>Select Collection  </span>:<img src={selectedNFT.cardImg} style={{width:'100%',height:'100%'}} />}
                                 </div>
                                 <Modal  width={700} bodyStyle={{height:'420px',color:'#fff', background:'#101526'}} 
                                             onOk={handleOk} onCancel={handleCancel}
@@ -148,7 +156,7 @@ const MintSingleNft=({mode})=>{
                                                 <div className='carousel-card-body'>
                                                     <Suspense fallback={<div>Loading</div>}>
                                                         <Carousel responsive={carouselState.responsive} draggable showDots={false}>
-                                                            {dynamicCardsData.map((val, i)=><div style={{width:"200px",height:'270px'}}>
+                                                            {dynamicCardsData.map((val, i)=><div onClick={()=>handleNFTSelection(val)}  key={'popupGallery'+i} style={{width:"200px",height:'270px'}}>
                                                                 <DarkCards cardImg={val.cardImg} title={val.title}></DarkCards>
                                                             {/* <DynamicC rectImg={val.cardImg} key={i} multiPplImg={val.contactList}></DynamicCards> */}
                                                             </div>)}
@@ -160,7 +168,7 @@ const MintSingleNft=({mode})=>{
                                             </div>
                                            
                                         </div>
-                                    </Modal>
+                                </Modal>
                             </div>  
                             <div className='col-md-8'>
                                 <div className='row'>
@@ -239,13 +247,13 @@ const MintSingleNft=({mode})=>{
                                             <label>Choose a type of collection</label> 
                                         </div>
                                         <div className='col-md-6 '>
-                                            <button className={'btn mint-blue-btn'} id="internal_form" onClick={()=>handleSelectionUpdate('collection_type',"Internal")}>Internal</button>
+                                            <button className={'btn mint-blue-btn'} id="internal_form" onClick={()=>handleSelectionUpdate('collection_type',"Recognition")}>Recognition</button>
                                         </div>
                                         <div className='col-md-6 '>
-                                            <button className={'btn  mint-unselected-btn '} id="external_form"  onClick={()=>handleSelectionUpdate('collection_type',"External")}>External</button>
+                                            <button className={'btn  mint-unselected-btn '} id="external_form"  onClick={()=>handleSelectionUpdate('collection_type',"General")}>General</button>
                                         </div>
                                     </div>
-                                    {mintState.collection_type=="Internal" && <div className='row mt-2'>
+                                    {mintState.collection_type=="Recognition" && <div className='row mt-2'>
                                         <div className='col-md-12 mb-1'>
                                             <div className='selection-card'>
                                                 <div className='selected-tab'>Recognition</div>
@@ -258,27 +266,37 @@ const MintSingleNft=({mode})=>{
                                 </div>
                             </div>
                             {mode!="employee" &&<div className='col-md-12 p-0 mt-2 mb-2'>
-                                <div className='row'>
-                                    <div className='col-md-4'>
+                                <div className='row mt-2'>
+                                    <div className='col-md-8' style={{height:"0.8rem"}}>
                                         <div className='row'>
-                                            <div className='col-md-12'>
+                                            <div className='col-md-5'>
                                                 <label style={{fontSize:"0.8rem"}}>Recipient list</label>
                                             </div>
-                                            <div className='col-md-12 p-0 mt-1'>
-                                                <label htmlFor="uploadCsv" className="btn mt-2" >
-                                                    <div className='upload-csv'>Upload csv &nbsp; <AiOutlineUpload size={19}></AiOutlineUpload></div>
-                                                    <input type="file" accept=".csv, .xls, .xlsx" style={{display:"none"}} onChange={handleChangeFile} id="uploadCsv" name="file" multiple></input>
-                                                </label>                            
+                                            <div className='col-md-7'>
+                                                <label style={{fontSize:"0.8rem"}}>Number of recipients</label>
                                             </div>
                                         </div>
                                     </div>
                                     <div className='col-md-8 p-0'>
                                         <div className='row'>
-                                            <div className='col-md-12'>
-                                                <label style={{fontSize:"0.8rem"}}>Number of recipients</label>
+                                            
+                                            <div className='col-md-5 m-0' style={{height:'2.5rem'}}>
+                                               {csvFile!=null ? <label className="btn mt-2" >
+                                                    <div className='upload-csv-selected'>Test.csv  &nbsp;&nbsp;&nbsp; <FaTimes onClick={(e)=>{
+                                                        e.preventDefault();
+                                                        setFile(null);
+                                                    }} size={15} ></FaTimes> </div>
+                                                  
+                                                </label>:<label htmlFor="uploadCsv" className="btn mt-2" >
+                                                    <div className='upload-csv'>Upload csv &nbsp; <AiOutlineUpload size={19}></AiOutlineUpload></div>
+                                                    <input type="file" accept=".csv, .xls, .xlsx" style={{display:"none"}} onChange={handleChangeFile} id="uploadCsv" name="file" multiple></input>
+                                                </label>}
                                             </div>
-                                            <div className='col-md-12'>
-                                                <span style={{fontSize:"1.5rem", fontWeight:"bold"}}>{csvFile!=null?csvFile.length:0}</span>
+                                            <div className='col-md-7'>
+                                                <div  style={{height:'3rem',width:'fit-content',display:'flex',alignItems:'center'}}>
+                                                    <span style={{fontSize:"1.5rem",marginTop:'.8rem', fontWeight:"bold"}}>{csvFile!=null?csvFile.length:0}</span>
+                                                </div>
+                                             
                                             </div>
                                         </div>
                                     </div>
@@ -286,7 +304,7 @@ const MintSingleNft=({mode})=>{
                             </div>}
                             <div className='col-md-12'>
                                
-                            {mode=="employee" && mintState.collection_type=="Internal" &&<div className='row mt-2'>
+                            {mode=="employee"  &&<div className='row mt-2'>
                                     <div className='col-md-12 mb-1'>
                                         <label>Recipient Name</label>
                                     </div>
@@ -294,7 +312,7 @@ const MintSingleNft=({mode})=>{
                                        <input  className='mint-input-data-entry2'></input>
                                     </div>
                                 </div>}
-                                {mode=="employee" && mintState.collection_type=="Internal" &&<div className='row mt-2'>
+                                {mode=="employee" &&<div className='row mt-2'>
                                     <div className='col-md-12 mb-1'>
                                         <label>Recipient Email</label>
                                     </div>
@@ -302,7 +320,7 @@ const MintSingleNft=({mode})=>{
                                        <input  className='mint-input-data-entry2'></input>
                                     </div>
                                 </div>}
-                                {mintState.collection_type=="Internal" && <div className='row mt-2'>
+                                {<div className='row mt-2'>
                                     <div className='col-md-12 mb-1'>
                                         <label>Please select the area of recognition</label>
                                     </div>
@@ -312,7 +330,7 @@ const MintSingleNft=({mode})=>{
                                        </select>
                                     </div>
                                 </div>}
-                                {mintState.collection_type=="Internal" &&<div className='row mt-2'>
+                                {<div className='row mt-2'>
                                     <div className='col-md-12 mb-1'>
                                         <label>Reason</label><br/>
                                         <span id="mint-sub-label">Let the recipient know why they’re recieving this.</span>

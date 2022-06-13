@@ -21,12 +21,14 @@ const Discover =()=>{
         create_collection:false
     })
 
+    const [uploadNftImg, setNftImg] = useState(null);
     const [menuItems, setMenu] = useState([
         {title:'Discover', tab:'discover', icon:<FiSend size={18}></FiSend>, id:'wallet-tab-1', classname:"active"},
         {title:'Recognize an employee', tab:'recog_employee', icon:<BsFillPersonFill size={18}></BsFillPersonFill>, id:'wallet-tab-2', classname:""},
         {title:'Recognize a team', tab:'recog_team', icon:<BsPeopleFill size={18}></BsPeopleFill>, id:'wallet-tab-3', classname:""},
         {title:'Your Collections', tab:'yrCollection', icon:<BiCopy size={19}></BiCopy>, id:'wallet-tab-4', classname:""},
-        {title:'Create a collection', tab:'create_collection', icon:<BsPlusCircleFill size={18}></BsPlusCircleFill>, id:'wallet-tab-5', classname:""}
+        {title:'Create a collection', tab:'create_collection', icon:<BsPlusCircleFill size={18}></BsPlusCircleFill>, id:'wallet-tab-5', classname:""},
+        {title:'Fill Wallet', tab:'fill_wallet', icon:<BsPlusCircleFill size={18}></BsPlusCircleFill>, id:'wallet-tab-6', classname:""}
     ])
 
     const [isModalVisible, setIsModalVisible] = useState(false);
@@ -91,6 +93,12 @@ const Discover =()=>{
         }
         setSwitchCase(temp)
     }
+
+    const handleChangeFileUpload=(e)=>{
+        e.preventDefault();
+        setNftImg(URL.createObjectURL(e.target.files[0]));
+        console.log(e.target.files[0])
+    }
     return <>
             <div className='row m-0'>
                 <div className='col-md-12  mt-5 p-0'>
@@ -111,7 +119,11 @@ const Discover =()=>{
                                             </div>
                                             <div className='col-md-5'>
                                                 <div className='img-holder'>
-                                                    <span>Upload Image </span>&nbsp;&nbsp;&nbsp;<AiOutlineUpload size={19} stroke={12}></AiOutlineUpload>
+                                                    {uploadNftImg==null ? <label htmlFor="uploadCsv" className="btn mt-2 text-white d-flex" >
+                                                        <span>Upload Image </span>&nbsp;&nbsp;&nbsp;<AiOutlineUpload size={19} stroke={12}></AiOutlineUpload>
+                                                        <input type="file" accept="image/*" style={{display:"none"}} onChange={handleChangeFileUpload} id="uploadCsv" name="file" multiple></input>
+                                                    </label>:<img src={uploadNftImg} style={{width:'100%',height:'100%'}}/>}
+                                               
                                                 </div>
                                             </div>
                                             <div className='col-md-7 p-0'>

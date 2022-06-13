@@ -76,6 +76,54 @@ const NewLandingPage=()=>{
                 
             </div>
        </div>
+
+       
+       <div className='row m-0 '>
+            <div className='col-md-12 p-0 mt-5 mb-5 d-flex justify-content-center'>
+                <div className='steps-page'>
+                    <div className='hr-header'>
+                        <span className='hr-title'>YOUR WALLET</span>
+                        <hr></hr>
+                    </div>
+                    {/* <div className='get-started mt-3 d-flex align-items-center'>
+                        <span>Create your own Recognition Awards </span> &nbsp; <BsArrowRight></BsArrowRight> 
+                    </div> */}
+                    <div className='steps-page-body d-flex mt-3'>
+                        <div className='steps-block' style={{width:'50%'}}>
+                            <div className='row mt-3'>
+                                <div className='col-md-12 p-0'  style={{fontSize:'0.8rem',fontWeight:'bold'}}>
+                                    YOUR WALLET
+                                </div>
+                                <div className='col-md-12 p-0 mt-3 d-flex align-items-center' style={{fontSize:'0.8rem'}}>
+                                    MetaMask is a digital wallet that stores the cryptocurrency<br/>required to mint and transfer your NFTs. Create a wallet and<br/>collect your free tokens today to begin using the platform. 
+                              
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div className='steps-block' style={{width:'50%'}}>
+                            <div className='row mt-3'>
+                            <div className='col-md-12 p-0' style={{fontSize:'0.8rem',fontWeight:'bold'}}>
+                                    METAMASK
+                                </div>
+                                <div className='col-md-12 p-0 mt-3 d-flex align-items-center' style={{fontSize:'0.8rem'}}>
+                                MetaMask is non-custodial wallet, meaning that the security of<br/>
+                                your assets is your responsibility. Unlike a hosted wallet, which<br/>
+                                stores your currency with a third party in a similar fashion to<br/>
+                                banks, a non-custodial wallet has no third party to serve as the<br/>
+                                “custodian” to your currency. This means that the responsibility<br/>
+                                of safeguarding and remembering your password will fall on<br/>you, the user. 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className='get-started mt-5 d-flex align-items-center'>
+                        <span>Learn more </span> &nbsp;  &nbsp; <BsArrowRight></BsArrowRight> 
+                    </div>
+                </div>
+                
+            </div>
+       </div>
        
        <div className='row m-0 '>
             <div className='col-md-12 p-0 mt-5 mb-5 d-flex justify-content-center'>
@@ -87,7 +135,7 @@ const NewLandingPage=()=>{
                     <div className='steps-page-body d-flex mt-3'>
                         <div className='steps-block'>
                             <div className='row mt-3'>
-                                <div className='col-md-12 d-flex align-items-center' style={{fontSize:'0.8rem'}}>
+                                <div className='col-md-12 p-0 d-flex align-items-center' style={{fontSize:'0.8rem'}}>
                                 NFTs use case as certificates and records of<br/>achievement are still largely unexplored in the<br/>corporate sector.
  This is why KPMG seeks to create a<br/>platform for organizations (educational institutions<br/>included) to mint NFTs and distribute them securely.
                               
@@ -96,14 +144,14 @@ const NewLandingPage=()=>{
                         </div>
                         <div className='steps-block'>
                             <div className='row mt-3'>
-                                <div className='col-md-12 d-flex align-items-center justify-content-center' style={{fontSize:'0.8rem'}}>
+                                <div className='col-md-12 p-0 d-flex align-items-center justify-content-center' style={{fontSize:'0.8rem'}}>
                                 Example of<br/>NFT use cases:
                                 </div>
                             </div>
                         </div>
                         <div className='steps-block'>
                             <div className='row mt-3'>
-                                <div className='col-md-12 d-flex align-items-center' style={{fontSize:'0.8rem'}}>
+                                <div className='col-md-12 p-0 d-flex align-items-center' style={{fontSize:'0.8rem'}}>
                                     <div>
                                         <div className='d-flex align-items-center'><BsCheckCircle></BsCheckCircle>&nbsp;Certifications</div>
                                         <div className='d-flex align-items-center'><BsCheckCircle></BsCheckCircle>&nbsp;Professional Designations</div>
@@ -114,7 +162,7 @@ const NewLandingPage=()=>{
                         </div>
                     </div>
                     <div className='get-started mt-3 d-flex align-items-center'>
-                        <span>Create your own Recognition Awards </span> &nbsp; <BsArrowRight></BsArrowRight> 
+                        <span>Create your own Recognition Awards </span> &nbsp;  &nbsp;  &nbsp; <BsArrowRight></BsArrowRight> 
                     </div>
                 </div>
                 

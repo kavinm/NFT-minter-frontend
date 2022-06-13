@@ -52,8 +52,8 @@ const ExampleNFTs=()=>{
                                     <AiOutlineStar></AiOutlineStar>
                             </div>
                             <div style={{marginLeft:'1rem'}}>
-                                <span style={{fontSize:'large'}}>1,000</span><br/>
-                                <span style={{fontSize:"0.8rem"}}>Singular NFT</span>
+                                <span style={{fontSize:'1.1rem',fontWeight:'bold'}}>1,000</span><br/>
+                                <span style={{fontSize:"0.7rem"}}>Singular NFT</span>
                             </div>
                             </div>
                             <div className='discover-cards d-flex'>
@@ -61,8 +61,8 @@ const ExampleNFTs=()=>{
                                     <RiStackFill></RiStackFill>
                                 </div>
                             <div style={{marginLeft:'1rem'}}>
-                                <span style={{fontSize:'large'}}>257</span><br/>
-                                <span style={{fontSize:"0.8rem"}}>NFT Collection</span>
+                                <span style={{fontSize:'1.1rem',fontWeight:'bold'}}>257</span><br/>
+                                <span style={{fontSize:"0.7rem"}}>NFT Collection</span>
                             </div>
                         </div>
                     </div>
