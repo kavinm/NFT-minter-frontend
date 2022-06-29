@@ -10,6 +10,8 @@ import MintSingleNft from './MintSingleNft';
 import YourCollection from './YourCollection';
 import CarouselCollection from './YourCollection/CarouselCollection';
 import { Modal } from 'antd';
+import CreateCollection from './CreateCollection';
+import RecognizeAnEmp from './RecognizeAnEmp';
 
 const Discover =()=>{
 
@@ -21,7 +23,7 @@ const Discover =()=>{
         create_collection:false
     })
 
-    const [uploadNftImg, setNftImg] = useState(null);
+    // const [uploadNftImg, setNftImg] = useState(null);
     const [menuItems, setMenu] = useState([
         {title:'Discover', tab:'discover', icon:<FiSend size={18}></FiSend>, id:'wallet-tab-1', classname:"active"},
         {title:'Recognize an employee', tab:'recog_employee', icon:<BsFillPersonFill size={18}></BsFillPersonFill>, id:'wallet-tab-2', classname:""},
@@ -94,11 +96,11 @@ const Discover =()=>{
         setSwitchCase(temp)
     }
 
-    const handleChangeFileUpload=(e)=>{
-        e.preventDefault();
-        setNftImg(URL.createObjectURL(e.target.files[0]));
-        console.log(e.target.files[0])
-    }
+    // const handleChangeFileUpload=(e)=>{
+    //     e.preventDefault();
+    //     setNftImg(URL.createObjectURL(e.target.files[0]));
+    //     console.log(e.target.files[0])
+    // }
     return <>
             <div className='row m-0'>
                 <div className='col-md-12  mt-5 p-0'>
@@ -106,10 +108,11 @@ const Discover =()=>{
                         <div className='row'>
                             <div className='col-md-3'>
                                 <div className='wallet-side-bar pt-3'>
-                                    {menuItems.map((r,i)=> <div className={"wallet-tabs "+r.classname} id={r.id} onClick={()=>r.tab!="create_collection"?handleSwitchTab(r.tab):showModal()}> 
+                                    {/* r.tab!="create_collection"?:showModal() */}
+                                    {menuItems.map((r,i)=> <div className={"wallet-tabs "+r.classname} id={r.id} onClick={()=>handleSwitchTab(r.tab)}> 
                                         {r.icon} &nbsp; &nbsp; {r.title}
                                     </div>)}
-                                    <Modal  width={650} bodyStyle={{height:'420px',color:'#fff', background:'#101526'}} 
+                                    {/* <Modal  width={650} bodyStyle={{height:'420px',color:'#fff', background:'#101526'}} 
                                             onOk={handleOk} onCancel={handleCancel}
                                             visible={isModalVisible} footer={null}>
                                         <div className='row create_collection_pop_up'>
@@ -156,15 +159,16 @@ const Discover =()=>{
                                                 <button onClick={handleOk}>Create a Collection</button>
                                             </div>
                                         </div>
-                                    </Modal>
+                                    </Modal> */}
                                 </div>
                             </div>
                             <div className='col-md-9 '>
                                 {SwitchCase.discover && <ExampleNFTs></ExampleNFTs>}
-                                {SwitchCase.recog_employee && <MintSingleNft mode="employee"></MintSingleNft>}
+                                {SwitchCase.recog_employee && <RecognizeAnEmp></RecognizeAnEmp>}
+                                {/* <MintSingleNft mode="employee"></MintSingleNft>} */}
                                 {SwitchCase.recog_team && <MintSingleNft mode="team"></MintSingleNft>}
                                 {SwitchCase.yrCollection && <YourCollection></YourCollection>}
-                                {SwitchCase.create_collection && ""}
+                                {SwitchCase.create_collection && <CreateCollection></CreateCollection>}
                             </div>
                         </div>
 

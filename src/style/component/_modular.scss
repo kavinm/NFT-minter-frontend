@@ -245,6 +245,36 @@
             }
         }
     }
+    
+    .responsive_blue_btn{
+        button{
+            float: right;
+            width: 8rem;
+            height: 2.5rem;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            background-color: #1E49E3;
+            &:hover{
+                background-color: #355ef0;
+                cursor: pointer;
+                transition: background-color 0.3s ease-in-out;
+            }
+        }
+    }
+    .mint-blue-btn{
+        width:100%;
+        color:#fff;
+        font-size: 0.8rem;
+        background-color: #1E49E3;
+    }
+    .mint-unselected-btn{
+        width:100%;
+        color:#fff;
+        font-size: 0.8rem;
+        background-color: transparent;
+        border-color:#fff;
+      
+    }
 }
 .upload-csv{
     background-color: transparent;

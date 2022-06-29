@@ -127,7 +127,7 @@
 .your-collection{
     width: 90%;
     height: 450px;
-    background-color: rgb(9, 4, 36);
+    background-color: #101526;//rgb(9, 4, 36);
     border-radius: 10px;
     .yr-collections-title{
         font-size: 1.5rem;
@@ -150,6 +150,114 @@
             color:#fff;
         }
     }
+}
+
+.create-collection{
+    width: 80%;
+    background-color: #101526;//rgb(9, 4, 36);
+    border-radius: 10px;
+    padding-bottom: 1rem;
+    .yr-collections-title{
+        font-size: 1.5rem;
+        font-weight: bold;
+        color:#fff;
+    }
+    .carousel-card-body{
+        width: 80%;
+        margin-left: 10%;
+    }
+    .upload-img{
+        @include moduler-img-upload;  
+    }
+    .text-label{
+        font-size: 0.8rem;
+    }
+    .form-input{
+        width: 100%;
+        height: 2rem;
+        font-size: 0.8rem;
+        color:#050A1B;
+        outline: none;
+        border-radius: 2px;
+    }
+    .description{
+        width:95%;
+        border-radius: 2px;
+        height: 7rem;
+    }
+    .submit-collection{
+        background-color: #1E49E3;
+        color:#fff;
+        height: 2.2rem;
+        margin-left: calc(95% - 8rem);
+        width:8rem;
+        font-size: 0.7rem;
+        font-weight: bold;
+    }
+   
+}
+
+.recog-an-emp{
+    width: 80%;
+    background-color: #101526;//rgb(9, 4, 36);
+    border-radius: 10px;
+    padding-bottom: 2rem;
+    .yr-collections-title{
+        font-size: 1.5rem;
+        font-weight: bold;
+        color:#fff;
+    }
+    .select_collection{
+        width: 10rem;
+        height: 3rem;
+        font-weight: 550;
+        font-size: 0.8rem;
+        border-radius: 5px;
+        border: 1px dashed #fff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+    }
+    .text-label{
+        font-size: 0.7rem;
+        font-weight: 550;
+    }
+    .form-input{
+        width: 100%;
+        height: 2rem;
+        font-size: 0.8rem;
+        color:#050A1B;
+        outline: none;
+        border-radius: 2px;
+    }
+    .recog-form-page{
+        width: 95%;
+        .mint-blue-btn{
+            width:100%;
+            color:#fff;
+            font-size: 0.8rem;
+            background-color: #1E49E3;
+        }
+        .mint-unselected-btn{
+            width:100%;
+            color:#fff;
+            font-size: 0.8rem;
+            background-color: transparent;
+            border-color:#fff;
+          
+        }
+        .description{
+            width:100%;
+            border-radius: 2px;
+            height: 7rem;
+        }
+        .text-label-secondary{
+            color: #C6C6C6;
+            font-size: 0.7rem;
+        }
+    }
+    
 }
 
 .mint-an-nft{
@@ -212,6 +320,7 @@
         color:#fff;
         padding:.5rem 2.4rem;
     }
+    
     .full-form-area{
         width:87%;
         .mint-blue-btn{
@@ -254,6 +363,7 @@
                     background-color: #51586D;
                 }
             }
+           
         }
     }
 }
