@@ -30,7 +30,7 @@ const Discover =()=>{
         {title:'Recognize a team', tab:'recog_team', icon:<BsPeopleFill size={18}></BsPeopleFill>, id:'wallet-tab-3', classname:""},
         {title:'Your Collections', tab:'yrCollection', icon:<BiCopy size={19}></BiCopy>, id:'wallet-tab-4', classname:""},
         {title:'Create a collection', tab:'create_collection', icon:<BsPlusCircleFill size={18}></BsPlusCircleFill>, id:'wallet-tab-5', classname:""},
-        {title:'Fill Wallet', tab:'fill_wallet', icon:<BsPlusCircleFill size={18}></BsPlusCircleFill>, id:'wallet-tab-6', classname:""}
+        // {title:'Fill Wallet', tab:'fill_wallet', icon:<BsPlusCircleFill size={18}></BsPlusCircleFill>, id:'wallet-tab-6', classname:""}
     ])
 
     const [isModalVisible, setIsModalVisible] = useState(false);
