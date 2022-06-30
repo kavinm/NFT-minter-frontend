@@ -12,6 +12,7 @@ import CarouselCollection from './YourCollection/CarouselCollection';
 import { Modal } from 'antd';
 import CreateCollection from './CreateCollection';
 import RecognizeAnEmp from './RecognizeAnEmp';
+import RecognizeATeam from './RecognizeATeam';
 
 const Discover =()=>{
 
@@ -166,7 +167,8 @@ const Discover =()=>{
                                 {SwitchCase.discover && <ExampleNFTs></ExampleNFTs>}
                                 {SwitchCase.recog_employee && <RecognizeAnEmp></RecognizeAnEmp>}
                                 {/* <MintSingleNft mode="employee"></MintSingleNft>} */}
-                                {SwitchCase.recog_team && <MintSingleNft mode="team"></MintSingleNft>}
+                                {/*  <MintSingleNft mode="team"></MintSingleNft> */}
+                                {SwitchCase.recog_team && <RecognizeATeam></RecognizeATeam>}
                                 {SwitchCase.yrCollection && <YourCollection></YourCollection>}
                                 {SwitchCase.create_collection && <CreateCollection></CreateCollection>}
                             </div>
