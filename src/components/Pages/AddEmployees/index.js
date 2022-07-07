@@ -39,7 +39,7 @@ const DarkCards=({title, cardImg})=>{
     </>
 }
 
-const RecognizeATeam =()=>{
+const AddEmployees =()=>{
 
     const [selectedNFT, setNFTSelection] = useState(null);
     const [uploadNftImg, setNftImg] = useState(null);
@@ -229,4 +229,4 @@ const RecognizeATeam =()=>{
             </>
 }
 
-export default RecognizeATeam;
+export default AddEmployees;

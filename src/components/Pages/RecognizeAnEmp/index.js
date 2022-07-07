@@ -75,11 +75,13 @@ const RecognizeAnEmp =()=>{
         }
     });
     const [rec_menu, setMenu] = useState(["Integrity","Courage","Excellence", "Together", "For Better"]);
+    const [rec_strategy_menu, setRecStrategyMenu] = useState(["Clients and Markets","People and Knowledge","Public Trust and Quality","Operational Excellance"])
     const [yrs_menu, setYrsMenu] = useState([5,10,15,20,25]);
     const [myState, setState]=useState({
         value_tab:true,
         strategy_tab:false,
-        select_a_collection:""
+        select_a_collection:"",
+        modalCollectionType:''
     });
     const showModal = () => {
         setIsModalVisible(true);
@@ -108,6 +110,35 @@ const RecognizeAnEmp =()=>{
         handleOk();
     }
 
+    const handleStrategy_N_ValueMenu =(tabName, id)=>{
+        console.log("Running...")
+        if(tabName=="recMenuStrategy")
+        {
+            document.getElementById(tabName+id).classList.add("active");
+            for(let i=0;i<rec_strategy_menu.length;i++){
+                if(id != i)
+                    document.getElementById(tabName+i).classList.remove("active");
+            }
+        }
+        else
+        if(tabName=="recMenuValue"){
+            document.getElementById(tabName+id).classList.add("active");
+            for(let i=0;i<rec_menu.length;i++){
+                if(id != i)
+                    document.getElementById(tabName+i).classList.remove("active");
+            }
+        }
+        else
+        if(tabName=="yrsOfService"){
+            document.getElementById(tabName+id).classList.add("active");
+            for(let i=0;i<yrs_menu.length;i++){
+                if(id != i)
+                    document.getElementById(tabName+i).classList.remove("active");
+            }
+        }
+            
+    }
+
     return <>
             <div className='row m-0'>
                 <div className='col-md-12 p-0'>
@@ -120,10 +151,16 @@ const RecognizeAnEmp =()=>{
                                 <div className='recog-form-page'>
                                     <div className='row'>
                                         <div className='col-md-12 mt-3'>
-                                            <label className='select_collection ' onClick={()=>{
+                                            {myState.select_a_collection==""?<label className='select_collection ' onClick={()=>{
                                                 setModalList({...modalList,collection_m:true })
                                                 showModal();
-                                            }}>Select a collection</label>
+                                            }}>Select a collection</label>:(myState.select_a_collection=="Recognition_awards"?<label className='select_recognition_awards ' onClick={()=>{
+                                                setModalList({...modalList,collection_m:true })
+                                                showModal();
+                                            }}>Recognition awards</label>:<label className='select_recognition_awards ' onClick={()=>{
+                                                setModalList({...modalList,collection_m:true })
+                                                showModal();
+                                            }}>Service awards</label>)}
                                             {modalList.collection_m && <Modal  width={650} bodyStyle={{height:'250px',color:'#fff', background:'#101526'}} 
                                             onOk={handleOk} onCancel={handleCancel}
                                             visible={isModalVisible} footer={null}>
@@ -135,17 +172,19 @@ const RecognizeAnEmp =()=>{
                                                     <div className='col-md-12 p-0'>
                                                         <div className='row mt-2'>
                                                             <div className='col-md-6 '>
-                                                                <button onClick={()=>setState({...myState, select_a_collection:'Recognition_awards'})}
-                                                                className={'btn ' +(myState.select_a_collection=="Recognition_awards"?" mint-blue-btn ":" mint-unselected-btn ")} id="internal_form" >Recognition awards</button>
+                                                                <button onClick={()=>setState({...myState, modalCollectionType:'Recognition_awards'})}
+                                                                className={'btn ' +(myState.modalCollectionType=="Recognition_awards"?" mint-blue-btn ":" mint-unselected-btn ")} id="internal_form" >Recognition awards</button>
                                                             </div>
                                                             <div className='col-md-6 '>
-                                                                <button onClick={()=>setState({...myState, select_a_collection:'Service_awards'})} 
-                                                                className={'btn ' +(myState.select_a_collection=="Service_awards"?" mint-blue-btn ":" mint-unselected-btn ")} id="external_form" >Service awards</button>
+                                                                <button onClick={()=>setState({...myState, modalCollectionType:'Service_awards'})} 
+                                                                className={'btn ' +(myState.modalCollectionType=="Service_awards"?" mint-blue-btn ":" mint-unselected-btn ")} id="external_form" >Service awards</button>
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div className='col-md-12 mt-3 responsive_blue_btn'>
-                                                        <button onClick={handleOk}>Select</button>
+                                                        <button onClick={()=>{
+                                                            setState({...myState, select_a_collection:myState.modalCollectionType});
+                                                            handleOk();}}>Select</button>
                                                     </div>
                                                 </div>
                                             </Modal>}
@@ -210,10 +249,13 @@ const RecognizeAnEmp =()=>{
                                                 <div className='col-md-6 p-0'>
                                                     <div className='recognize-menu'>
                                                         <div className='row'> 
-                                                            {myState.select_a_collection=="Recognition_awards"  && rec_menu.map((val,i)=><div key={"recMenu"+i} className={'col-md-12 recognize-menu-tabs '+(i==1 && " active")}>
+                                                            {myState.select_a_collection=="Recognition_awards"   && myState.value_tab && rec_menu.map((val,i)=><div key={"recMenuValue"+i} id={"recMenuValue"+i} onClick={()=>handleStrategy_N_ValueMenu("recMenuValue",i)} className={'col-md-12 recognize-menu-tabs '}>
                                                                 {val}
                                                             </div>)}
-                                                            {myState.select_a_collection=="Service_awards"  && yrs_menu.map((val,i)=><div key={"recMenu"+i} className={'col-md-12 recognize-menu-tabs '+(i==1 && " active")}>
+                                                            {myState.select_a_collection=="Recognition_awards" && myState.strategy_tab && rec_strategy_menu.map((val,i)=><div key={"recMenuStrategy"+i} id={"recMenuStrategy"+i} onClick={()=>handleStrategy_N_ValueMenu("recMenuStrategy",i)} className={'col-md-12 recognize-menu-tabs '}>
+                                                                {val}
+                                                            </div>)}
+                                                            {myState.select_a_collection=="Service_awards"  && yrs_menu.map((val,i)=><div key={"recMenu"+i} onClick={()=>handleStrategy_N_ValueMenu("yrsOfService",i)} id={"yrsOfService"+i} className={'col-md-12 recognize-menu-tabs '}>
                                                                 {val}
                                                             </div>)}
                                                         </div>

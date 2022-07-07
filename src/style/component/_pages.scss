@@ -233,7 +233,20 @@
         background-size: 1px 100%, 100% 1px, 1px 100% , 100% 1px;
         background-position: 0 0, 0 0, 100% 0, 0 100%;
         background-repeat: no-repeat;
-            }
+    }
+    .select_recognition_awards{
+        width: 11rem;
+        height: 3rem;
+        font-weight: 550;
+        font-size: 0.8rem;
+        border-radius: 5px;
+        // border: 1px dashed #fff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        background: rgba(255, 255, 255, 0.1);
+    }
     .text-label{
         font-size: 0.7rem;
         font-weight: 550;
@@ -340,7 +353,11 @@
                 display: flex;
                 align-items: center;
                 background: transparent;
-               
+               &:hover{
+                    cursor: pointer;
+                    background: #51586D;
+                    transition: all ease-in-out 0.3s;
+               }
             }
             .active{
                 background: #51586D;

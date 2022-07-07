@@ -13,6 +13,7 @@ import { Modal } from 'antd';
 import CreateCollection from './CreateCollection';
 import RecognizeAnEmp from './RecognizeAnEmp';
 import RecognizeATeam from './RecognizeATeam';
+// import { AiOutlineUpload } from 'react-icons/ai';
 
 const Discover =()=>{
 
@@ -31,7 +32,8 @@ const Discover =()=>{
         {title:'Recognize a team', tab:'recog_team', icon:<BsPeopleFill size={18}></BsPeopleFill>, id:'wallet-tab-3', classname:""},
         {title:'Your Collections', tab:'yrCollection', icon:<BiCopy size={19}></BiCopy>, id:'wallet-tab-4', classname:""},
         {title:'Create a collection', tab:'create_collection', icon:<BsPlusCircleFill size={18}></BsPlusCircleFill>, id:'wallet-tab-5', classname:""},
-        // {title:'Fill Wallet', tab:'fill_wallet', icon:<BsPlusCircleFill size={18}></BsPlusCircleFill>, id:'wallet-tab-6', classname:""}
+        // {title:'Create a collection', tab:'create_collection', icon:<BsPlusCircleFill size={18}></BsPlusCircleFill>, id:'wallet-tab-6', classname:""}
+        {title:'Add employees', tab:'fill_wallet', icon:<AiOutlineUpload size={18}></AiOutlineUpload>, id:'wallet-tab-6', classname:""}
     ])
 
     const [isModalVisible, setIsModalVisible] = useState(false);
@@ -54,6 +56,7 @@ const Discover =()=>{
         const tab3= document.getElementById("wallet-tab-3");
         const tab4= document.getElementById("wallet-tab-4");
         const tab5= document.getElementById("wallet-tab-5");
+        const tab6= document.getElementById("wallet-tab-6");
         if(name=="discover"){
             temp={discover:true,recog_employee:false,recog_team:false,yrCollection:false,create_collection:false}
             tab1.classList.add("active");
@@ -61,6 +64,7 @@ const Discover =()=>{
             tab3.classList.remove("active");
             tab4.classList.remove("active");
             tab5.classList.remove("active");
+            tab6.classList.remove("active");
         }else
         if(name=="recog_employee"){
             temp={discover:false,recog_employee:true,recog_team:false,yrCollection:false,create_collection:false}
@@ -69,6 +73,7 @@ const Discover =()=>{
             tab3.classList.remove("active");
             tab4.classList.remove("active");
             tab5.classList.remove("active");
+            tab6.classList.remove("active");
         }else
         if(name=="recog_team"){
             temp={discover:false,recog_employee:false,recog_team:true,yrCollection:false,create_collection:false}
@@ -77,6 +82,7 @@ const Discover =()=>{
             tab1.classList.remove("active");
             tab4.classList.remove("active");
             tab5.classList.remove("active");
+            tab6.classList.remove("active");
         }else
         if(name=="yrCollection"){
             temp={discover:false,recog_employee:false,recog_team:false,yrCollection:true,create_collection:false}
@@ -85,6 +91,7 @@ const Discover =()=>{
             tab1.classList.remove("active");
             tab4.classList.add("active");
             tab5.classList.remove("active");
+            tab6.classList.remove("active");
         }else
         if(name=="create_collection"){
             temp={discover:false,recog_employee:false,recog_team:false,yrCollection:false,create_collection:true}
@@ -92,7 +99,17 @@ const Discover =()=>{
             tab2.classList.remove("active");
             tab1.classList.remove("active");
             tab4.classList.remove("active");
+            tab6.classList.remove("active");
             tab5.classList.add("active");
+        }else
+        if(name=="fill_wallet"){
+            temp={discover:false,recog_employee:false,recog_team:false,yrCollection:false,create_collection:true}
+            tab3.classList.remove("active");
+            tab2.classList.remove("active");
+            tab1.classList.remove("active");
+            tab4.classList.remove("active");
+            tab5.classList.remove("active");
+            tab6.classList.add("active");
         }
         setSwitchCase(temp)
     }
@@ -171,6 +188,7 @@ const Discover =()=>{
                                 {SwitchCase.recog_team && <RecognizeATeam></RecognizeATeam>}
                                 {SwitchCase.yrCollection && <YourCollection></YourCollection>}
                                 {SwitchCase.create_collection && <CreateCollection></CreateCollection>}
+                                {}
                             </div>
                         </div>
 
