@@ -3,7 +3,6 @@ import 'react-multi-carousel/lib/styles.css';
 import Carousel from 'react-multi-carousel';
 import multiPplImg from '../../../assets/illustrations/Component 1.png';
 import rectImg1 from '../../../assets/illustrations/greenRect.svg';
-import rectImg2 from '../../../assets/illustrations/Rectangle 187 (3).svg';
 import rectImg3 from '../../../assets/illustrations/Rectangle 187 (4).svg';
 import DynamicCards from '../../ModularCodes/DynamicCards';
 import _2mGraphic from '../../../assets/images/2M Graphic.png';

@@ -1,4 +1,4 @@
-import React, {Suspense, useEffect, useState } from 'react';
+import React, {Suspense, useState } from 'react';
 import { Modal } from 'antd';
 import { FaTimes } from 'react-icons/fa';
 import 'react-multi-carousel/lib/styles.css';

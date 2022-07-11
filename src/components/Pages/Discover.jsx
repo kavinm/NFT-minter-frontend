@@ -1,15 +1,12 @@
-import React, { Suspense, useState } from 'react';
+import React, { useState } from 'react';
 import {FiSend} from 'react-icons/fi';
-import {FaTimes} from 'react-icons/fa';
 import {BiCopy} from 'react-icons/bi';
 import {AiOutlineUpload} from 'react-icons/ai';
 import {BsFillPersonFill, BsPeopleFill, BsPlusCircleFill} from 'react-icons/bs';
 import BlueBanner from './Discover/BlueBanner';
 import ExampleNFTs from './Discover/ExampleNFTs';
-import MintSingleNft from './MintSingleNft';
 import YourCollection from './YourCollection';
 import CarouselCollection from './YourCollection/CarouselCollection';
-import { Modal } from 'antd';
 import CreateCollection from './CreateCollection';
 import RecognizeAnEmp from './RecognizeAnEmp';
 import RecognizeATeam from './RecognizeATeam';

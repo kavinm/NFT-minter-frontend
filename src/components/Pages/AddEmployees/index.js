@@ -1,5 +1,5 @@
 import { Modal } from 'antd';
-import React, { Suspense, useEffect, useState } from 'react';
+import React, { Suspense, useState } from 'react';
 import { AiOutlineUpload } from 'react-icons/ai';
 import { FaTimes } from 'react-icons/fa';
 import readXlsxFile from 'read-excel-file';
