@@ -1,15 +1,19 @@
-import React, { useState } from 'react';
+import React, { Suspense, useState } from 'react';
 import {FiSend} from 'react-icons/fi';
+import {FaTimes} from 'react-icons/fa';
 import {BiCopy} from 'react-icons/bi';
 import {AiOutlineUpload} from 'react-icons/ai';
 import {BsFillPersonFill, BsPeopleFill, BsPlusCircleFill} from 'react-icons/bs';
 import BlueBanner from './Discover/BlueBanner';
 import ExampleNFTs from './Discover/ExampleNFTs';
+import MintSingleNft from './MintSingleNft';
 import YourCollection from './YourCollection';
 import CarouselCollection from './YourCollection/CarouselCollection';
+import { Modal } from 'antd';
 import CreateCollection from './CreateCollection';
 import RecognizeAnEmp from './RecognizeAnEmp';
 import RecognizeATeam from './RecognizeATeam';
+import AddEmployees from './AddEmployees';
 // import { AiOutlineUpload } from 'react-icons/ai';
 
 const Discover =()=>{
@@ -19,7 +23,8 @@ const Discover =()=>{
         recog_employee:false,
         recog_team:false,
         yrCollection:false,
-        create_collection:false
+        create_collection:false,
+        add_emp:false
     })
 
     // const [uploadNftImg, setNftImg] = useState(null);
@@ -64,7 +69,7 @@ const Discover =()=>{
             tab6.classList.remove("active");
         }else
         if(name=="recog_employee"){
-            temp={discover:false,recog_employee:true,recog_team:false,yrCollection:false,create_collection:false}
+            temp={discover:false,recog_employee:true,recog_team:false,yrCollection:false,create_collection:false, add_emp:false}
             tab2.classList.add("active");
             tab1.classList.remove("active");
             tab3.classList.remove("active");
@@ -73,7 +78,7 @@ const Discover =()=>{
             tab6.classList.remove("active");
         }else
         if(name=="recog_team"){
-            temp={discover:false,recog_employee:false,recog_team:true,yrCollection:false,create_collection:false}
+            temp={discover:false,recog_employee:false,recog_team:true,yrCollection:false,create_collection:false, add_emp:false}
             tab3.classList.add("active");
             tab2.classList.remove("active");
             tab1.classList.remove("active");
@@ -82,7 +87,7 @@ const Discover =()=>{
             tab6.classList.remove("active");
         }else
         if(name=="yrCollection"){
-            temp={discover:false,recog_employee:false,recog_team:false,yrCollection:true,create_collection:false}
+            temp={discover:false,recog_employee:false,recog_team:false,yrCollection:true,create_collection:false, add_emp:false}
             tab3.classList.remove("active");
             tab2.classList.remove("active");
             tab1.classList.remove("active");
@@ -91,7 +96,7 @@ const Discover =()=>{
             tab6.classList.remove("active");
         }else
         if(name=="create_collection"){
-            temp={discover:false,recog_employee:false,recog_team:false,yrCollection:false,create_collection:true}
+            temp={discover:false,recog_employee:false,recog_team:false,yrCollection:false,create_collection:true, add_emp:false}
             tab3.classList.remove("active");
             tab2.classList.remove("active");
             tab1.classList.remove("active");
@@ -100,7 +105,7 @@ const Discover =()=>{
             tab5.classList.add("active");
         }else
         if(name=="fill_wallet"){
-            temp={discover:false,recog_employee:false,recog_team:false,yrCollection:false,create_collection:true}
+            temp={discover:false,recog_employee:false,recog_team:false,yrCollection:false,create_collection:false, add_emp:true}
             tab3.classList.remove("active");
             tab2.classList.remove("active");
             tab1.classList.remove("active");
@@ -185,7 +190,7 @@ const Discover =()=>{
                                 {SwitchCase.recog_team && <RecognizeATeam></RecognizeATeam>}
                                 {SwitchCase.yrCollection && <YourCollection></YourCollection>}
                                 {SwitchCase.create_collection && <CreateCollection></CreateCollection>}
-                                {}
+                                {SwitchCase.add_emp && <AddEmployees></AddEmployees>}
                             </div>
                         </div>
 

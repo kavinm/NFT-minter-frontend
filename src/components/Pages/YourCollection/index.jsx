@@ -7,8 +7,15 @@ import excellent from '../../../assets/images/excellent-service.png';
 import {BiDotsVerticalRounded} from 'react-icons/bi';
 import { AppstoreOutlined, MailOutlined, SettingOutlined } from '@ant-design/icons';
 import { Menu, Modal } from 'antd';
+import { FaTimes } from 'react-icons/fa';
+import { AiOutlineUpload } from 'react-icons/ai';
+import readXlsxFile from 'read-excel-file';
   
 const DarkCards=({title, cardImg})=>{
+
+    // const [myModal, showModal] = useState(false);
+    
+
     return <>
         <div className='dark-cards'>
             {/* <div className='row'>
@@ -71,7 +78,30 @@ const YourCollection=()=>{
         {title:'Service Awards', subtitle:'Offered by Parner Name', cardImg:excellent}// contactList:multiPplImg},
        
     ])
-
+    
+    const [csvFile,setFile] = useState(null);
+    const [isModalVisible, setIsModalVisible] = useState(false);
+    const showModal = () => {
+        setIsModalVisible(true);
+      };
+    
+      const handleOk = () => {
+        // setModalList({...modalList,collection_m:false, gallary_m:false });
+        setIsModalVisible(false);
+      };
+    
+      const handleCancel = () => {
+        // setModalList({...modalList,collection_m:false, gallary_m:false });
+        setIsModalVisible(false);
+      };
+      const handleChangeFile=async(e)=>{
+        readXlsxFile(e.target.files[0]).then((rows) => {
+           console.log(rows);
+           // `rows` is an array of rows
+           // each row being an array of cells.
+           setFile(rows)
+         })
+   }
     return <>
         <div className='row m-0'>
             <div className='col-md-12 p-0'>
@@ -97,7 +127,30 @@ const YourCollection=()=>{
                     </div>
                     <div className='col-md-12' style={{position:'relative'}}>
                    
-                        <button className='btn' >Create a Collection</button>
+                        <button className='btn' onClick={showModal}>Create a Collection</button>
+                        {<Modal  width={650} bodyStyle={{height:'250px',color:'#fff', background:'#101526'}} 
+                                            onOk={handleOk} onCancel={handleCancel}
+                                            visible={isModalVisible} footer={null}>
+                                                <div className='row create_collection_pop_up'>
+                                                    <div className='col-md-12 mb-2 create_collection_pop_up_title p-0'>
+                                                        <span>Add eligible minters</span>
+                                                        <FaTimes color={"#fff"} size={16} onClick={handleCancel} className="pop-close-modal"></FaTimes>
+                                                    </div>
+                                                    <div className='col-md-4 text-label'>
+                                                        <label>Recipient list</label> <br/>
+                                                        <label htmlFor="uploadCsv" className="btn mt-1" style={{paddingLeft:0, paddingTop:"0.1rem"}} >
+                                                                <div className='upload-csv'>Upload csv &nbsp; <AiOutlineUpload size={19}></AiOutlineUpload></div>
+                                                                <input type="file" accept=".csv, .xls, .xlsx" style={{display:"none"}} onChange={handleChangeFile}  id="uploadCsv" name="file" multiple></input>
+                                                        </label>
+                                                    </div>
+                                                    <div className='col-md-8'></div>
+                                                    <div className='col-md-12 mt-3 responsive_blue_btn'>
+                                                        <button onClick={()=>{
+                                                            // setState({...myState, select_a_collection:myState.modalCollectionType});
+                                                            handleOk();}}>Select</button>
+                                                    </div>
+                                                </div>
+                                            </Modal>}
                        
                     </div>
 
