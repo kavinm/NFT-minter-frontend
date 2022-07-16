@@ -1,0 +1,92 @@
+.navbar{
+    background-color: transparent;
+    width: 100%;
+    height: 100%;
+    
+    .nav-area{
+        width:80%;
+        position: relative;
+        #kpmg-logo{float:left;position:absolute;left:-5rem;width:8rem;height:4rem;}
+        button{
+            height: 2.5rem;
+            background: #fff;
+            font-size: 0.8rem;
+            font-weight: bold;
+            float: right;
+            margin-right: 3rem;
+            h5{
+                background: -webkit-linear-gradient(90deg, #1E49E3 0.52%, #7213E9 100.52%);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+            }
+        }
+    }
+    #kpmg-logo{
+        margin-left: 3rem;
+        height: 80%;
+    }
+    .launch-btn{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        button{
+            height: 67%;
+            background: #fff;
+            font-size: 0.8rem;
+            font-weight: bold;
+            float: right;
+            h5{
+                background: -webkit-linear-gradient(90deg, #1E49E3 0.52%, #7213E9 100.52%);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+            }
+        }
+    }
+}
+.navbar.active{
+    background: #fff;
+}
+
+.navbar-wallet{
+    background-color: transparent;
+    width: 100%;
+    height: 100%;
+    .nav-area-wallet{
+        width:80%;
+        position: relative;
+        #kpmg-logo{float:left;position:absolute;left:-5rem;width:8rem;height:4rem;}
+        button{
+            height: 2.5rem;
+            position: absolute;
+            background: #fff;
+            font-size: 0.8rem;
+            font-weight: bold;
+            right:0;
+            margin-right: 3rem;
+            margin-top: 1rem;
+            background: linear-gradient(90deg, #1E49E3 0%, #7213E9 100%);
+            color:#fff;
+        }
+    }
+    #kpmg-logo{
+        margin-left: 3rem;
+        height: 80%;
+    }
+    .launch-btn{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        button{
+            height: 67%;
+            background: #fff;
+            font-size: 0.8rem;
+            font-weight: bold;
+            float: right;
+            h5{
+                background: -webkit-linear-gradient(90deg, #1E49E3 0.52%, #7213E9 100.52%);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+            }
+        }
+    }
+}
