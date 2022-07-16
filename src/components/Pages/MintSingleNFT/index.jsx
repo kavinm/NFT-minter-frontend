@@ -128,6 +128,13 @@ const MintSingleNft=({mode})=>{
         handleOk();
     }
 
+
+    const mint = () => {
+
+        console.log("INDIA")
+
+    }
+
     return <>
         <div className='row m-0'>
             <div className='col-md-12 p-0'>
@@ -341,8 +348,7 @@ const MintSingleNft=({mode})=>{
                                 </div>}
                                 <div className='row mt-2'>
                                     <div className='col-md-12 mt-2 mb-4'>
-                                        <button className='btn' id="submit-btn">Mint</button>
-                                        
+                                        <button className='btn' id="submit-btn" onClick={() => mint()} >Mint</button>
                                     </div>
                                 </div>
                             </div>

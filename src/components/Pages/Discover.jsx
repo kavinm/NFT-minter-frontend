@@ -6,7 +6,6 @@ import {AiOutlineUpload} from 'react-icons/ai';
 import {BsFillPersonFill, BsPeopleFill, BsPlusCircleFill} from 'react-icons/bs';
 import BlueBanner from './Discover/BlueBanner';
 import ExampleNFTs from './Discover/ExampleNFTs';
-import MintSingleNft from './MintSingleNft';
 import YourCollection from './YourCollection';
 import CarouselCollection from './YourCollection/CarouselCollection';
 import { Modal } from 'antd';

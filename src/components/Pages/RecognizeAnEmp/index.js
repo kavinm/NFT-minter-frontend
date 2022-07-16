@@ -1,4 +1,4 @@
-import React, {Suspense, useState } from 'react';
+import React, {Suspense, useState, useEffect } from 'react';
 import { Modal } from 'antd';
 import { FaTimes } from 'react-icons/fa';
 import 'react-multi-carousel/lib/styles.css';
@@ -6,6 +6,10 @@ import Carousel from 'react-multi-carousel';
 import bicycleBoy from '../../../assets/images/bicycle-boy.png';
 import _2mGraphic from '../../../assets/images/2M Graphic.png';
 import excellent from '../../../assets/images/excellent-service.png';
+//import myNFT from "../utils/MyNFT.json";
+import myNFT from "../../../utils/MyNFT.json"
+import axios from "axios";
+import { ethers } from "ethers";
 
 const DarkCards=({title, cardImg})=>{
     return <>
@@ -39,6 +43,7 @@ const DarkCards=({title, cardImg})=>{
 
 const RecognizeAnEmp =()=>{
 
+    
     const [selectedNFT, setNFTSelection] = useState(null);
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [modalList, setModalList] = useState({
@@ -46,10 +51,9 @@ const RecognizeAnEmp =()=>{
         gallary_m:false,
     });
     const [dynamicCardsData, setCards]=useState([
-        {title:'Recognition Awards', subtitle:'Offered by Parner Name', cardImg:_2mGraphic},// contactList:multiPplImg},
-        {title:'Participation Record', subtitle:'Offered by Parner Name', cardImg:bicycleBoy},// contactList:multiPplImg},
-        {title:'Service Awards', subtitle:'Offered by Parner Name', cardImg:excellent}// contactList:multiPplImg},
-       
+        {title:'Recognition Awards', subtitle:'Offered by Parner Name', cardImg: "https://cdn.discordapp.com/attachments/949062467131158528/997628182758953050/2M_Graphic.81e00e16f39e449d2aa7.png"},// contactList:multiPplImg},
+        {title:'Participation Record', subtitle:'Offered by Parner Name', cardImg: "https://media.discordapp.net/attachments/949062467131158528/997629759888564294/download.png"},// contactList:multiPplImg},
+        {title:'Service Awards', subtitle:'Offered by Parner Name', cardImg: "https://media.discordapp.net/attachments/949062467131158528/997629870043562075/download_1.png"}// contactList:multiPplImg},
     ]);
     const [ carouselState, setCarouse] = useState({
         responsive:{
@@ -83,6 +87,42 @@ const RecognizeAnEmp =()=>{
         select_a_collection:"",
         modalCollectionType:''
     });
+    const [currentAccount, setCurrentAccount] = useState("");
+    const [recipientName, setRecipientName] = useState("");
+    const [recipientEmail, setRecipientEmail] = useState("");
+    const [recipientWallet, setRecipientWallet] = useState("");
+    const [recognitionNote, setRecognitionNote] = useState("");
+
+    const [yearsOfService, setYearsOfService] = useState(0);
+    const [recMenuValue, setRecMenuValue] = useState("");
+    const [recMenuStrategy, setRecMenuStrategy] = useState("");
+
+    useEffect(() => {
+        checkIfWalletIsConnected();
+    }, []);
+
+    const checkIfWalletIsConnected = async () => {
+        const { ethereum } = window;
+
+        if (!ethereum) {
+            // TODO: Proper Error Handling modal
+            console.error("Make sure you have metamask");
+            return;
+        }
+
+        const accounts = await ethereum.request({ method: "eth_accounts" });
+
+        if (accounts.length !== 0) {
+            const account = accounts[0];
+            console.info(`Connected to ${account}`);
+
+            setCurrentAccount(account);
+        } else {
+            console.error("No authorized account found");
+        }
+    };
+
+
     const showModal = () => {
         setIsModalVisible(true);
       };
@@ -98,21 +138,30 @@ const RecognizeAnEmp =()=>{
       };
 
       const toggleTab=(name)=>{
-        if(name=="value_tab")
+        if(name==="value_tab")
             setState({...myState, value_tab:true, strategy_tab:false})
-        if(name=="strategy_tab")
+        if(name==="strategy_tab")
             setState({...myState, strategy_tab:true, value_tab:false})
       }
       
     const handleNFTSelection=(val)=>{
-        console.log(val)
+        console.log(val);
         setNFTSelection(val);
         handleOk();
+        
     }
 
     const handleStrategy_N_ValueMenu =(tabName, id)=>{
-        console.log("Running...")
-        if(tabName=="recMenuStrategy")
+
+        if (tabName === "yrsOfService") {
+            setYearsOfService(yrs_menu[id]);
+        } else if (tabName === "recMenuValue") {
+            setRecMenuValue(rec_menu[id]);
+        } else if (tabName === "recMenuStrategy") {
+            setRecMenuStrategy(rec_strategy_menu[id]);
+        }
+
+        if(tabName==="recMenuStrategy")
         {
             document.getElementById(tabName+id).classList.add("active");
             for(let i=0;i<rec_strategy_menu.length;i++){
@@ -121,7 +170,7 @@ const RecognizeAnEmp =()=>{
             }
         }
         else
-        if(tabName=="recMenuValue"){
+        if(tabName==="recMenuValue"){
             document.getElementById(tabName+id).classList.add("active");
             for(let i=0;i<rec_menu.length;i++){
                 if(id != i)
@@ -129,7 +178,7 @@ const RecognizeAnEmp =()=>{
             }
         }
         else
-        if(tabName=="yrsOfService"){
+        if(tabName==="yrsOfService"){
             document.getElementById(tabName+id).classList.add("active");
             for(let i=0;i<yrs_menu.length;i++){
                 if(id != i)
@@ -137,6 +186,70 @@ const RecognizeAnEmp =()=>{
             }
         }
             
+    }
+
+    const mintSubmission = async () => {
+        
+        const pinToIPFSURL = `https://api.pinata.cloud/pinning/pinFileToIPFS`;
+        const pinJSONToIPFSURL = `https://api.pinata.cloud/pinning/pinJSONToIPFS`;
+        const CONTRACT_ADDRESS = "0x93b9439e2a89019dee11306e78adcf77c7431caf";
+
+        let nftMetadata = {
+            "name": selectedNFT.title,
+            "description": selectedNFT.subtitle,
+            "image": selectedNFT.cardImg,
+            "recognition_note": recognitionNote,
+            "attributes": [
+                {trait_type: "Employee Name", value: recipientName},
+                {trait_type: "Employee Email", value: recipientEmail}
+            ]
+        }
+
+        if (myState.modalCollectionType === "Service_awards") {
+            nftMetadata["attributes"].push({trait_type: "Collection", value: "Service Award"});
+            nftMetadata["attributes"].push({trait_type: "Years of Service", value: yearsOfService});
+        } else if (myState.modalCollectionType === "Recognition_awards"){
+            nftMetadata["attributes"].push({trait_type: "Collection", value: "Recognition Award"});
+            if (myState.strategy_tab) {
+                nftMetadata["attributes"].push({trait_type: "Strategy Type", value: recMenuStrategy});
+            } else if (myState.value_tab) {
+                nftMetadata["attributes"].push({trait_type: "Value Type", value: recMenuValue});
+            }
+        }
+
+        const meta_data_response = await axios.post(pinJSONToIPFSURL, nftMetadata, {
+            headers: {
+              'pinata_api_key': "6dc806852197ca3a8e7b",
+              "pinata_secret_api_key": "334eed80fbabe379df3d8df9cc48198488dfb5d6d68f022c562fdba4af48de0f",
+            }
+        })
+        
+        const JsonUrl = "https://gateway.pinata.cloud/ipfs/" + meta_data_response.data.IpfsHash;
+        console.log(JsonUrl);
+
+        try {
+            const { ethereum } = window;
+            if (ethereum) {
+                const provider = new ethers.providers.Web3Provider(ethereum);
+                const signer = provider.getSigner();
+                const connectedContract = new ethers.Contract(
+                CONTRACT_ADDRESS,
+                myNFT.abi,
+                signer
+                );
+                
+                console.log("Going to pop wallet now to pay gas...");
+                let nftTx = await connectedContract.mintNFT(recipientWallet, JsonUrl);
+                console.info(
+                `Mined, see transaction: https://rinkeby.etherscan.io/tx/${nftTx.hash}`
+                );
+            } else {
+                console.log("Ethereum object doesn't exist!");
+            }
+        } catch (error) {
+            console.log(error);
+        }
+
     }
 
     return <>
@@ -191,15 +304,15 @@ const RecognizeAnEmp =()=>{
                                         </div>
                                         <div className='col-md-12 mt-3'>
                                             <label className='text-label'>Recipient Name</label><br/>
-                                            <input type="text" className='form-input mt-1' />
+                                            <input type="text" className='form-input mt-1' value={recipientName} onChange={(e) => setRecipientName(e.target.value)}/>
                                         </div>
                                         <div className='col-md-12 mt-2 pl-2'>
                                             <label className='text-label'>Recipient Email</label><br/>
-                                            <input type="text" className='form-input mt-1' />
+                                            <input type="text" className='form-input mt-1' value={recipientEmail} onChange={(e) => setRecipientEmail(e.target.value)}/>
                                         </div>
                                         <div className='col-md-12 mt-2'>
                                             <label className='text-label'>Recipient wallet</label><br/>
-                                            <input type="text" className='form-input mt-1' />
+                                            <input type="text" className='form-input mt-1' value={recipientWallet} onChange={(e) => setRecipientWallet(e.target.value)}/>
                                         </div>
                                         {myState.select_a_collection!="" && myState.select_a_collection=="Recognition_awards" && <div className='col-md-12 mt-4'>
                                             <div className='value-strategy'>
@@ -249,13 +362,13 @@ const RecognizeAnEmp =()=>{
                                                 <div className='col-md-6 p-0'>
                                                     <div className='recognize-menu'>
                                                         <div className='row'> 
-                                                            {myState.select_a_collection=="Recognition_awards"   && myState.value_tab && rec_menu.map((val,i)=><div key={"recMenuValue"+i} id={"recMenuValue"+i} onClick={()=>handleStrategy_N_ValueMenu("recMenuValue",i)} className={'col-md-12 recognize-menu-tabs '}>
+                                                            {myState.select_a_collection==="Recognition_awards"   && myState.value_tab && rec_menu.map((val,i)=><div key={"recMenuValue"+i} id={"recMenuValue"+i} onClick={()=>handleStrategy_N_ValueMenu("recMenuValue",i)} className={'col-md-12 recognize-menu-tabs '}>
                                                                 {val}
                                                             </div>)}
-                                                            {myState.select_a_collection=="Recognition_awards" && myState.strategy_tab && rec_strategy_menu.map((val,i)=><div key={"recMenuStrategy"+i} id={"recMenuStrategy"+i} onClick={()=>handleStrategy_N_ValueMenu("recMenuStrategy",i)} className={'col-md-12 recognize-menu-tabs '}>
+                                                            {myState.select_a_collection==="Recognition_awards" && myState.strategy_tab && rec_strategy_menu.map((val,i)=><div key={"recMenuStrategy"+i} id={"recMenuStrategy"+i} onClick={()=>handleStrategy_N_ValueMenu("recMenuStrategy",i)} className={'col-md-12 recognize-menu-tabs '}>
                                                                 {val}
                                                             </div>)}
-                                                            {myState.select_a_collection=="Service_awards"  && yrs_menu.map((val,i)=><div key={"recMenu"+i} onClick={()=>handleStrategy_N_ValueMenu("yrsOfService",i)} id={"yrsOfService"+i} className={'col-md-12 recognize-menu-tabs '}>
+                                                            {myState.select_a_collection==="Service_awards"  && yrs_menu.map((val,i)=><div key={"recMenu"+i} onClick={()=>handleStrategy_N_ValueMenu("yrsOfService",i)} id={"yrsOfService"+i} className={'col-md-12 recognize-menu-tabs '}>
                                                                 {val}
                                                             </div>)}
                                                         </div>
@@ -263,13 +376,13 @@ const RecognizeAnEmp =()=>{
                                                 </div>
                                             </div>
                                         </div>}
-                                        {myState.select_a_collection!="" && <div className='col-md-12 mt-3'>
+                                        {myState.select_a_collection!=="" && <div className='col-md-12 mt-3'>
                                             <label className='text-label'>Reason</label><br/>
-                                            <label className='text-label-secondary'>Let the recipient know why they’re recieving this.</label> <br/>
-                                            <textarea className='mt-1 description'></textarea>
+                                            <label className='text-label-secondary'>Let the recipient know why they're recieving this.</label> <br/>
+                                            <textarea style={{color: 'black'}} className='mt-1 description' onChange={(e) => setRecognitionNote(e.target.value)}></textarea>
                                         </div>}
                                         <div className='col-md-12 mt-3'>
-                                            <button className='submit-btn'>Submit</button>
+                                            <button className='submit-btn' onClick={() => mintSubmission()}>Mint</button>
                                         </div>
                                     </div>
                                 </div>
