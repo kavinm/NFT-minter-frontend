@@ -21,7 +21,8 @@ const App = () => {
 
   const [isAuth, setIsAuth] = useState(false);
 
-  return (
+
+  if (isAuth) return (
     <>
     <BrowserRouter>
         <Routes>
@@ -30,13 +31,22 @@ const App = () => {
           <Route path="/mint" element={<MainLayout><MintPage/></MainLayout>}/>
           <Route path="/collection" element={<MainLayout><CollectionPage/></MainLayout>}/>
           <Route path="/img" element={<ImagePreview/>}/>
-          <Route path="/auth" element={<GoofyAuth setAuth={setIsAuth}/>}/>
-
         </Routes>
     </BrowserRouter>
 
     </>
   )
+
+  return (
+    <>
+    <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<GoofyAuth setAuth={setIsAuth}/>}/>
+        </Routes>
+    </BrowserRouter>
+    </>
+  )
+
 }
 
 export default App
