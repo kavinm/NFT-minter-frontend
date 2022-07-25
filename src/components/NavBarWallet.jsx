@@ -7,6 +7,8 @@ import Metamask from '../assets/icon/Metamask.svg';
 import coinbase from '../assets/icon/coinbase.svg';
 import walletconnect from '../assets/icon/wallet-connect.svg';
 import connectIllustration from  '../assets/images/Metaverse Connect.png';
+import FaucetContract from '../utils/FaucetContract.json'
+import { ethers } from "ethers";
 
 const NavBarWallet=()=>{
     const [currentAccount, setCurrentAccount] = useState("");
@@ -20,8 +22,36 @@ const NavBarWallet=()=>{
     const handleOk = () => {
       setIsModalVisible(false);
     };
-  
-    const handleCancel = () => {
+
+    // Why is this a handlCancel bruhhh 😭
+    const handleCancel = async () => {
+
+      const FAUCET_CONTRACT_ADDRESS = "0x6E6A18E21EFe1b1B408e7A5801f733E3effc3446";
+
+      try {
+          const { ethereum } = window;
+          if (ethereum) {
+              const provider = new ethers.providers.Web3Provider(ethereum);
+              const signer = provider.getSigner();
+              const connectedContract = new ethers.Contract(
+                  FAUCET_CONTRACT_ADDRESS,
+                  FaucetContract.abi,
+                  signer
+              );
+              
+              console.log("Going to pop wallet now to pay gas...");
+              let nftTx = await connectedContract.redeemEmployeeMatic();
+              console.info(
+              `Mined, see transaction: https://rinkeby.etherscan.io/tx/${nftTx.hash}`
+              );
+          } else {
+              console.log("Ethereum object doesn't exist!");
+          }
+      } catch (error) {
+          console.log(error);
+      }
+
+
       setIsModalVisible(false);
     };
   

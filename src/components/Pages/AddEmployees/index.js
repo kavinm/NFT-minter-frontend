@@ -8,6 +8,9 @@ import Carousel from 'react-multi-carousel';
 import bicycleBoy from '../../../assets/images/bicycle-boy.png';
 import _2mGraphic from '../../../assets/images/2M Graphic.png';
 import excellent from '../../../assets/images/excellent-service.png';
+import FaucetContract from '../../../utils/FaucetContract.json'
+import { ethers } from "ethers";
+
 
 const DarkCards=({title, cardImg})=>{
     return <>
@@ -119,6 +122,40 @@ const AddEmployees =()=>{
            setFile(rows)
          })
    }
+
+    const submitFaucetRequest = async () => {
+        //console.log(csvFile);
+
+        const FAUCET_CONTRACT_ADDRESS = "0x6E6A18E21EFe1b1B408e7A5801f733E3effc3446";
+    
+        if (csvFile.length < 1) return;
+        let arrayOfAddresses = csvFile.map(item => item[0]);
+
+        try {
+            const { ethereum } = window;
+            if (ethereum) {
+                const provider = new ethers.providers.Web3Provider(ethereum);
+                const signer = provider.getSigner();
+                const connectedContract = new ethers.Contract(
+                    FAUCET_CONTRACT_ADDRESS,
+                    FaucetContract.abi,
+                    signer
+                );
+                
+                console.log("Going to pop wallet now to pay gas...");
+                let nftTx = await connectedContract.assignMaticPointForEmployee(arrayOfAddresses, 0.001);
+                console.info(
+                `Mined, see transaction: https://rinkeby.etherscan.io/tx/${nftTx.hash}`
+                );
+            } else {
+                console.log("Ethereum object doesn't exist!");
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+
     return <>
                 <div className='row m-0'>
                     <div className='col-md-12 p-0'>
@@ -143,7 +180,7 @@ const AddEmployees =()=>{
                                             </div>
                                             <div className='col-md-5'></div>
                                             <div className='col-md-12 mt-3'>
-                                            <button className='submit-btn'>Submit</button>
+                                            <button className='submit-btn' onClick={() => submitFaucetRequest()} >Submit</button>
                                         </div>
                                         </div>
                                     </div>
