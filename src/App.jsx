@@ -16,17 +16,19 @@ import GeneralLayout from './components/Layout/GeneralLayout';
 import WalletLayout from './components/Layout/WalletLayout';
 import Discover from './components/Pages/Discover';
 import GoofyAuth from './components/GoofyAuth';
+import WhatItMeansForYou from './components/WhatItMeansForYou';
 
 const App = () => {
 
   const [isAuth, setIsAuth] = useState(false);
 
 
-  if (isAuth) return (
+  if (!isAuth) return (
     <>
     <BrowserRouter>
         <Routes>
           <Route path="/" element={ <GeneralLayout><NewLandingPage/></GeneralLayout>}/>
+          <Route path="/what-it-means-for-you" element={ <GeneralLayout><WhatItMeansForYou/></GeneralLayout>}/>
           <Route path="/discover" element={<WalletLayout><Discover></Discover></WalletLayout>} />
           <Route path="/mint" element={<MainLayout><MintPage/></MainLayout>}/>
           <Route path="/collection" element={<MainLayout><CollectionPage/></MainLayout>}/>

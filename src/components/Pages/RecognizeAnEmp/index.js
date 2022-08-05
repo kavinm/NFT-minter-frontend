@@ -10,6 +10,16 @@ import excellent from '../../../assets/images/excellent-service.png';
 import myNFT from "../../../utils/MyNFT.json"
 import axios from "axios";
 import { ethers } from "ethers";
+import noOneImgCard from '../../../assets/illustrations/Rectangle 187 (3).svg';
+import noThreeImgCard from '../../../assets/illustrations/Rectangle 187 (4).svg';
+import noTwoImgCard from '../../../assets/illustrations/greenRect.svg';
+
+import noFiveImgCard from'../../../assets/illustrations/Service Awards.png';
+import noTenImgCard from'../../../assets/illustrations/Service Awards (1).png';
+import noFifteenImgCard from'../../../assets/illustrations/Service Awards (2).png';
+import noTwentyImgCard from'../../../assets/illustrations/Service Awards (3).png';
+import noTwentyFiveImgCard from'../../../assets/illustrations/Service Awards (4).png';
+
 
 const DarkCards=({title, cardImg})=>{
     return <>
@@ -43,7 +53,7 @@ const DarkCards=({title, cardImg})=>{
 
 const RecognizeAnEmp =()=>{
 
-    
+    const [previewImgData, setPreviewImgData] = useState(null);
     const [selectedNFT, setNFTSelection] = useState(null);
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [modalList, setModalList] = useState({
@@ -138,6 +148,7 @@ const RecognizeAnEmp =()=>{
       };
 
       const toggleTab=(name)=>{
+        setPreviewImgData(null)
         if(name==="value_tab")
             setState({...myState, value_tab:true, strategy_tab:false})
         if(name==="strategy_tab")
@@ -154,6 +165,22 @@ const RecognizeAnEmp =()=>{
     const handleStrategy_N_ValueMenu =(tabName, id)=>{
 
         if (tabName === "yrsOfService") {
+            if(id==0){
+                setPreviewImgData(noFiveImgCard)
+            }
+            if(id==1){
+                setPreviewImgData(noTenImgCard)
+            }
+            if(id==2){
+                setPreviewImgData(noFifteenImgCard)
+            }
+
+            if(id==3){
+                setPreviewImgData(noTwentyImgCard)
+            }if(id==4){
+                setPreviewImgData(noTwentyFiveImgCard)
+            }
+
             setYearsOfService(yrs_menu[id]);
         } else if (tabName === "recMenuValue") {
             setRecMenuValue(rec_menu[id]);
@@ -163,6 +190,18 @@ const RecognizeAnEmp =()=>{
 
         if(tabName==="recMenuStrategy")
         {
+            if(id==0){
+                setPreviewImgData(noOneImgCard)
+            }
+            if(id==1){
+                setPreviewImgData(noTwoImgCard)
+            }
+            if(id==2){
+                setPreviewImgData(noThreeImgCard)
+            }
+            if(id==3){
+                setPreviewImgData(noTwoImgCard)
+            }
             document.getElementById(tabName+id).classList.add("active");
             for(let i=0;i<rec_strategy_menu.length;i++){
                 if(id != i)
@@ -172,6 +211,23 @@ const RecognizeAnEmp =()=>{
         else
         if(tabName==="recMenuValue"){
             document.getElementById(tabName+id).classList.add("active");
+            if(id==0){
+                setPreviewImgData(noOneImgCard)
+            }
+            if(id==1){
+                setPreviewImgData(noTwoImgCard)
+            }
+            if(id==2){
+                setPreviewImgData(noThreeImgCard)
+            }
+            if(id==3){
+                setPreviewImgData(noTwoImgCard)
+            }
+            if(id==4){
+                setPreviewImgData(noThreeImgCard)
+            }
+            
+            //current change
             for(let i=0;i<rec_menu.length;i++){
                 if(id != i)
                     document.getElementById(tabName+i).classList.remove("active");
@@ -195,9 +251,9 @@ const RecognizeAnEmp =()=>{
         const CONTRACT_ADDRESS = "0x93b9439e2a89019dee11306e78adcf77c7431caf";
 
         let nftMetadata = {
-            "name": selectedNFT.title,
-            "description": selectedNFT.subtitle,
-            "image": selectedNFT.cardImg,
+            "name": "Service awards",//selectedNFT.title,
+            "description": "ABC",//selectedNFT.subtitle,
+            "image": previewImgData,
             "recognition_note": recognitionNote,
             "attributes": [
                 {trait_type: "Employee Name", value: recipientName},
@@ -331,7 +387,11 @@ const RecognizeAnEmp =()=>{
                                                     <div className='upload-image' onClick={()=>{
                                                 setModalList({...modalList,gallary_m:true })
                                                 showModal();}}>
-                                                        {selectedNFT==null ?<span>Preview  </span>:<img src={selectedNFT.cardImg} style={{width:'100%',height:'100%'}} />}
+                                                        {/* {selectedNFT==null ? */}
+                                                        {previewImgData==null? <span>Preview  </span>:
+                                                        <img src={previewImgData} style={{width:'100%',height:'100%'}} />
+                                                        // <img src={selectedNFT.cardImg} style={{width:'100%',height:'100%'}} />
+                                                        }
                                                     </div>
                                                     {modalList.gallary_m && <Modal  width={700} bodyStyle={{height:'420px',color:'#fff', background:'#101526'}} 
                                                             onOk={handleOk} onCancel={handleCancel}
