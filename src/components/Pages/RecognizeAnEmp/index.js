@@ -21,6 +21,7 @@ import noTwentyImgCard from'../../../assets/illustrations/Service Awards (3).png
 import noTwentyFiveImgCard from'../../../assets/illustrations/Service Awards (4).png';
 
 
+
 const DarkCards=({title, cardImg})=>{
     return <>
         <div className='dark-cards'>
@@ -253,7 +254,7 @@ const RecognizeAnEmp =()=>{
         let nftMetadata = {
             "name": "Service awards",//selectedNFT.title,
             "description": "ABC",//selectedNFT.subtitle,
-            "image": previewImgData,
+            "image": "https://cdn.discordapp.com/attachments/949062467131158528/1005137298561708103/Rectangle_187_3.01a105a5ccef58e525520d0bab06ee67.png",
             "recognition_note": recognitionNote,
             "attributes": [
                 {trait_type: "Employee Name", value: recipientName},
