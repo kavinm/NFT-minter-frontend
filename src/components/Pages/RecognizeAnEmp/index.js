@@ -10,17 +10,6 @@ import excellent from '../../../assets/images/excellent-service.png';
 import myNFT from "../../../utils/MyNFT.json"
 import axios from "axios";
 import { ethers } from "ethers";
-import noOneImgCard from '../../../assets/illustrations/Rectangle 187 (3).svg';
-import noThreeImgCard from '../../../assets/illustrations/Rectangle 187 (4).svg';
-import noTwoImgCard from '../../../assets/illustrations/greenRect.svg';
-
-import noFiveImgCard from'../../../assets/illustrations/Service Awards.png';
-import noTenImgCard from'../../../assets/illustrations/Service Awards (1).png';
-import noFifteenImgCard from'../../../assets/illustrations/Service Awards (2).png';
-import noTwentyImgCard from'../../../assets/illustrations/Service Awards (3).png';
-import noTwentyFiveImgCard from'../../../assets/illustrations/Service Awards (4).png';
-
-
 
 const DarkCards=({title, cardImg})=>{
     return <>
@@ -54,7 +43,7 @@ const DarkCards=({title, cardImg})=>{
 
 const RecognizeAnEmp =()=>{
 
-    const [previewImgData, setPreviewImgData] = useState(null);
+    const [previewImgData, setPreviewImgData] = useState("");
     const [selectedNFT, setNFTSelection] = useState(null);
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [modalList, setModalList] = useState({
@@ -107,6 +96,7 @@ const RecognizeAnEmp =()=>{
     const [yearsOfService, setYearsOfService] = useState(0);
     const [recMenuValue, setRecMenuValue] = useState("");
     const [recMenuStrategy, setRecMenuStrategy] = useState("");
+    const [recognitionTitle, setRecognitionTitle] = useState("");
 
     useEffect(() => {
         checkIfWalletIsConnected();
@@ -165,21 +155,25 @@ const RecognizeAnEmp =()=>{
 
     const handleStrategy_N_ValueMenu =(tabName, id)=>{
 
+        console.log("Tabs: ", tabName)
+
         if (tabName === "yrsOfService") {
+
+            setRecognitionTitle("Service Award")
             if(id==0){
-                setPreviewImgData(noFiveImgCard)
+
+                setPreviewImgData("https://media.discordapp.net/attachments/747950732753502291/1005519792628838561/Service_Awards.png")
             }
             if(id==1){
-                setPreviewImgData(noTenImgCard)
+                setPreviewImgData("https://media.discordapp.net/attachments/747950732753502291/1005520243612975277/Service_Awards_7.png")
             }
             if(id==2){
-                setPreviewImgData(noFifteenImgCard)
+                setPreviewImgData("https://media.discordapp.net/attachments/747950732753502291/1005520243906588714/Service_Awards_6.png")
             }
-
             if(id==3){
-                setPreviewImgData(noTwentyImgCard)
+                setPreviewImgData("https://media.discordapp.net/attachments/747950732753502291/1005520061244641450/Service_Awards_5.png")
             }if(id==4){
-                setPreviewImgData(noTwentyFiveImgCard)
+                setPreviewImgData("https://media.discordapp.net/attachments/747950732753502291/1005520045012688978/Service_Awards_4.png")
             }
 
             setYearsOfService(yrs_menu[id]);
@@ -192,16 +186,16 @@ const RecognizeAnEmp =()=>{
         if(tabName==="recMenuStrategy")
         {
             if(id==0){
-                setPreviewImgData(noOneImgCard)
+                setPreviewImgData("https://media.discordapp.net/attachments/747950732753502291/1005521389945618592/Group_298.png")
             }
             if(id==1){
-                setPreviewImgData(noTwoImgCard)
+                setPreviewImgData("https://media.discordapp.net/attachments/747950732753502291/1005521390256005260/Group_299.png")
             }
             if(id==2){
-                setPreviewImgData(noThreeImgCard)
+                setPreviewImgData("https://media.discordapp.net/attachments/747950732753502291/1005521719462735993/Screen_Shot_2022-08-06_at_1.04.16_PM.png")
             }
             if(id==3){
-                setPreviewImgData(noTwoImgCard)
+                setPreviewImgData("https://media.discordapp.net/attachments/747950732753502291/1005521390880948286/Group_301.png")
             }
             document.getElementById(tabName+id).classList.add("active");
             for(let i=0;i<rec_strategy_menu.length;i++){
@@ -211,21 +205,23 @@ const RecognizeAnEmp =()=>{
         }
         else
         if(tabName==="recMenuValue"){
+            setRecognitionTitle("Recognition Award")
+
             document.getElementById(tabName+id).classList.add("active");
             if(id==0){
-                setPreviewImgData(noOneImgCard)
+                setPreviewImgData("https://media.discordapp.net/attachments/747950732753502291/1005522113853141032/Group_293.png")
             }
             if(id==1){
-                setPreviewImgData(noTwoImgCard)
+                setPreviewImgData("https://media.discordapp.net/attachments/747950732753502291/1005522113450479646/Group_295.png")
             }
             if(id==2){
-                setPreviewImgData(noThreeImgCard)
+                setPreviewImgData("https://media.discordapp.net/attachments/747950732753502291/1005522293541322792/Screen_Shot_2022-08-06_at_1.06.33_PM.png")
             }
             if(id==3){
-                setPreviewImgData(noTwoImgCard)
+                setPreviewImgData("https://media.discordapp.net/attachments/747950732753502291/1005522112594853979/Group_296.png")
             }
             if(id==4){
-                setPreviewImgData(noThreeImgCard)
+                setPreviewImgData("https://media.discordapp.net/attachments/747950732753502291/1005522112171221082/Group_297.png")
             }
             
             //current change
@@ -252,9 +248,9 @@ const RecognizeAnEmp =()=>{
         const CONTRACT_ADDRESS = "0x93b9439e2a89019dee11306e78adcf77c7431caf";
 
         let nftMetadata = {
-            "name": "Service awards",//selectedNFT.title,
-            "description": "ABC",//selectedNFT.subtitle,
-            "image": "https://cdn.discordapp.com/attachments/949062467131158528/1005137298561708103/Rectangle_187_3.01a105a5ccef58e525520d0bab06ee67.png",
+            "name": recognitionTitle,
+            "description": "Offered by Partner Name",
+            "image": previewImgData,
             "recognition_note": recognitionNote,
             "attributes": [
                 {trait_type: "Employee Name", value: recipientName},
@@ -282,7 +278,7 @@ const RecognizeAnEmp =()=>{
         })
         
         const JsonUrl = "https://gateway.pinata.cloud/ipfs/" + meta_data_response.data.IpfsHash;
-        console.log(JsonUrl);
+        console.log(nftMetadata);
 
         try {
             const { ethereum } = window;
@@ -290,9 +286,9 @@ const RecognizeAnEmp =()=>{
                 const provider = new ethers.providers.Web3Provider(ethereum);
                 const signer = provider.getSigner();
                 const connectedContract = new ethers.Contract(
-                CONTRACT_ADDRESS,
-                myNFT.abi,
-                signer
+                    CONTRACT_ADDRESS,
+                    myNFT.abi,
+                    signer
                 );
                 
                 console.log("Going to pop wallet now to pay gas...");
@@ -385,9 +381,7 @@ const RecognizeAnEmp =()=>{
                                         {myState.select_a_collection!="" &&<div className='col-md-12 mt-3'>
                                             <div className='row m-0'>
                                                 <div className='col-md-6 p-0 d-flex justify-content-center'>
-                                                    <div className='upload-image' onClick={()=>{
-                                                setModalList({...modalList,gallary_m:true })
-                                                showModal();}}>
+                                                    <div className='upload-image'>
                                                         {/* {selectedNFT==null ? */}
                                                         {previewImgData==null? <span>Preview  </span>:
                                                         <img src={previewImgData} style={{width:'100%',height:'100%'}} />
