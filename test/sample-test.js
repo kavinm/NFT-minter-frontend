@@ -1,10 +1,12 @@
 const { expect } = require("chai");
 const { ethers } = require("hardhat");
 
-describe("Greeter", function () {
-  it("Should return the new greeting once it's changed", async function () {
-    const Greeter = await ethers.getContractFactory("Greeter");
-    const greeter = await Greeter.deploy("Hello, world!");
+describe("SFT", function () {
+  it("Should deploy the Semi-Fungible Token", async function () {
+    const SFT = await ethers.getContractFactory("SFT");
+    const sft = await SFT.deploy(
+      "https://api.jsonbin.io/v3/qs/62ec2b9a5c146d63ca5f288f"
+    );
     await greeter.deployed();
 
     expect(await greeter.greet()).to.equal("Hello, world!");
