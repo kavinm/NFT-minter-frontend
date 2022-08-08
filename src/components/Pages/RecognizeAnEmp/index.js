@@ -285,16 +285,21 @@ const RecognizeAnEmp =()=>{
             if (ethereum) {
                 const provider = new ethers.providers.Web3Provider(ethereum);
                 const signer = provider.getSigner();
+
+                const serviceAddress = "0xf2c70d56DAB5a149a8FA0C6732d2742357147d64"
+                const recogAddress = "0xe201525cF38433556516e19dA81372ea95767304"
+                let newContractAddress = myState.modalCollectionType === "Service_awards" ? serviceAddress : recogAddress
+                
                 const connectedContract = new ethers.Contract(
-                    CONTRACT_ADDRESS,
+                    newContractAddress,
                     myNFT.abi,
                     signer
                 );
-                
+
                 console.log("Going to pop wallet now to pay gas...");
                 let nftTx = await connectedContract.mintNFT(recipientWallet, JsonUrl);
                 console.info(
-                `Mined, see transaction: https://rinkeby.etherscan.io/tx/${nftTx.hash}`
+                `Mined, see transaction: https://mumbai.polygonscan.com/tx/${nftTx.hash}`
                 );
             } else {
                 console.log("Ethereum object doesn't exist!");
@@ -388,31 +393,6 @@ const RecognizeAnEmp =()=>{
                                                         // <img src={selectedNFT.cardImg} style={{width:'100%',height:'100%'}} />
                                                         }
                                                     </div>
-                                                    {modalList.gallary_m && <Modal  width={700} bodyStyle={{height:'420px',color:'#fff', background:'#101526'}} 
-                                                            onOk={handleOk} onCancel={handleCancel}
-                                                            visible={isModalVisible} footer={null}>
-                                                        <div className='row create_collection_pop_up'>
-                                                            <div className='col-md-12 mb-5 create_collection_pop_up_title p-0'>
-                                                                <span>Your Collections</span>
-                                                                <FaTimes color={"#fff"} size={16} onClick={handleCancel} className="pop-close-modal"></FaTimes>
-                                                            </div>
-                                                            <div className='col-md-12 mt-3'>
-                                                                <div className='carousel-card-body'>
-                                                                    <Suspense fallback={<div>Loading</div>}>
-                                                                        <Carousel responsive={carouselState.responsive} draggable showDots={false}>
-                                                                            {dynamicCardsData.map((val, i)=><div onClick={()=>handleNFTSelection(val)}  key={'popupGallery'+i} style={{width:"200px",height:'270px'}}>
-                                                                                <DarkCards cardImg={val.cardImg} title={val.title}></DarkCards>
-                                                                            {/* <DynamicC rectImg={val.cardImg} key={i} multiPplImg={val.contactList}></DynamicCards> */}
-                                                                            </div>)}
-                                                                                            
-                                                                        </Carousel>
-                                                                    </Suspense>
-
-                                                                </div>
-                                                            </div>
-                                                        
-                                                        </div>
-                                                </Modal>}
                                                 </div>
                                                 <div className='col-md-6 p-0'>
                                                     <div className='recognize-menu'>

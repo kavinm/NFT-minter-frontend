@@ -59,7 +59,7 @@ const InstallYourNodes =()=>{
                         <div style={{width:'80%'}}>
                             <div className='row'>
                                 <div className='col-md-3 text-center'>
-                                        <h5 className='step-num'>{idx+1}</h5>
+                                    <h5 className='step-num'>{idx+1}</h5>
                                 </div>
                                 <div className='col-md-9 title-text mt-3'>
                                     <span>{val.title}</span>
@@ -72,7 +72,6 @@ const InstallYourNodes =()=>{
                             </div>
                         </div>
                     </div>)}
-                    
                 </div>
             </>
 }
