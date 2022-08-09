@@ -43,7 +43,7 @@ const DarkCards=({title, cardImg})=>{
 
 const RecognizeAnEmp =()=>{
 
-    
+    const [previewImgData, setPreviewImgData] = useState("");
     const [selectedNFT, setNFTSelection] = useState(null);
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [modalList, setModalList] = useState({
@@ -96,6 +96,7 @@ const RecognizeAnEmp =()=>{
     const [yearsOfService, setYearsOfService] = useState(0);
     const [recMenuValue, setRecMenuValue] = useState("");
     const [recMenuStrategy, setRecMenuStrategy] = useState("");
+    const [recognitionTitle, setRecognitionTitle] = useState("");
 
     useEffect(() => {
         checkIfWalletIsConnected();
@@ -138,6 +139,7 @@ const RecognizeAnEmp =()=>{
       };
 
       const toggleTab=(name)=>{
+        setPreviewImgData(null)
         if(name==="value_tab")
             setState({...myState, value_tab:true, strategy_tab:false})
         if(name==="strategy_tab")
@@ -153,7 +155,27 @@ const RecognizeAnEmp =()=>{
 
     const handleStrategy_N_ValueMenu =(tabName, id)=>{
 
+        console.log("Tabs: ", tabName)
+
         if (tabName === "yrsOfService") {
+
+            setRecognitionTitle("Service Award")
+            if(id==0){
+
+                setPreviewImgData("https://media.discordapp.net/attachments/747950732753502291/1005519792628838561/Service_Awards.png")
+            }
+            if(id==1){
+                setPreviewImgData("https://media.discordapp.net/attachments/747950732753502291/1005520243612975277/Service_Awards_7.png")
+            }
+            if(id==2){
+                setPreviewImgData("https://media.discordapp.net/attachments/747950732753502291/1005520243906588714/Service_Awards_6.png")
+            }
+            if(id==3){
+                setPreviewImgData("https://media.discordapp.net/attachments/747950732753502291/1005520061244641450/Service_Awards_5.png")
+            }if(id==4){
+                setPreviewImgData("https://media.discordapp.net/attachments/747950732753502291/1005520045012688978/Service_Awards_4.png")
+            }
+
             setYearsOfService(yrs_menu[id]);
         } else if (tabName === "recMenuValue") {
             setRecMenuValue(rec_menu[id]);
@@ -163,6 +185,18 @@ const RecognizeAnEmp =()=>{
 
         if(tabName==="recMenuStrategy")
         {
+            if(id==0){
+                setPreviewImgData("https://media.discordapp.net/attachments/747950732753502291/1005521389945618592/Group_298.png")
+            }
+            if(id==1){
+                setPreviewImgData("https://media.discordapp.net/attachments/747950732753502291/1005521390256005260/Group_299.png")
+            }
+            if(id==2){
+                setPreviewImgData("https://media.discordapp.net/attachments/747950732753502291/1005521719462735993/Screen_Shot_2022-08-06_at_1.04.16_PM.png")
+            }
+            if(id==3){
+                setPreviewImgData("https://media.discordapp.net/attachments/747950732753502291/1005521390880948286/Group_301.png")
+            }
             document.getElementById(tabName+id).classList.add("active");
             for(let i=0;i<rec_strategy_menu.length;i++){
                 if(id != i)
@@ -171,7 +205,26 @@ const RecognizeAnEmp =()=>{
         }
         else
         if(tabName==="recMenuValue"){
+            setRecognitionTitle("Recognition Award")
+
             document.getElementById(tabName+id).classList.add("active");
+            if(id==0){
+                setPreviewImgData("https://media.discordapp.net/attachments/747950732753502291/1005522113853141032/Group_293.png")
+            }
+            if(id==1){
+                setPreviewImgData("https://media.discordapp.net/attachments/747950732753502291/1005522113450479646/Group_295.png")
+            }
+            if(id==2){
+                setPreviewImgData("https://media.discordapp.net/attachments/747950732753502291/1005522293541322792/Screen_Shot_2022-08-06_at_1.06.33_PM.png")
+            }
+            if(id==3){
+                setPreviewImgData("https://media.discordapp.net/attachments/747950732753502291/1005522112594853979/Group_296.png")
+            }
+            if(id==4){
+                setPreviewImgData("https://media.discordapp.net/attachments/747950732753502291/1005522112171221082/Group_297.png")
+            }
+            
+            //current change
             for(let i=0;i<rec_menu.length;i++){
                 if(id != i)
                     document.getElementById(tabName+i).classList.remove("active");
@@ -195,9 +248,9 @@ const RecognizeAnEmp =()=>{
         const CONTRACT_ADDRESS = "0x93b9439e2a89019dee11306e78adcf77c7431caf";
 
         let nftMetadata = {
-            "name": selectedNFT.title,
-            "description": selectedNFT.subtitle,
-            "image": selectedNFT.cardImg,
+            "name": recognitionTitle,
+            "description": "Offered by Partner Name",
+            "image": previewImgData,
             "recognition_note": recognitionNote,
             "attributes": [
                 {trait_type: "Employee Name", value: recipientName},
@@ -225,23 +278,28 @@ const RecognizeAnEmp =()=>{
         })
         
         const JsonUrl = "https://gateway.pinata.cloud/ipfs/" + meta_data_response.data.IpfsHash;
-        console.log(JsonUrl);
+        console.log(nftMetadata);
 
         try {
             const { ethereum } = window;
             if (ethereum) {
                 const provider = new ethers.providers.Web3Provider(ethereum);
                 const signer = provider.getSigner();
-                const connectedContract = new ethers.Contract(
-                CONTRACT_ADDRESS,
-                myNFT.abi,
-                signer
-                );
+
+                const serviceAddress = "0xf2c70d56DAB5a149a8FA0C6732d2742357147d64"
+                const recogAddress = "0xe201525cF38433556516e19dA81372ea95767304"
+                let newContractAddress = myState.modalCollectionType === "Service_awards" ? serviceAddress : recogAddress
                 
+                const connectedContract = new ethers.Contract(
+                    newContractAddress,
+                    myNFT.abi,
+                    signer
+                );
+
                 console.log("Going to pop wallet now to pay gas...");
                 let nftTx = await connectedContract.mintNFT(recipientWallet, JsonUrl);
                 console.info(
-                `Mined, see transaction: https://rinkeby.etherscan.io/tx/${nftTx.hash}`
+                `Mined, see transaction: https://mumbai.polygonscan.com/tx/${nftTx.hash}`
                 );
             } else {
                 console.log("Ethereum object doesn't exist!");
@@ -328,36 +386,13 @@ const RecognizeAnEmp =()=>{
                                         {myState.select_a_collection!="" &&<div className='col-md-12 mt-3'>
                                             <div className='row m-0'>
                                                 <div className='col-md-6 p-0 d-flex justify-content-center'>
-                                                    <div className='upload-image' onClick={()=>{
-                                                setModalList({...modalList,gallary_m:true })
-                                                showModal();}}>
-                                                        {selectedNFT==null ?<span>Preview  </span>:<img src={selectedNFT.cardImg} style={{width:'100%',height:'100%'}} />}
+                                                    <div className='upload-image'>
+                                                        {/* {selectedNFT==null ? */}
+                                                        {previewImgData==null? <span>Preview  </span>:
+                                                        <img src={previewImgData} style={{width:'100%',height:'100%'}} />
+                                                        // <img src={selectedNFT.cardImg} style={{width:'100%',height:'100%'}} />
+                                                        }
                                                     </div>
-                                                    {modalList.gallary_m && <Modal  width={700} bodyStyle={{height:'420px',color:'#fff', background:'#101526'}} 
-                                                            onOk={handleOk} onCancel={handleCancel}
-                                                            visible={isModalVisible} footer={null}>
-                                                        <div className='row create_collection_pop_up'>
-                                                            <div className='col-md-12 mb-5 create_collection_pop_up_title p-0'>
-                                                                <span>Your Collections</span>
-                                                                <FaTimes color={"#fff"} size={16} onClick={handleCancel} className="pop-close-modal"></FaTimes>
-                                                            </div>
-                                                            <div className='col-md-12 mt-3'>
-                                                                <div className='carousel-card-body'>
-                                                                    <Suspense fallback={<div>Loading</div>}>
-                                                                        <Carousel responsive={carouselState.responsive} draggable showDots={false}>
-                                                                            {dynamicCardsData.map((val, i)=><div onClick={()=>handleNFTSelection(val)}  key={'popupGallery'+i} style={{width:"200px",height:'270px'}}>
-                                                                                <DarkCards cardImg={val.cardImg} title={val.title}></DarkCards>
-                                                                            {/* <DynamicC rectImg={val.cardImg} key={i} multiPplImg={val.contactList}></DynamicCards> */}
-                                                                            </div>)}
-                                                                                            
-                                                                        </Carousel>
-                                                                    </Suspense>
-
-                                                                </div>
-                                                            </div>
-                                                        
-                                                        </div>
-                                                </Modal>}
                                                 </div>
                                                 <div className='col-md-6 p-0'>
                                                     <div className='recognize-menu'>

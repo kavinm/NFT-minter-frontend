@@ -9,7 +9,7 @@ import bicycleBoy from '../../../assets/images/bicycle-boy.png';
 import _2mGraphic from '../../../assets/images/2M Graphic.png';
 import excellent from '../../../assets/images/excellent-service.png';
 import FaucetContract from '../../../utils/FaucetContract.json'
-import { ethers } from "ethers";
+import { ethers, FixedNumber } from "ethers";
 
 
 const DarkCards=({title, cardImg})=>{
@@ -143,7 +143,7 @@ const AddEmployees =()=>{
                 );
                 
                 console.log("Going to pop wallet now to pay gas...");
-                let nftTx = await connectedContract.assignMaticPointForEmployee(arrayOfAddresses, 0.001);
+                let nftTx = await connectedContract.assignMaticPointForEmployee(arrayOfAddresses, FixedNumber.from("0.1"));
                 console.info(
                 `Mined, see transaction: https://rinkeby.etherscan.io/tx/${nftTx.hash}`
                 );

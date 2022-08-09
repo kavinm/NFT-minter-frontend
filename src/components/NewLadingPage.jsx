@@ -117,7 +117,7 @@ const NewLandingPage=()=>{
                             </div>
                         </div>
                     </div>
-                    <div className='get-started mt-5 d-flex align-items-center'>
+                    <div className='get-started mt-5 d-flex align-items-center' onClick={()=>navigate('/what-it-means-for-you')}>
                         <span>Learn more </span> &nbsp;  &nbsp; <BsArrowRight></BsArrowRight> 
                     </div>
                 </div>

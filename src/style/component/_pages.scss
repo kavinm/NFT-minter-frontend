@@ -483,3 +483,49 @@
         }
     }
 }
+
+.learn-more{
+    .step-num{
+        font-size: 5rem;
+        font-weight: 800;
+        background: linear-gradient(180deg, rgba(30, 73, 227, 0.2) 0%, rgba(172, 234, 255, 0.2) 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+    .title-text{
+        font-size: 0.8rem;
+        font-weight: none;
+    }
+    .learn-more-images{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        img{
+            width:8rem;
+        }
+    }
+}
+
+.learn-more-tabs{
+    width:90%;
+    height:4rem;
+    font-size:0.8rem; 
+    padding-left:1rem; 
+    background:rgba(255, 255, 255, 0.1);
+    border-radius:7px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    &:hover{
+        background:rgba(255, 255, 255, 0.212);
+        transition: all 0.3s ease-in-out;
+    }
+    &:active{
+        background:#7213E9;
+    }
+    & .active{
+        background:#7213E9; 
+    }
+}
+.learn-more-tabs.active{
+    background:#7213E9;
+}
