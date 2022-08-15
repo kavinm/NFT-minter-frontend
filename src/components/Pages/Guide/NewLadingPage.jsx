@@ -1,12 +1,12 @@
 import React from 'react';
-import NavBar from './NavBar';
-import vrBoyImg from '../assets/illustrations/vr-man.png';
+import NavBar from '../Nav/NavBar';
+import vrBoyImg from '../../../assets/illustrations/vr-man.png';
 import {BsArrowRight, BsCheckCircle} from 'react-icons/bs';
-import awardIcon from '../assets/icon/award.svg';
-import commandIcon from '../assets/icon/command.svg';
-import briefcaseIcon from '../assets/icon/briefcase.svg';
+import awardIcon from '../../../assets/icon/award.svg';
+import commandIcon from '../../../assets/icon/command.svg';
+import briefcaseIcon from '../../../assets/icon/briefcase.svg';
 import { useNavigate } from 'react-router-dom';
-import Footer1 from './Layout/Footer1';
+import Footer1 from '../../Layout/Footer1';
 
 
 const NewLandingPage=()=>{

@@ -1,5 +1,5 @@
 import React from 'react';
-import logo from '../assets/icon/Logo.svg';
+import logo from '../../../assets/icon/Logo.svg';
 import { useNavigate } from 'react-router-dom';
 
 const NavBar=()=>{

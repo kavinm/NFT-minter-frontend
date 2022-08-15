@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
-import logo from '../assets/icon/Logo.svg';
+import logo from '../../../assets/icon/Logo.svg';
 import { message, Modal} from 'antd';
-import pointIlls from '../assets/illustrations/9.png';
+import pointIlls from '../../../assets/illustrations/9.png';
 import {FaTimes} from 'react-icons/fa';
-import Metamask from '../assets/icon/Metamask.svg';
-import coinbase from '../assets/icon/coinbase.svg';
-import walletconnect from '../assets/icon/wallet-connect.svg';
-import connectIllustration from  '../assets/images/Metaverse Connect.png';
-import FaucetContract from '../utils/FaucetContract.json'
+import Metamask from '../../../assets/icon/Metamask.svg';
+import coinbase from '../../../assets/icon/coinbase.svg';
+import walletconnect from '../../../assets/icon/wallet-connect.svg';
+import connectIllustration from  '../../../assets/images/Metaverse Connect.png';
+import FaucetContract from '../../../utils/FaucetContract.json'
 import { ethers } from "ethers";
 
 const NavBarWallet=()=>{

@@ -1,31 +1,24 @@
 import React, { useState } from 'react';
-import NavBar from './NavBar';
-import vrBoyImg from '../assets/illustrations/vr-man.png';
-import {BsArrowRight, BsCheckCircle} from 'react-icons/bs';
-import awardIcon from '../assets/icon/award.svg';
-import commandIcon from '../assets/icon/command.svg';
-import briefcaseIcon from '../assets/icon/briefcase.svg';
 import { useNavigate } from 'react-router-dom';
-import Footer1 from './Layout/Footer1';
-import InstallYourNodes from './InstallYourNodes';
-import chromImg from '../assets/images/chromeImg.png';
-import metamask_website from '../assets/images/metamask_website.png';
-import metamask from '../assets/images/metamask.png';
-import download_extension from '../assets/images/download_extension.png';
-import create_password from '../assets/images/create_password.png';
-import new_to_metamask from '../assets/images/new_to_metamask.png';
-import sceret_key from '../assets/images/sceret_key.png';
-import congrats from '../assets/images/congrats.png';
+import Footer1 from '../../Layout/Footer1';
+import chromImg from '../../../assets/images/chromeImg.png';
+import metamask_website from '../../../assets/images/metamask_website.png';
+import metamask from '../../../assets/images/metamask.png';
+import download_extension from '../../../assets/images/download_extension.png';
+import create_password from '../../../assets/images/create_password.png';
+import new_to_metamask from '../../../assets/images/new_to_metamask.png';
+import sceret_key from '../../../assets/images/sceret_key.png';
+import congrats from '../../../assets/images/congrats.png';
 
-import ethereumMainet from '../assets/images/ethereumMainet.png';
-import ethereumExtension from '../assets/images/ethereumExtension.png';
-import addNetwork from '../assets/images/addNetwork.png';
-import infoForm from '../assets/images/infoForm.png';
+import ethereumMainet from '../../../assets/images/ethereumMainet.png';
+import ethereumExtension from '../../../assets/images/ethereumExtension.png';
+import addNetwork from '../../../assets/images/addNetwork.png';
+import infoForm from '../../../assets/images/infoForm.png';
 
-import MetamaskFox from '../assets/images/MetamaskFox.png';
-import launchNft from '../assets/images/image 8 (1).png';
-import connectWallet from '../assets/images/image 9.png';
-import walletConnected from '../assets/images/image 10.png';
+import MetamaskFox from '../../../assets/images/MetamaskFox.png';
+import launchNft from '../../../assets/images/image 8 (1).png';
+import connectWallet from '../../../assets/images/image 9.png';
+import walletConnected from '../../../assets/images/image 10.png';
 
 const WhatItMeansForYou=()=>{
     const [installYourWallet, setInstallWallet] = useState([
