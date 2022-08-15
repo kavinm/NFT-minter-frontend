@@ -1,5 +1,4 @@
 import React from 'react';
-import NavBar from './NavBar';
 import vrBoyImg from '../assets/illustrations/vr-man.png';
 import {BsArrowRight, BsCheckCircle} from 'react-icons/bs';
 import awardIcon from '../assets/icon/award.svg';
@@ -8,10 +7,8 @@ import briefcaseIcon from '../assets/icon/briefcase.svg';
 import { useNavigate } from 'react-router-dom';
 import Footer1 from './Layout/Footer1';
 
-
 const NewLandingPage=()=>{
     const navigate = useNavigate();
-
     return <>
        <div className='row m-0 mt-3 landing-banner'>
            <div className='banner-area'>
@@ -165,7 +162,6 @@ const NewLandingPage=()=>{
                         <span>Create your own Recognition Awards </span> &nbsp;  &nbsp;  &nbsp; <BsArrowRight></BsArrowRight> 
                     </div>
                 </div>
-                
             </div>
        </div>
        

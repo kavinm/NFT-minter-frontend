@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import sha256 from 'crypto-js/sha256';
 import Base64 from 'crypto-js/enc-base64';
-import '../App.scss';
+import '../../../App.scss';
 import {
   Input,
   Button,

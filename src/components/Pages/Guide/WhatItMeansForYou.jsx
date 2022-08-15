@@ -1,34 +1,27 @@
 import React, { useState } from 'react';
-import NavBar from './NavBar';
-import vrBoyImg from '../assets/illustrations/vr-man.png';
-import {BsArrowRight, BsCheckCircle} from 'react-icons/bs';
-import awardIcon from '../assets/icon/award.svg';
-import commandIcon from '../assets/icon/command.svg';
-import briefcaseIcon from '../assets/icon/briefcase.svg';
 import { useNavigate } from 'react-router-dom';
-import Footer1 from './Layout/Footer1';
-import InstallYourNodes from './InstallYourNodes';
-import chromImg from '../assets/images/chromeImg.png';
-import metamask_website from '../assets/images/metamask_website.png';
-import metamask from '../assets/images/metamask.png';
-import download_extension from '../assets/images/download_extension.png';
-import create_password from '../assets/images/create_password.png';
-import new_to_metamask from '../assets/images/new_to_metamask.png';
-import sceret_key from '../assets/images/sceret_key.png';
-import congrats from '../assets/images/congrats.png';
+import Footer1 from '../../Layout/Footer1';
+import chromImg from '../../../assets/images/chromeImg.png';
+import metamask_website from '../../../assets/images/metamask_website.png';
+import metamask from '../../../assets/images/metamask.png';
+import download_extension from '../../../assets/images/download_extension.png';
+import create_password from '../../../assets/images/create_password.png';
+import new_to_metamask from '../../../assets/images/new_to_metamask.png';
+import sceret_key from '../../../assets/images/sceret_key.png';
+import congrats from '../../../assets/images/congrats.png';
 
-import ethereumMainet from '../assets/images/ethereumMainet.png';
-import ethereumExtension from '../assets/images/ethereumExtension.png';
-import addNetwork from '../assets/images/addNetwork.png';
-import infoForm from '../assets/images/infoForm.png';
+import ethereumMainet from '../../../assets/images/ethereumMainet.png';
+import ethereumExtension from '../../../assets/images/ethereumExtension.png';
+import addNetwork from '../../../assets/images/addNetwork.png';
+import infoForm from '../../../assets/images/infoForm.png';
 
-import MetamaskFox from '../assets/images/MetamaskFox.png';
-import launchNft from '../assets/images/image 8 (1).png';
-import connectWallet from '../assets/images/image 9.png';
-import walletConnected from '../assets/images/image 10.png';
+import MetamaskFox from '../../../assets/images/MetamaskFox.png';
+import launchNft from '../../../assets/images/image 8 (1).png';
+import connectWallet from '../../../assets/images/image 9.png';
+import walletConnected from '../../../assets/images/image 10.png';
 
 const WhatItMeansForYou=()=>{
-    const [installYourWallet, setInstallWallet] = useState([
+    const installYourWallet = [
         {
             title:"Ensure that you are using a chrome browser.",
             Imgs:chromImg,
@@ -69,19 +62,20 @@ const WhatItMeansForYou=()=>{
             Imgs:congrats,
             width:'80%'
         }
-    ])
-    const [settingUpMetaMask, setMetaMask] = useState([
+    ]
+    const settingUpMetaMask = [
         {title:'Making your account places you into the Ethereum Main Net. You must add the Polygon Mainnet.',Imgs:ethereumMainet,width:'60%'},
         {title:'On the top right of the MetaMask extension, click the dropdown “Ethereum Main Net”.',Imgs:ethereumExtension,width:'80%'},
         {title:'Click “Add Network”. This will take you to a new webpage.',Imgs:addNetwork,width:'85%'},
         {title:'Please fill out the required information:',Imgs:infoForm,width:'70%'},
-    ]);
-    const [usingYourWallet, setUsingYourWallet] = useState([
+    ];
+    const usingYourWallet = [
         {title:'Launch the NFT minting platform.',Imgs:launchNft,width:'70%'},
         {title:'Click the “Connect Wallet” button to connect your newly created MetaMask wallet to the application.',Imgs:connectWallet,width:'80%'},
         {title:'Once the wallet is connected, click on the button “Fill wallet” to collect your funds.',Imgs:walletConnected,width:'85%'},
         {title:'Funds will be deposited into your MetaMask wallet. Check your balance by clicking on the MetaMask extension on your browser.',Imgs:MetamaskFox,width:'70%'},
-    ]);
+    ];
+
     const [menuList, setMenuList] = useState(installYourWallet)
     const navigate = useNavigate();
 

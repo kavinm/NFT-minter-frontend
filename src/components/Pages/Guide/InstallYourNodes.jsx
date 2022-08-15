@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import chromImg from '../assets/images/chromeImg.png';
-import metamask_website from '../assets/images/metamask_website.png';
-import metamask from '../assets/images/metamask.png';
-import download_extension from '../assets/images/download_extension.png';
-import create_password from '../assets/images/create_password.png';
-import new_to_metamask from '../assets/images/new_to_metamask.png';
-import sceret_key from '../assets/images/sceret_key.png';
-import congrats from '../assets/images/congrats.png';
+import chromImg from '../../../assets/images/chromeImg.png';
+import metamask_website from '../../../assets/images/metamask_website.png';
+import metamask from '../../../assets/images/metamask.png';
+import download_extension from '../../../assets/images/download_extension.png';
+import create_password from '../../../assets/images/create_password.png';
+import new_to_metamask from '../../../assets/images/new_to_metamask.png';
+import sceret_key from '../../../assets/images/sceret_key.png';
+import congrats from '../../../assets/images/congrats.png';
 
 const InstallYourNodes =()=>{
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import NavBar from '../NavBar';
+import NavBar from '../Pages/Nav/NavBar';
 // import Footer1 from './Footer1';
 
 const GeneralLayout = ({children})=>{

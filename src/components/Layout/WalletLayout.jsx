@@ -1,5 +1,5 @@
 import React from 'react';
-import NavBarWallet from '../NavBarWallet';
+import NavBarWallet from '../Pages/Nav/NavBarWallet';
 
 const WalletLayout = ({children})=>{
     return <div className='wallet-layout'>
