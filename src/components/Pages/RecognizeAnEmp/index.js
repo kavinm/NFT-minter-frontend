@@ -10,6 +10,8 @@ import excellent from '../../../assets/images/excellent-service.png';
 import myNFT from "../../../utils/MyNFT.json"
 import axios from "axios";
 import { ethers } from "ethers";
+import { message } from 'antd';
+
 
 const DarkCards=({title, cardImg})=>{
     return <>
@@ -238,11 +240,30 @@ const RecognizeAnEmp =()=>{
                     document.getElementById(tabName+i).classList.remove("active");
             }
         }
-            
     }
 
     const mintSubmission = async () => {
-        
+        const whilelist_url = "http://20.63.106.39:3000/customers"
+        let users = await fetch(whilelist_url, {
+            method: "GET",
+            headers: {
+                'Content-Type': 'application/json' 
+            },
+        }).then(res => res.json())
+        users = users.data
+        let found = false;
+        for (let user of users) {
+            if (user.address.toUpperCase() === window.ethereum.selectedAddress.toUpperCase()) {
+                found = true
+            }
+        }
+
+        if (!found) {
+            message.error({content:"You are not permitted to mint!", duration:3, className:'error-message'});
+
+            return
+        }
+
         const pinToIPFSURL = `https://api.pinata.cloud/pinning/pinFileToIPFS`;
         const pinJSONToIPFSURL = `https://api.pinata.cloud/pinning/pinJSONToIPFS`;
         const CONTRACT_ADDRESS = "0x93b9439e2a89019dee11306e78adcf77c7431caf";
@@ -257,6 +278,25 @@ const RecognizeAnEmp =()=>{
                 {trait_type: "Employee Email", value: recipientEmail}
             ]
         }
+
+
+        // const server_id = "http://20.63.106.39:3000/recordkeeping"
+        
+        // fetch(server_id, {
+        //     method: "POST",
+        //     headers: {
+        //         'Content-Type': 'application/json' 
+        //     },
+        //     body: JSON.stringify({
+        //         name: recipientName,
+        //         address: recipientWallet,
+        //         email: recipientEmail
+        //     })
+        // }).then(res => res.json()).then(result => console.log(result)).catch(res => console.log(res))
+        
+        
+
+
 
         if (myState.modalCollectionType === "Service_awards") {
             nftMetadata["attributes"].push({trait_type: "Collection", value: "Service Award"});

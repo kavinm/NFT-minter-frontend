@@ -49,7 +49,7 @@ const CreateCollection =()=>{
                                                 <label className='text-label'>
                                                     Collection name
                                                 </label> <br/>
-                                                <input type="text" className='form-input mt-1' />
+                                                <input type="text" className='form-input mt-1'/>
                                             </div>
                                             <div className='col-md-12 mt-3'>
                                                 <label className='text-label'>

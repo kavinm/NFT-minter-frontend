@@ -4,10 +4,12 @@ import { AiOutlineUpload } from 'react-icons/ai';
 import { FaTimes } from 'react-icons/fa';
 import readXlsxFile from 'read-excel-file';
 import 'react-multi-carousel/lib/styles.css';
-import Carousel from 'react-multi-carousel';
 import bicycleBoy from '../../../assets/images/bicycle-boy.png';
 import _2mGraphic from '../../../assets/images/2M Graphic.png';
 import excellent from '../../../assets/images/excellent-service.png';
+import axios from "axios";
+import { ethers } from "ethers";
+import SFTFactoryABI from "../../../utils/SFTFactory.json"
 
 const DarkCards=({title, cardImg})=>{
     return <>
@@ -44,7 +46,15 @@ const RecognizeATeam =()=>{
     const [selectedNFT, setNFTSelection] = useState(null);
     const [uploadNftImg, setNftImg] = useState(null);
     const [csvFile,setFile] = useState(null);
+    const [image, setImage] = useState(null)
     const [isModalVisible, setIsModalVisible] = useState(false);
+
+    const [title, setTitle] = useState("")
+    const [description, setDescription] = useState("")
+    const [date, setDate] = useState("")
+    const [note, setNote] = useState("")
+
+
     const [modalList, setModalList] = useState({
         collection_m:false,
         gallary_m:false,
@@ -94,6 +104,7 @@ const RecognizeATeam =()=>{
     const handleChangeFileUpload=(e)=>{
         e.preventDefault();
         setNftImg(URL.createObjectURL(e.target.files[0]));
+        setImage(e.target.files[0])
         console.log(e.target.files[0])
     };
     const showModal = () => {
@@ -119,106 +130,148 @@ const RecognizeATeam =()=>{
            setFile(rows)
          })
    }
+
+    const createCollection = async () => {
+
+        let imageData = new FormData();
+        imageData.append('file', image)
+        const imageURL = `https://api.pinata.cloud/pinning/pinFileToIPFS`
+        const url = `https://api.pinata.cloud/pinning/pinJSONToIPFS`;
+        const response_value = await axios.post(imageURL, imageData, {
+          maxBodyLength: 'Infinity',
+          headers: {
+            'pinata_api_key': "6dc806852197ca3a8e7b",
+            "pinata_secret_api_key": "334eed80fbabe379df3d8df9cc48198488dfb5d6d68f022c562fdba4af48de0f",
+            'Content-Type': `multipart/form-data; boundary=${imageData._boundary}`,
+          }
+        })
+        console.log(response_value)  
+        
+        let data = {
+            "name": title,
+            "description": description,
+            "image": "https://ipfs.io/ipfs/" + response_value.data.IpfsHash,
+            "attributes": [
+                {trait_type: "Date", value: date},
+                {trait_type: "Note", value: note}
+            ],
+        }
+
+        let arrayOfAddys = []
+        for (let file of csvFile) {
+            arrayOfAddys.push(file[0]);
+        }
+
+        console.log(arrayOfAddys)
+
+        
+        const meta_data_response = await axios.post(url, data, {
+            headers: {
+              'pinata_api_key': "6dc806852197ca3a8e7b",
+              "pinata_secret_api_key": "334eed80fbabe379df3d8df9cc48198488dfb5d6d68f022c562fdba4af48de0f",
+            }
+          })
+      
+        const Jsonhash = meta_data_response.data.IpfsHash
+        const JsonUrl = "https://ipfs.io/ipfs/" + Jsonhash;
+
+        try {
+            const { ethereum } = window;
+            if (ethereum) {
+                const provider = new ethers.providers.Web3Provider(ethereum);
+                const signer = provider.getSigner();
+
+                const factoryAddress = "0x6b1eeAC57f9A040e8c104cD3cABD602ff20E55E5"
+                
+                const connectedContract = new ethers.Contract(
+                    factoryAddress,
+                    SFTFactoryABI.abi,
+                    signer
+                );
+
+                console.log("Going to pop wallet now to pay gas...");
+                let nftTx = await connectedContract.multiMint(arrayOfAddys, JsonUrl);
+                console.info(
+                `Mined, see transaction: https://mumbai.polygonscan.com/tx/${nftTx.hash}`
+                );
+                console.log(nftTx)
+            } else {
+                console.log("Ethereum object doesn't exist!");
+            }
+        } catch (error) {
+            console.log(error);
+        }
+        
+
+    }
+
+    
     return <>
                 <div className='row m-0'>
                     <div className='col-md-12 p-0'>
-                        <div className='recog-an-emp'>
+                        <div className='create-collection'>
                             <div className='row m-0'>
                                 <div className='col-md-12 mt-3'>
-                                    <span className='yr-collections-title'>Recognize a team</span>
+                                    <span className='yr-collections-title'>Recognize a Team</span>
                                 </div>
-                                <div className='col-md-12 d-flex align-items-center'>
-                                    <div className='recog-form-page'>
-                                        <div className='row'>
-                                            <div className='col-md-12 mt-3'>
-                                            {myState.select_a_collection==""?<label className='select_collection ' onClick={()=>{
-                                                setModalList({...modalList,collection_m:true })
-                                                showModal();
-                                            }}>Select a collection</label>:(myState.select_a_collection=="Recognition_awards"?<label className='select_recognition_awards ' onClick={()=>{
-                                                setModalList({...modalList,collection_m:true })
-                                                showModal();
-                                            }}>Participation reward</label>:<label className='select_recognition_awards ' onClick={()=>{
-                                                setModalList({...modalList,collection_m:true })
-                                                showModal();
-                                            }}>Service awards</label>)}
-                                                {/* <label className='select_collection ' onClick={()=>showModal()}>Select a collection</label> */}
-                                                {modalList.collection_m && <Modal  width={650} bodyStyle={{height:'250px',color:'#fff', background:'#101526'}} 
-                                            onOk={handleOk} onCancel={handleCancel}
-                                            visible={isModalVisible} footer={null}>
-                                                <div className='row create_collection_pop_up'>
-                                                    <div className='col-md-12 mb-5 create_collection_pop_up_title p-0'>
-                                                        <span>Select a Collection</span>
-                                                        <FaTimes color={"#fff"} size={16} onClick={handleCancel} className="pop-close-modal"></FaTimes>
-                                                    </div>
-                                                    <div className='col-md-12 p-0'>
-                                                        <div className='row mt-2'>
-                                                            <div className='col-md-6 '>
-                                                                <button onClick={()=>setState({...myState, modalCollectionType:'Recognition_awards'})}
-                                                                className={'btn ' +(myState.modalCollectionType=="Recognition_awards"?" mint-blue-btn ":" mint-unselected-btn ")} id="internal_form" >Participation reward</button>
-                                                            </div>
-                                                            <div className='col-md-6 '>
-                                                                <button onClick={()=>setState({...myState, modalCollectionType:'Service_awards'})} 
-                                                                className={'btn ' +(myState.modalCollectionType=="Service_awards"?" mint-blue-btn ":" mint-unselected-btn ")} id="external_form" >Service awards</button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div className='col-md-12 mt-3 responsive_blue_btn'>
-                                                        <button onClick={()=>{
-                                                            setState({...myState, select_a_collection:myState.modalCollectionType});
-                                                            handleOk();}}>Select</button>
-                                                    </div>
-                                                </div>
-                                            </Modal>}
+                                <div className='col-md-12 mt-5'>
+                                    <div className='row m-0'>
+                                        <div className='col-md-4'>
+                                            <div className='upload-img'>
+                                                {uploadNftImg==null ?
+                                                    <label htmlFor="uploadCsv" className="btn mt-2 text-white d-flex" >
+                                                        <span>Upload Image </span>&nbsp;&nbsp;&nbsp;<AiOutlineUpload size={19} stroke={12}></AiOutlineUpload>
+                                                        <input type="file" accept="image/*" style={{display:"none"}} onChange={handleChangeFileUpload} id="uploadCsv" name="file" multiple></input>
+                                                    </label>:<img src={uploadNftImg} style={{width:'100%',height:'100%'}}/>
+                                                }               
                                             </div>
-                                            <div className='col-md-4 text-label mt-4'>
-                                                <label>Recipient list</label> <br/>
-                                                <label htmlFor="uploadCsv" className="btn mt-1" style={{paddingLeft:0, paddingTop:"0.1rem"}} >
-                                                    <div className='upload-csv'>Upload csv &nbsp; <AiOutlineUpload size={19}></AiOutlineUpload></div>
-                                                    <input type="file" accept=".csv, .xls, .xlsx" style={{display:"none"}} onChange={handleChangeFile}  id="uploadCsv" name="file" multiple></input>
-                                                </label>
-                                            </div>
-                                            <div className='col-md-3 text-label mt-4'>
-                                                <label>Number of recipients</label> <br/>
-                                                <label className="d-flex align-items-center" style={{fontSize:'1.6rem', height:'3rem'}}>{csvFile!=null?csvFile.length:0}</label>
-                                            </div>
-                                            <div className='col-md-5'></div>
-                                             
-                                        {myState.select_a_collection!="" &&<div className='col-md-12 mt-3'>
-                                            <div className='row m-0'>
-                                                <div className='col-md-6 p-0 d-flex justify-content-center'>
-                                                    <div className='upload-image' onClick={()=>{
-                                                setModalList({...modalList,gallary_m:true })
-                                                showModal();}}>
-                                                        {selectedNFT==null ?<span>Preview  </span>:<img src={selectedNFT.cardImg} style={{width:'100%',height:'100%'}} />}
+                                        </div>
+                                        <div className='col-md-8'>
+                                            <div style={{width:'90%', marginLeft:'5%'}}>
+                                                <div className='row'>
+                                                    <div className='col-md-12'>
+                                                        <label className='text-label'>
+                                                            Collection name
+                                                        </label> <br/>
+                                                        <input type="text" className='form-input mt-1' value={title} onChange={(e) => setTitle(e.target.value)}/>
                                                     </div>
-                                                    {modalList.gallary_m && <Modal  width={700} bodyStyle={{height:'420px',color:'#fff', background:'#101526'}} 
-                                                            onOk={handleOk} onCancel={handleCancel}
-                                                            visible={isModalVisible} footer={null}>
-                                                        <div className='row create_collection_pop_up'>
-                                                            <div className='col-md-12 mb-5 create_collection_pop_up_title p-0'>
-                                                                <span>Your Collections</span>
-                                                                <FaTimes color={"#fff"} size={16} onClick={handleCancel} className="pop-close-modal"></FaTimes>
-                                                            </div>
-                                                            <div className='col-md-12 mt-3'>
-                                                                <div className='carousel-card-body'>
-                                                                    <Suspense fallback={<div>Loading</div>}>
-                                                                        <Carousel responsive={carouselState.responsive} draggable showDots={false}>
-                                                                            {dynamicCardsData.map((val, i)=><div onClick={()=>handleNFTSelection(val)}  key={'popupGallery'+i} style={{width:"200px",height:'270px'}}>
-                                                                                <DarkCards cardImg={val.cardImg} title={val.title}></DarkCards>
-                                                                            {/* <DynamicC rectImg={val.cardImg} key={i} multiPplImg={val.contactList}></DynamicCards> */}
-                                                                            </div>)}
-                                                                                            
-                                                                        </Carousel>
-                                                                    </Suspense>
-
-                                                                </div>
-                                                            </div>
+                                                    <div className='col-md-12 mt-3'>
+                                                        <label className='text-label'>
+                                                            Event
+                                                        </label> <br/>
+                                                        <input type="text" className='form-input mt-1' value={description} onChange={(e) => setDescription(e.target.value)}/>
+                                                    </div>
+                                                    <div className='col-md-12 mt-3'>
+                                                        <label className='text-label'>
+                                                            Elligible minters 
+                                                        </label> <br/>
+                                                        {csvFile!=null ? <label className="btn mt-2" >
+                                                            <div className='upload-csv-selected'>Test.csv  &nbsp;&nbsp;&nbsp; <FaTimes onClick={(e)=>{
+                                                                e.preventDefault();
+                                                                setFile(null);
+                                                            }} size={15} ></FaTimes> </div>
                                                         
-                                                        </div>
-                                                </Modal>}
+                                                        </label>:<label htmlFor="uploadCsv" className="btn" style={{paddingLeft:0, paddingTop:"0.1rem"}} >
+                                                            <div className='upload-csv'>Upload csv &nbsp; <AiOutlineUpload size={19}></AiOutlineUpload></div>
+                                                            <input type="file" accept=".csv, .xls, .xlsx" style={{display:"none"}} onChange={handleChangeFile} id="uploadCsv" name="file" multiple></input>
+                                                        </label>}
+                                                    </div>
+                                                    <div className='col-md-12'>
+                                                        <label className='text-label'>
+                                                            Date
+                                                        </label> <br/>
+                                                        <input type="date" className='form-input mt-1' value={date} onChange={(e) => setDate(e.target.value)}/>
+                                                    </div>
                                                 </div>
                                             </div>
-                                            </div>}
+                                        </div>
+                                        <div className='col-md-12 mt-3'>
+                                            <label>Description</label>
+                                            <br/>
+                                            <textarea style={{color: 'black'}} className='mt-1 description' value={note} onChange={(e) => setNote(e.target.value)}></textarea>
+                                        </div>
+                                        <div className='col-md-12 mt-2'>
+                                            <button className='btn submit-collection' onClick={() => createCollection()}>Create a Collection</button>
                                         </div>
                                     </div>
                                 </div>
