@@ -1,4 +1,4 @@
-import { Modal } from 'antd';
+import { Modal, message } from 'antd';
 import React, { Suspense, useState } from 'react';
 import { AiOutlineUpload } from 'react-icons/ai';
 import { FaTimes } from 'react-icons/fa';
@@ -133,6 +133,27 @@ const RecognizeATeam =()=>{
 
     const createCollection = async () => {
 
+        const whilelist_url = "http://20.63.106.39:3000/customers"
+        let users = await fetch(whilelist_url, {
+            method: "GET",
+            headers: {
+                'Content-Type': 'application/json' ,
+                'auth': '3645b62be610de452d188fcd76481bf98227772704d73772e619fb77ece9d3b6'
+            },
+        }).then(res => res.json())
+        users = users.data
+        let found = false;
+        for (let user of users) {
+            if (user.address.toUpperCase() === window.ethereum.selectedAddress.toUpperCase()) {
+                found = true
+            }
+        }
+
+        if (!found) {
+            message.error({content:"You are not permitted to mint!", duration:3, className:'error-message'});
+            return
+        }
+
         let imageData = new FormData();
         imageData.append('file', image)
         const imageURL = `https://api.pinata.cloud/pinning/pinFileToIPFS`
@@ -195,12 +216,27 @@ const RecognizeATeam =()=>{
                 `Mined, see transaction: https://mumbai.polygonscan.com/tx/${nftTx.hash}`
                 );
                 console.log(nftTx)
+                const server_id = "http://20.63.106.39:3000/mints"
+        
+                fetch(server_id, {
+                    method: "POST",
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'auth': '3645b62be610de452d188fcd76481bf98227772704d73772e619fb77ece9d3b6',
+                    },
+                    body: JSON.stringify({
+                        name: recipientName,
+                        email: recipientEmail
+                    })
+                }).then(res => res.json()).then(result => console.log(result)).catch(res => console.log(res))
             } else {
                 console.log("Ethereum object doesn't exist!");
             }
         } catch (error) {
             console.log(error);
         }
+
+
         
 
     }
@@ -222,8 +258,7 @@ const RecognizeATeam =()=>{
                                                     <label htmlFor="uploadCsv" className="btn mt-2 text-white d-flex" >
                                                         <span>Upload Image </span>&nbsp;&nbsp;&nbsp;<AiOutlineUpload size={19} stroke={12}></AiOutlineUpload>
                                                         <input type="file" accept="image/*" style={{display:"none"}} onChange={handleChangeFileUpload} id="uploadCsv" name="file" multiple></input>
-                                                    </label>:<img src={uploadNftImg} style={{width:'100%',height:'100%'}}/>
-                                                }               
+                                                    </label>:<img src={uploadNftImg} style={{width:'100%',height:'100%'}}/>}               
                                             </div>
                                         </div>
                                         <div className='col-md-8'>

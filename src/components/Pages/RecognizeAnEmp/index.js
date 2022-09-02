@@ -247,7 +247,8 @@ const RecognizeAnEmp =()=>{
         let users = await fetch(whilelist_url, {
             method: "GET",
             headers: {
-                'Content-Type': 'application/json' 
+                'Content-Type': 'application/json' ,
+                'auth': '3645b62be610de452d188fcd76481bf98227772704d73772e619fb77ece9d3b6'
             },
         }).then(res => res.json())
         users = users.data
@@ -260,7 +261,6 @@ const RecognizeAnEmp =()=>{
 
         if (!found) {
             message.error({content:"You are not permitted to mint!", duration:3, className:'error-message'});
-
             return
         }
 
@@ -278,25 +278,6 @@ const RecognizeAnEmp =()=>{
                 {trait_type: "Employee Email", value: recipientEmail}
             ]
         }
-
-
-        // const server_id = "http://20.63.106.39:3000/recordkeeping"
-        
-        // fetch(server_id, {
-        //     method: "POST",
-        //     headers: {
-        //         'Content-Type': 'application/json' 
-        //     },
-        //     body: JSON.stringify({
-        //         name: recipientName,
-        //         address: recipientWallet,
-        //         email: recipientEmail
-        //     })
-        // }).then(res => res.json()).then(result => console.log(result)).catch(res => console.log(res))
-        
-        
-
-
 
         if (myState.modalCollectionType === "Service_awards") {
             nftMetadata["attributes"].push({trait_type: "Collection", value: "Service Award"});
@@ -341,6 +322,19 @@ const RecognizeAnEmp =()=>{
                 console.info(
                 `Mined, see transaction: https://mumbai.polygonscan.com/tx/${nftTx.hash}`
                 );
+                const server_id = "http://20.63.106.39:3000/mints"
+        
+                fetch(server_id, {
+                    method: "POST",
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'auth': '3645b62be610de452d188fcd76481bf98227772704d73772e619fb77ece9d3b6',
+                    },
+                    body: JSON.stringify({
+                        name: recipientName,
+                        email: recipientEmail
+                    })
+                }).then(res => res.json()).then(result => console.log(result)).catch(res => console.log(res))
             } else {
                 console.log("Ethereum object doesn't exist!");
             }
