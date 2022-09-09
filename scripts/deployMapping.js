@@ -23,9 +23,6 @@ async function main() {
 
   console.log("NFT Mapping Contract deployed to:", addressStorage.address);
 
-  let txn = await addressStorage.addCollection("I hope this works", "TEST");
-  await txn.wait();
-  console.log(txn);
 }
 
 // We recommend this pattern to be able to use async/await everywhere

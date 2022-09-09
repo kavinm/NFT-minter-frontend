@@ -10,10 +10,17 @@ contract AddressToCollection {
         address[] addresses;
     }
 
-    address constant ADMIN = 0xf228F1B867445c5cD36e8210aa6EA3608D3D4622;
+    struct contractDataStruct {
+        string contractImageURI;
+        string contractDescription;
+        string eventDate;
+        string eventName;
+        string collectionName;
+    }
 
     // for each organization address, there will be a corresponding addressData struct
-    mapping(address => addressData) private addressMapping;
+    mapping(address => addressData) public addressMapping;
+    mapping(address => contractDataStruct) public contractMapping;
 
     function verifyOrg(address wallet_address) public {
         //replace this with OnlyOwner after import issue is fixed
@@ -23,7 +30,7 @@ contract AddressToCollection {
 
     //will return all the contract addresses for a organization EOA
     function getCollections() public view returns (address[] memory) {
-        if (addressMapping[msg.sender].verified) {
+        if (!addressMapping[msg.sender].verified) {
             address[] memory emptyArray;
             return emptyArray;
         }
@@ -43,7 +50,11 @@ contract AddressToCollection {
     //deploys a new NFT Contract (creates collection), and adds the contract address to mapping
     function addCollection(
         string memory collection_name,
-        string memory collection_symbol
+        string memory collection_symbol,
+        string memory imageURI,
+        string memory description,
+        string memory date,
+        string memory eventName
     ) public {
         //deploys MyNFT.sol and creates a new NFT collection
         MyNFT collection = new MyNFT(collection_name, collection_symbol);
@@ -58,5 +69,10 @@ contract AddressToCollection {
             addressMapping[msg.sender] = _address;
             addressMapping[msg.sender].addresses.push(address(collection));
         }
+        contractMapping[address(collection)] = contractDataStruct(imageURI, description, date, eventName, collection_name);
+    }
+
+    function getContractInfo( address contract_address) public view returns (contractDataStruct memory){
+        return contractMapping[contract_address];
     }
 }

@@ -182,7 +182,7 @@ const RecognizeATeam =()=>{
         for (let file of csvFile) {
             arrayOfAddys.push(file[0]);
         }
-
+        
         console.log(arrayOfAddys)
 
         
@@ -217,28 +217,26 @@ const RecognizeATeam =()=>{
                 );
                 console.log(nftTx)
                 const server_id = "http://20.63.106.39:3000/mints"
-        
-                fetch(server_id, {
-                    method: "POST",
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'auth': '3645b62be610de452d188fcd76481bf98227772704d73772e619fb77ece9d3b6',
-                    },
-                    body: JSON.stringify({
-                        name: recipientName,
-                        email: recipientEmail
-                    })
-                }).then(res => res.json()).then(result => console.log(result)).catch(res => console.log(res))
+                for (let file of csvFile) {
+                    fetch(server_id, {
+                        method: "POST",
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'auth': '3645b62be610de452d188fcd76481bf98227772704d73772e619fb77ece9d3b6',
+                        },
+                        body: JSON.stringify({
+                            name: file[1],
+                            email: file[2]
+                        })
+                    }).then(res => res.json()).then(result => console.log(result)).catch(res => console.log(res))
+
+                }
             } else {
                 console.log("Ethereum object doesn't exist!");
             }
         } catch (error) {
             console.log(error);
         }
-
-
-        
-
     }
 
     
