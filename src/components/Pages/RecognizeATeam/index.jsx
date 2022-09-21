@@ -133,6 +133,11 @@ const RecognizeATeam =()=>{
 
     const createCollection = async () => {
 
+        if (title === "" || description === "" || date === "") {
+            message.error("Fill out all form fields!");
+            return
+        }
+
         const whilelist_url = "http://20.63.106.39:3000/customers"
         let users = await fetch(whilelist_url, {
             method: "GET",
@@ -177,14 +182,26 @@ const RecognizeATeam =()=>{
                 {trait_type: "Note", value: note}
             ],
         }
-
+        const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
         let arrayOfAddys = []
         for (let file of csvFile) {
+
+            if ( file[0] === "" || file[1] === "" || file[2] === "") {
+                message.error({content: "Address, name, or email is missing in the excel sheet"})
+                return
+            }
+    
+            if (! emailRegex.test(file[2])) {
+                message.error({content: "Invalid Email!"})
+                return
+            }
+    
+            if (! /^0x[a-fA-F0-9]{40}$/.test(file[0])) {
+                message.error({content: "Invalid Address!"})
+                return
+            }
             arrayOfAddys.push(file[0]);
         }
-        
-        console.log(arrayOfAddys)
-
         
         const meta_data_response = await axios.post(url, data, {
             headers: {
@@ -212,9 +229,10 @@ const RecognizeATeam =()=>{
 
                 console.log("Going to pop wallet now to pay gas...");
                 let nftTx = await connectedContract.multiMint(arrayOfAddys, JsonUrl);
-                console.info(
+                message.info(
                 `Mined, see transaction: https://mumbai.polygonscan.com/tx/${nftTx.hash}`
                 );
+
                 console.log(nftTx)
                 const server_id = "http://20.63.106.39:3000/mints"
                 for (let file of csvFile) {

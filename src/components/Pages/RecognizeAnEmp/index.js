@@ -243,6 +243,23 @@ const RecognizeAnEmp =()=>{
     }
 
     const mintSubmission = async () => {
+
+        const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+        if ( recipientName === "" || recipientEmail === "" ) {
+            message.error({content: "Fill in all form fields!"})
+            return
+        }
+
+        if (! emailRegex.test(recipientEmail)) {
+            message.error({content: "Invalid Email!"})
+            return
+        }
+
+        if (! /^0x[a-fA-F0-9]{40}$/.test(recipientWallet)) {
+            message.error({content: "Invalid Address!"})
+            return
+        }
+        
         const whilelist_url = "http://20.63.106.39:3000/customers"
         let users = await fetch(whilelist_url, {
             method: "GET",
@@ -273,10 +290,7 @@ const RecognizeAnEmp =()=>{
             "description": "Offered by Partner Name",
             "image": previewImgData,
             "recognition_note": recognitionNote,
-            "attributes": [
-                {trait_type: "Employee Name", value: recipientName},
-                {trait_type: "Employee Email", value: recipientEmail}
-            ]
+            "attributes": []
         }
 
         if (myState.modalCollectionType === "Service_awards") {
@@ -319,9 +333,10 @@ const RecognizeAnEmp =()=>{
 
                 console.log("Going to pop wallet now to pay gas...");
                 let nftTx = await connectedContract.mintNFT(recipientWallet, JsonUrl);
-                console.info(
-                `Mined, see transaction: https://mumbai.polygonscan.com/tx/${nftTx.hash}`
-                );
+                message.info({
+                    content: `Mined, see transaction: https://mumbai.polygonscan.com/tx/${nftTx.hash}`,
+                    duration: 5
+                });
                 const server_id = "http://20.63.106.39:3000/mints"
         
                 fetch(server_id, {

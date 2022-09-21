@@ -94,11 +94,11 @@ const NavBarWallet=()=>{
         setStatus(true);
         showModal();
         //check if user is connected to rinkeby
-        const rinkebyChainId = "0x4";
+        const mumbaiChainid = "0x13881";
         let chainId = await ethereum.request({ method: "eth_chainId" });
   
-        if (chainId !== rinkebyChainId) {
-          alert("You are not connected to the Rinkeby Test Network!");
+        if (chainId !== mumbaiChainid) {
+          message.error("You are not connected to the Mumbai Test Network!");
           return;
         }
   
