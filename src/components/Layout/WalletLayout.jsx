@@ -10,7 +10,6 @@ const WalletLayout = ({children})=>{
                     {children}
                 </div>    
             </div>
-
 }
 
 export default WalletLayout;

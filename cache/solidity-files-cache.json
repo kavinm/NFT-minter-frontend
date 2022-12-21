@@ -1330,6 +1330,43 @@
       "artifacts": [
         "SFT"
       ]
+    },
+    "/Users/dhoolie/programs/NFT-minter-frontend/contracts/CollectionFactory.sol": {
+      "lastModificationDate": 1665607894146,
+      "contentHash": "14eeacbb1165e413740f688eac5b8d35",
+      "sourceName": "contracts/CollectionFactory.sol",
+      "solcConfig": {
+        "version": "0.8.9",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "./SFT.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.4"
+      ],
+      "artifacts": [
+        "CollectionFactory"
+      ]
     }
   }
 }

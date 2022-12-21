@@ -5,9 +5,9 @@ async function main() {
   
     let accounts = await ethers.getSigners();
     let eoa = accounts[0];
-    let factory = await ethers.getContractFactory("AddressToCollection");
+    let factory = await ethers.getContractFactory("CollectionFactory");
 
-    let contract = factory.attach("0xdb38dFF1fBD80ff0122B7e19D697A89a769EaA6c");
+    let contract = factory.attach("0xfC20A30BFf58F818CF0Fe0391e58dF79E8EcBFb6");
 
     const tx = await contract['addCollection(string,string,string,string,string,string)'](
         "Test Collection Name",

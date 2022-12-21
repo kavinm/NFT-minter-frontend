@@ -26,7 +26,7 @@ const NavBarWallet=()=>{
     // Why is this a handlCancel bruhhh 😭
     const handleCancel = async () => {
 
-      const FAUCET_CONTRACT_ADDRESS = "0x6E6A18E21EFe1b1B408e7A5801f733E3effc3446";
+      const FAUCET_CONTRACT_ADDRESS = "0x325A43670f4077832ef78b2851d83B0E5a0391F1";
 
       try {
           const { ethereum } = window;
@@ -40,7 +40,7 @@ const NavBarWallet=()=>{
               );
               
               console.log("Going to pop wallet now to pay gas...");
-              let nftTx = await connectedContract.redeemEmployeeMatic();
+              let nftTx = await connectedContract.redeemEmployeeMatic({gasLimit: 50000});
               console.info(
               `Mined, see transaction: https://rinkeby.etherscan.io/tx/${nftTx.hash}`
               );
@@ -149,8 +149,6 @@ const NavBarWallet=()=>{
                               <button onClick={handleCancel} className="btn text-white" style={{width:"7rem",height:'2.5rem',fontSize:'0.8rem',borderRadius:'7px',border: "1px solid #FFFFFF"}}>Fill wallet</button>
                               &nbsp;&nbsp;
                               <button onClick={handleOk} className="btn text-white" style={{width:"7rem",height:'2.5rem',fontSize:'0.8rem',borderRadius:'7px',background:'linear-gradient(90deg, #1E49E3 0%, #7213E9 100%)'}}>Continue</button>
-                          
-                           
                         </div>
                       </div>}
                     </Modal>

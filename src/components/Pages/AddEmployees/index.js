@@ -126,11 +126,10 @@ const AddEmployees =()=>{
     const submitFaucetRequest = async () => {
         //console.log(csvFile);
 
-        const FAUCET_CONTRACT_ADDRESS = "0x6E6A18E21EFe1b1B408e7A5801f733E3effc3446";
+        const FAUCET_CONTRACT_ADDRESS = "0x5804649116D8E4BfE4146b2868d44Af789e2aAAf";
     
         if (csvFile.length < 1) return;
-        let arrayOfAddresses = csvFile.map(item => item[0]);
-
+        let arrayOfAddresses = csvFile.map(item => item[0]); 
         try {
             const { ethereum } = window;
             if (ethereum) {
