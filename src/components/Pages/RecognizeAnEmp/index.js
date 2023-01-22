@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Modal } from 'antd';
+import { Modal, Alert } from 'antd';
 import { FaTimes } from 'react-icons/fa';
 import 'react-multi-carousel/lib/styles.css';
 //import myNFT from "../utils/MyNFT.json";
@@ -7,12 +7,20 @@ import myNFT from "../../../utils/MyNFT.json"
 import axios from "axios";
 import { ethers, utils } from "ethers";
 import { message } from 'antd';
+import { useQuery } from 'react-query'
 
+const fetchDirectory = async () => {
+    return await axios.get("https://nftrecognitionapi.canadacentral.cloudapp.azure.com/api/directory")
+}
 
 const RecognizeAnEmp =()=>{
 
+
+    const directory = useQuery('directory', fetchDirectory)
     const [previewImgData, setPreviewImgData] = useState("");
     const [isModalVisible, setIsModalVisible] = useState(false);
+    const [isNFTModalVisible, setIsNFTModalVisible ] = useState(false);
+    const [tokenURI, setTokenURI] = useState("")
     const [modalList, setModalList] = useState({
         collection_m:false,
         gallary_m:false,
@@ -27,9 +35,13 @@ const RecognizeAnEmp =()=>{
         select_a_collection:"",
         modalCollectionType:''
     });
-    const [recipientName, setRecipientName] = useState("");
-    const [recipientEmail, setRecipientEmail] = useState("");
-    const [recipientWallet, setRecipientWallet] = useState("");
+
+    const [selectedEmployee, setSelectedEmployee] = useState(null)
+
+    useEffect(() => {
+        console.log(selectedEmployee)
+    }, [selectedEmployee])
+
     const [recognitionNote, setRecognitionNote] = useState("");
 
     const [yearsOfService, setYearsOfService] = useState(0);
@@ -82,6 +94,18 @@ const RecognizeAnEmp =()=>{
             setState({...myState, strategy_tab:true, value_tab:false})
       }
       
+
+      const showModalNFT = () => {
+        setIsNFTModalVisible(true);
+      };
+    
+      const handleOkNFT = () => {
+        setIsNFTModalVisible(false);
+      };
+    
+      const handleCancelNFT = () => {
+        setIsNFTModalVisible(false);
+      };
 
     const handleStrategy_N_ValueMenu =(tabName, id)=>{
 
@@ -171,23 +195,6 @@ const RecognizeAnEmp =()=>{
 
     const mintSubmission = async () => {
 
-        const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-        if ( recipientName === "" || recipientEmail === "" ) {
-            message.error({content: "Fill in all form fields!"})
-            return
-        }
-
-        if (! emailRegex.test(recipientEmail)) {
-            message.error({content: "Invalid Email!"})
-            return
-        }
-
-        if (! /^0x[a-fA-F0-9]{40}$/.test(recipientWallet)) {
-            message.error({content: "Invalid Address!"})
-            return
-        }
-        
-
         const whitelist_url = `https://nftrecognitionapi.canadacentral.cloudapp.azure.com/api/whitelist/${utils.getAddress(window.ethereum.selectedAddress)}`
         const whitelist_response = await axios.get(whitelist_url)
 
@@ -201,7 +208,9 @@ const RecognizeAnEmp =()=>{
             "description": "Offered by Partner Name",
             "image": previewImgData,
             "recognition_note": recognitionNote,
-            "attributes": []
+            "attributes": [
+                {trait_type: "Recognition Note", value: recognitionNote}
+            ]
         }
 
         if (myState.modalCollectionType === "Service_awards") {
@@ -216,6 +225,7 @@ const RecognizeAnEmp =()=>{
             }
         }
 
+        const employeeData = JSON.parse(selectedEmployee)
         let formdata = new FormData();
         formdata.append('nft_metadata', JSON.stringify(nftMetadata))
         const tokenURIURL = 'https://nftrecognitionapi.canadacentral.cloudapp.azure.com/api/urigenerate/with_image'
@@ -223,7 +233,6 @@ const RecognizeAnEmp =()=>{
           maxBodyLength: 'Infinity',
           headers: { "Content-Type": "multipart/form-data" }
         })
-        console.log(response_value)
 
         const tokenuri = response_value.data.token_uri;
 
@@ -244,7 +253,8 @@ const RecognizeAnEmp =()=>{
                 );
 
                 console.log("Going to pop wallet now to pay gas...");
-                let nftTx = await connectedContract.mintNFT(recipientWallet, tokenuri);
+                let nftTx = await connectedContract.mintNFT(employeeData.address, tokenuri);
+                console.log("Finished minting")
                 message.info({
                     content: `Mined, see transaction: https://mumbai.polygonscan.com/tx/${nftTx.hash}`,
                     duration: 5
@@ -253,8 +263,8 @@ const RecognizeAnEmp =()=>{
                 const response_value = await axios.post(
                     server_id, 
                     {
-                        name: recipientName,
-                        recipient: recipientWallet,
+                        name: employeeData.name,
+                        recipient: employeeData.address,
                         tokenuri: tokenuri,
                     },
                     {
@@ -265,6 +275,15 @@ const RecognizeAnEmp =()=>{
 
                 if (response_value.status !== 200) {
                     message.error({content:"Error adding log", duration:3, className:'error-message'});
+                } else {
+                    console.log(nftTx)
+                    setTokenURI({
+                        uri: previewImgData,
+                        transaction: nftTx,
+                        address: employeeData.address
+                    })
+                    showModalNFT();
+                    console.log("Modal set to true")
                 }
             } else {
                 console.log("Ethereum object doesn't exist!");
@@ -323,18 +342,32 @@ const RecognizeAnEmp =()=>{
                                                     </div>
                                                 </div>
                                             </Modal>}
-                                        </div>
-                                        <div className='col-md-12 mt-3'>
-                                            <label className='text-label'>Recipient Name</label><br/>
-                                            <input type="text" className='form-input mt-1' value={recipientName} onChange={(e) => setRecipientName(e.target.value)}/>
-                                        </div>
-                                        <div className='col-md-12 mt-2 pl-2'>
-                                            <label className='text-label'>Recipient Email</label><br/>
-                                            <input type="text" className='form-input mt-1' value={recipientEmail} onChange={(e) => setRecipientEmail(e.target.value)}/>
+                                            {
+                                            <Modal  width={650} bodyStyle={{height:'500px',color:'#fff', background:'#101526'}} 
+                                                onOk={handleOkNFT} onCancel={handleCancelNFT}
+                                                visible={isNFTModalVisible} footer={null}
+                                            >
+                                                <div className='row create_collection_pop_up'>
+                                                    <div className='col-md-12 mb-5 create_collection_pop_up_title p-0'>
+                                                        <span>Select a Collection</span>
+                                                        <FaTimes color={"#fff"} size={16} onClick={handleCancelNFT} className="pop-close-modal"></FaTimes>
+                                                    </div>
+                                                    <img style={{width: 250, marginLeft: 'auto', marginRight: 'auto', marginBottom: 30}} alt="nft" src={tokenURI.uri}></img>
+                                                    <a href={`https://mumbai.polygonscan.com/tx/${tokenURI.transaction?.hash}`} target="_blank" rel="noreferrer"><strong>Transaction:</strong>https://mumbai.polygonscan.com/tx/{tokenURI.transaction?.hash}</a>
+                                                    <a  href={`https://testnets.opensea.io/${tokenURI.address}`} target="_blank" rel="noreferrer"><strong>Find on opensea at: </strong>https://testnets.opensea.io/{tokenURI.address}</a>
+                                                </div>
+                                            </Modal>
+                                            }
                                         </div>
                                         <div className='col-md-12 mt-2'>
                                             <label className='text-label'>Recipient wallet</label><br/>
-                                            <input type="text" className='form-input mt-1' value={recipientWallet} onChange={(e) => setRecipientWallet(e.target.value)}/>
+                                            <select type="text" className='form-input mt-1' value={selectedEmployee} onChange={(e) => setSelectedEmployee(e.target.value)}>
+                                                {directory.data && directory.data.data.map(item => {
+                                                    return (
+                                                        <option value={JSON.stringify(item)} key={item.address}>{item.name} - {item.email} - {item.address}</option>
+                                                    )
+                                                })}
+                                            </select>
                                         </div>
                                         {myState.select_a_collection!=="" && myState.select_a_collection==="Recognition_awards" && <div className='col-md-12 mt-4'>
                                             <div className='value-strategy'>
@@ -353,7 +386,7 @@ const RecognizeAnEmp =()=>{
                                                     <div className='upload-image'>
                                                         {/* {selectedNFT==null ? */}
                                                         {previewImgData==null? <span>Preview  </span>:
-                                                        <img src={previewImgData} alt="bruh" style={{width:'100%',height:'100%'}} />
+                                                        <img src={previewImgData} alt="Empty" style={{width:'100%',height:'100%'}} />
                                                         // <img src={selectedNFT.cardImg} style={{width:'100%',height:'100%'}} />
                                                         }
                                                     </div>
@@ -380,8 +413,13 @@ const RecognizeAnEmp =()=>{
                                             <label className='text-label-secondary'>Let the recipient know why they're recieving this.</label> <br/>
                                             <textarea style={{color: 'black'}} className='mt-1 description' onChange={(e) => setRecognitionNote(e.target.value)}></textarea>
                                         </div>}
-                                        <div className='col-md-12 mt-3'>
-                                            <button className='submit-btn' onClick={() => mintSubmission()}>Mint</button>
+                                        <div className='row mt-2'>
+                                            <div className='col-md-6 '>
+                                                <button className='submit-btn' onClick={() => mintSubmission()}>Mint</button>
+                                            </div>
+                                            <div className='col-md-6 '>
+                                                <Alert message="Notice: Please do not include any PII (Personal Identifiable Information)" type="warning" showIcon/>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

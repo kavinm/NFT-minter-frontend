@@ -122,7 +122,6 @@ const RecognizeATeam =()=>{
             console.log(error);
         }
     }
-
     
     return <>
                 <div className='row m-0'>
