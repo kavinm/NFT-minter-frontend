@@ -67,7 +67,7 @@ const Discover =()=>{
 
         if (isVerified) {
             baseTabs.push({title:'Create a collection', tab:'create_collection', icon:<BsPlusCircleFill size={18}></BsPlusCircleFill>, id:'wallet-tab-5', classname:"", index: 4})
-            baseTabs.push({title:'Add employees', tab:'fill_wallet', icon:<AiOutlineUpload size={18}></AiOutlineUpload>, id:'wallet-tab-6', classname:"", index: 5})
+            baseTabs.push({title:'Add to Whitelist', tab:'fill_wallet', icon:<AiOutlineUpload size={18}></AiOutlineUpload>, id:'wallet-tab-6', classname:"", index: 5})
         }
 
         return baseTabs

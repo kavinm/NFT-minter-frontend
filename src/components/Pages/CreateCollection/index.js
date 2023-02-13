@@ -6,10 +6,16 @@ import axios from "axios";
 import { ethers } from "ethers";
 import { message } from 'antd';
 import CollectionFactory from "../../../utils/CollectionFactory.json"
+import { useQuery } from 'react-query'
+
+const fetchDirectory = async () => {
+    return await axios.get("https://nftrecognitionapi.canadacentral.cloudapp.azure.com/api/directory")
+}
 
 const CreateCollection =()=>{
     
-
+    const directory = useQuery('directory', fetchDirectory)
+    console.log(directory?.data?.data)
     const [uploadNftImg, setNftImg] = useState(null);
     const [csvFile,setFile] = useState(null);
     const [collectionName, setCollectionName] = useState("");
@@ -30,6 +36,11 @@ const CreateCollection =()=>{
            // each row being an array of cells.
            setFile(rows)
          })
+   }
+
+   const getEveryone= async (e) => {
+        let newSet = directory?.data?.data.map(value => [value.address, value.name, value.email])
+        setFile(newSet)
    }
 
     const createCollection = async () => {
@@ -157,8 +168,9 @@ const CreateCollection =()=>{
                                                   
                                                 </label>:<label htmlFor="uploadCsv" className="btn" style={{paddingLeft:0, paddingTop:"0.1rem"}} >
                                                     <div className='upload-csv'>Upload csv &nbsp; <AiOutlineUpload size={19}></AiOutlineUpload></div>
-                                                    <input type="file" accept=".csv, .xls, .xlsx" style={{display:"none"}} onChange={handleChangeFile} id="uploadCsv" name="file" multiple></input>
+                                                    <input type="file" accept=".csv, .xls, .xlsx" style={{display:"none"}} onChange={handleChangeFile} onClick={() => console.log("BRUH")} id="uploadCsv" name="file" multiple></input>
                                                 </label>}
+                                                <button onClick={() => getEveryone()} className='upload-csv'>or Whitelist everyone</button>
                                             </div>
                                         </div>
                                     </div>
