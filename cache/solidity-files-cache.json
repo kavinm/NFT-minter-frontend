@@ -1,12 +1,12 @@
 {
   "_format": "hh-sol-cache-2",
   "files": {
-    "/Users/dhoolie/programs/nft-minter-frontend/contracts/Address.sol": {
-      "lastModificationDate": 1646857691835,
+    "/Users/dhoolie/programs/NFT-minter-frontend/contracts/Address.sol": {
+      "lastModificationDate": 1657556374675,
       "contentHash": "82d2f62bbe513c6657fcd0a6a5e42b08",
       "sourceName": "contracts/Address.sol",
       "solcConfig": {
-        "version": "0.8.4",
+        "version": "0.8.9",
         "settings": {
           "optimizer": {
             "enabled": false,
@@ -36,12 +36,12 @@
         "Address"
       ]
     },
-    "/Users/dhoolie/programs/nft-minter-frontend/contracts/IERC721Enumerable.sol": {
-      "lastModificationDate": 1646857691840,
+    "/Users/dhoolie/programs/NFT-minter-frontend/contracts/IERC721Enumerable.sol": {
+      "lastModificationDate": 1657556374677,
       "contentHash": "9fb196932d91327174186fda64492695",
       "sourceName": "contracts/IERC721Enumerable.sol",
       "solcConfig": {
-        "version": "0.8.4",
+        "version": "0.8.9",
         "settings": {
           "optimizer": {
             "enabled": false,
@@ -79,12 +79,12 @@
         "ERC721"
       ]
     },
-    "/Users/dhoolie/programs/nft-minter-frontend/contracts/IERC721.sol": {
-      "lastModificationDate": 1646857691840,
+    "/Users/dhoolie/programs/NFT-minter-frontend/contracts/IERC721.sol": {
+      "lastModificationDate": 1657556374677,
       "contentHash": "4982be3f7714c081acb988a1d9ee8217",
       "sourceName": "contracts/IERC721.sol",
       "solcConfig": {
-        "version": "0.8.4",
+        "version": "0.8.9",
         "settings": {
           "optimizer": {
             "enabled": false,
@@ -116,12 +116,12 @@
         "IERC721"
       ]
     },
-    "/Users/dhoolie/programs/nft-minter-frontend/contracts/IERC721Receiver.sol": {
-      "lastModificationDate": 1646857691841,
+    "/Users/dhoolie/programs/NFT-minter-frontend/contracts/IERC721Receiver.sol": {
+      "lastModificationDate": 1657556374677,
       "contentHash": "9a367cecca6fed80a3e975b7e6b3bd5c",
       "sourceName": "contracts/IERC721Receiver.sol",
       "solcConfig": {
-        "version": "0.8.4",
+        "version": "0.8.9",
         "settings": {
           "optimizer": {
             "enabled": false,
@@ -151,12 +151,12 @@
         "IERC721Receiver"
       ]
     },
-    "/Users/dhoolie/programs/nft-minter-frontend/contracts/IERC721Metadata.sol": {
-      "lastModificationDate": 1646857691841,
+    "/Users/dhoolie/programs/NFT-minter-frontend/contracts/IERC721Metadata.sol": {
+      "lastModificationDate": 1657556374677,
       "contentHash": "4d47eb75f2404f010c1b2c0ef5a71e74",
       "sourceName": "contracts/IERC721Metadata.sol",
       "solcConfig": {
-        "version": "0.8.4",
+        "version": "0.8.9",
         "settings": {
           "optimizer": {
             "enabled": false,
@@ -188,12 +188,12 @@
         "IERC721Metadata"
       ]
     },
-    "/Users/dhoolie/programs/nft-minter-frontend/contracts/Context.sol": {
-      "lastModificationDate": 1646857691836,
+    "/Users/dhoolie/programs/NFT-minter-frontend/contracts/Context.sol": {
+      "lastModificationDate": 1657556374676,
       "contentHash": "5f2c5c4b6af2dd4551027144797bc8be",
       "sourceName": "contracts/Context.sol",
       "solcConfig": {
-        "version": "0.8.4",
+        "version": "0.8.9",
         "settings": {
           "optimizer": {
             "enabled": false,
@@ -223,12 +223,12 @@
         "Context"
       ]
     },
-    "/Users/dhoolie/programs/nft-minter-frontend/contracts/Strings.sol": {
-      "lastModificationDate": 1646857691843,
+    "/Users/dhoolie/programs/NFT-minter-frontend/contracts/Strings.sol": {
+      "lastModificationDate": 1657556374678,
       "contentHash": "be2b9405ba22d7e457a7090381978acd",
       "sourceName": "contracts/Strings.sol",
       "solcConfig": {
-        "version": "0.8.4",
+        "version": "0.8.9",
         "settings": {
           "optimizer": {
             "enabled": false,
@@ -258,12 +258,12 @@
         "Strings"
       ]
     },
-    "/Users/dhoolie/programs/nft-minter-frontend/contracts/ERC165.sol": {
-      "lastModificationDate": 1646857691837,
+    "/Users/dhoolie/programs/NFT-minter-frontend/contracts/ERC165.sol": {
+      "lastModificationDate": 1657556374676,
       "contentHash": "dc27c19e42b9b6d41c1dc278883882f4",
       "sourceName": "contracts/ERC165.sol",
       "solcConfig": {
-        "version": "0.8.4",
+        "version": "0.8.9",
         "settings": {
           "optimizer": {
             "enabled": false,
@@ -295,12 +295,12 @@
         "ERC165"
       ]
     },
-    "/Users/dhoolie/programs/nft-minter-frontend/contracts/IERC165.sol": {
-      "lastModificationDate": 1646857691839,
+    "/Users/dhoolie/programs/NFT-minter-frontend/contracts/IERC165.sol": {
+      "lastModificationDate": 1657556374677,
       "contentHash": "9a04322bb8f6b8f2767d8358d1d2537b",
       "sourceName": "contracts/IERC165.sol",
       "solcConfig": {
-        "version": "0.8.4",
+        "version": "0.8.9",
         "settings": {
           "optimizer": {
             "enabled": false,
@@ -330,12 +330,12 @@
         "IERC165"
       ]
     },
-    "/Users/dhoolie/programs/nft-minter-frontend/contracts/ERC721.sol": {
-      "lastModificationDate": 1646857691838,
+    "/Users/dhoolie/programs/NFT-minter-frontend/contracts/ERC721.sol": {
+      "lastModificationDate": 1657556374676,
       "contentHash": "9fb196932d91327174186fda64492695",
       "sourceName": "contracts/ERC721.sol",
       "solcConfig": {
-        "version": "0.8.4",
+        "version": "0.8.9",
         "settings": {
           "optimizer": {
             "enabled": false,
@@ -373,12 +373,12 @@
         "ERC721"
       ]
     },
-    "/Users/dhoolie/programs/nft-minter-frontend/contracts/ERC721URIStorage.sol": {
-      "lastModificationDate": 1646857691838,
+    "/Users/dhoolie/programs/NFT-minter-frontend/contracts/ERC721URIStorage.sol": {
+      "lastModificationDate": 1657556374676,
       "contentHash": "4d0811eac28ceca601f4dbca00cdd5ac",
       "sourceName": "contracts/ERC721URIStorage.sol",
       "solcConfig": {
-        "version": "0.8.4",
+        "version": "0.8.9",
         "settings": {
           "optimizer": {
             "enabled": false,
@@ -410,12 +410,12 @@
         "ERC721URIStorage"
       ]
     },
-    "/Users/dhoolie/programs/nft-minter-frontend/contracts/Ownable.sol": {
-      "lastModificationDate": 1649952917691,
+    "/Users/dhoolie/programs/NFT-minter-frontend/contracts/Ownable.sol": {
+      "lastModificationDate": 1657556374678,
       "contentHash": "a258bc877203bb2f47d294f50cce50fc",
       "sourceName": "contracts/Ownable.sol",
       "solcConfig": {
-        "version": "0.8.4",
+        "version": "0.8.9",
         "settings": {
           "optimizer": {
             "enabled": false,
@@ -447,12 +447,12 @@
         "Ownable"
       ]
     },
-    "/Users/dhoolie/programs/nft-minter-frontend/contracts/AddressToCollection.sol": {
-      "lastModificationDate": 1649953970455,
-      "contentHash": "3d5617de518ebfefceccbb6654047aa2",
+    "/Users/dhoolie/programs/NFT-minter-frontend/contracts/AddressToCollection.sol": {
+      "lastModificationDate": 1662519010682,
+      "contentHash": "edc54b6b945febeca3c514bece53f38c",
       "sourceName": "contracts/AddressToCollection.sol",
       "solcConfig": {
-        "version": "0.8.4",
+        "version": "0.8.9",
         "settings": {
           "optimizer": {
             "enabled": false,
@@ -484,12 +484,12 @@
         "AddressToCollection"
       ]
     },
-    "/Users/dhoolie/programs/nft-minter-frontend/contracts/MyNFT.sol": {
-      "lastModificationDate": 1649864853754,
+    "/Users/dhoolie/programs/NFT-minter-frontend/contracts/MyNFT.sol": {
+      "lastModificationDate": 1657556374677,
       "contentHash": "43b4b69f9d68a9d4a08ff95d1e58cbe4",
       "sourceName": "contracts/MyNFT.sol",
       "solcConfig": {
-        "version": "0.8.4",
+        "version": "0.8.9",
         "settings": {
           "optimizer": {
             "enabled": false,
@@ -523,12 +523,12 @@
         "MyNFT"
       ]
     },
-    "/Users/dhoolie/programs/nft-minter-frontend/node_modules/@openzeppelin/contracts/token/ERC721/ERC721.sol": {
-      "lastModificationDate": 1645719849990,
-      "contentHash": "49295810dc45f300e5f84b4b50d88a59",
+    "/Users/dhoolie/programs/NFT-minter-frontend/node_modules/@openzeppelin/contracts/token/ERC721/ERC721.sol": {
+      "lastModificationDate": 1657556731643,
+      "contentHash": "79ff1a7eb801a525aa315fb7a679eede",
       "sourceName": "@openzeppelin/contracts/token/ERC721/ERC721.sol",
       "solcConfig": {
-        "version": "0.8.4",
+        "version": "0.8.9",
         "settings": {
           "optimizer": {
             "enabled": false,
@@ -566,12 +566,12 @@
         "ERC721"
       ]
     },
-    "/Users/dhoolie/programs/nft-minter-frontend/node_modules/@openzeppelin/contracts/utils/Counters.sol": {
-      "lastModificationDate": 1645719849757,
+    "/Users/dhoolie/programs/NFT-minter-frontend/node_modules/@openzeppelin/contracts/utils/Counters.sol": {
+      "lastModificationDate": 1657556731491,
       "contentHash": "74654e3ae5d7f39555055dfe244dab7a",
       "sourceName": "@openzeppelin/contracts/utils/Counters.sol",
       "solcConfig": {
-        "version": "0.8.4",
+        "version": "0.8.9",
         "settings": {
           "optimizer": {
             "enabled": false,
@@ -601,12 +601,12 @@
         "Counters"
       ]
     },
-    "/Users/dhoolie/programs/nft-minter-frontend/node_modules/@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol": {
-      "lastModificationDate": 1645719850016,
-      "contentHash": "580a443491d9d70eb064b0130fc3cd01",
+    "/Users/dhoolie/programs/NFT-minter-frontend/node_modules/@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol": {
+      "lastModificationDate": 1657556731663,
+      "contentHash": "8af32effd0536e2971ff8496812a5016",
       "sourceName": "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol",
       "solcConfig": {
-        "version": "0.8.4",
+        "version": "0.8.9",
         "settings": {
           "optimizer": {
             "enabled": false,
@@ -638,12 +638,12 @@
         "ERC721URIStorage"
       ]
     },
-    "/Users/dhoolie/programs/nft-minter-frontend/node_modules/@openzeppelin/contracts/token/ERC721/IERC721.sol": {
-      "lastModificationDate": 1645719850109,
-      "contentHash": "27d219ec6f69478d065fdbfa7931da68",
+    "/Users/dhoolie/programs/NFT-minter-frontend/node_modules/@openzeppelin/contracts/token/ERC721/IERC721.sol": {
+      "lastModificationDate": 1657556731737,
+      "contentHash": "ec99d946db3685a3630554aa6055bd7f",
       "sourceName": "@openzeppelin/contracts/token/ERC721/IERC721.sol",
       "solcConfig": {
-        "version": "0.8.4",
+        "version": "0.8.9",
         "settings": {
           "optimizer": {
             "enabled": false,
@@ -675,12 +675,12 @@
         "IERC721"
       ]
     },
-    "/Users/dhoolie/programs/nft-minter-frontend/node_modules/@openzeppelin/contracts/token/ERC721/IERC721Receiver.sol": {
-      "lastModificationDate": 1645719850121,
-      "contentHash": "592df588492d45fdcf46b3cb608c0fbf",
+    "/Users/dhoolie/programs/NFT-minter-frontend/node_modules/@openzeppelin/contracts/token/ERC721/IERC721Receiver.sol": {
+      "lastModificationDate": 1657556731742,
+      "contentHash": "c22d4395e33763de693fd440c6fd10e1",
       "sourceName": "@openzeppelin/contracts/token/ERC721/IERC721Receiver.sol",
       "solcConfig": {
-        "version": "0.8.4",
+        "version": "0.8.9",
         "settings": {
           "optimizer": {
             "enabled": false,
@@ -710,12 +710,12 @@
         "IERC721Receiver"
       ]
     },
-    "/Users/dhoolie/programs/nft-minter-frontend/node_modules/@openzeppelin/contracts/token/ERC721/extensions/IERC721Metadata.sol": {
-      "lastModificationDate": 1645719850118,
+    "/Users/dhoolie/programs/NFT-minter-frontend/node_modules/@openzeppelin/contracts/token/ERC721/extensions/IERC721Metadata.sol": {
+      "lastModificationDate": 1657556731741,
       "contentHash": "efbc0d15b80a74e34dbe8da0f3e879bb",
       "sourceName": "@openzeppelin/contracts/token/ERC721/extensions/IERC721Metadata.sol",
       "solcConfig": {
-        "version": "0.8.4",
+        "version": "0.8.9",
         "settings": {
           "optimizer": {
             "enabled": false,
@@ -747,12 +747,12 @@
         "IERC721Metadata"
       ]
     },
-    "/Users/dhoolie/programs/nft-minter-frontend/node_modules/@openzeppelin/contracts/utils/Address.sol": {
-      "lastModificationDate": 1645719849712,
-      "contentHash": "ad714a6368ee7d43cded6bbe8af0b155",
+    "/Users/dhoolie/programs/NFT-minter-frontend/node_modules/@openzeppelin/contracts/utils/Address.sol": {
+      "lastModificationDate": 1657556731465,
+      "contentHash": "c476b3895a94798b88a4bb97399e6dfe",
       "sourceName": "@openzeppelin/contracts/utils/Address.sol",
       "solcConfig": {
-        "version": "0.8.4",
+        "version": "0.8.9",
         "settings": {
           "optimizer": {
             "enabled": false,
@@ -782,12 +782,12 @@
         "Address"
       ]
     },
-    "/Users/dhoolie/programs/nft-minter-frontend/node_modules/@openzeppelin/contracts/utils/Context.sol": {
-      "lastModificationDate": 1645719849756,
+    "/Users/dhoolie/programs/NFT-minter-frontend/node_modules/@openzeppelin/contracts/utils/Context.sol": {
+      "lastModificationDate": 1657556731490,
       "contentHash": "5f2c5c4b6af2dd4551027144797bc8be",
       "sourceName": "@openzeppelin/contracts/utils/Context.sol",
       "solcConfig": {
-        "version": "0.8.4",
+        "version": "0.8.9",
         "settings": {
           "optimizer": {
             "enabled": false,
@@ -817,12 +817,12 @@
         "Context"
       ]
     },
-    "/Users/dhoolie/programs/nft-minter-frontend/node_modules/@openzeppelin/contracts/utils/Strings.sol": {
-      "lastModificationDate": 1645719850219,
-      "contentHash": "9c54c6c065d9e590fdcdd72c451425b9",
+    "/Users/dhoolie/programs/NFT-minter-frontend/node_modules/@openzeppelin/contracts/utils/Strings.sol": {
+      "lastModificationDate": 1657556731791,
+      "contentHash": "cf46906c4035f51639a22265066a9e78",
       "sourceName": "@openzeppelin/contracts/utils/Strings.sol",
       "solcConfig": {
-        "version": "0.8.4",
+        "version": "0.8.9",
         "settings": {
           "optimizer": {
             "enabled": false,
@@ -852,12 +852,12 @@
         "Strings"
       ]
     },
-    "/Users/dhoolie/programs/nft-minter-frontend/node_modules/@openzeppelin/contracts/utils/introspection/ERC165.sol": {
-      "lastModificationDate": 1645719849857,
+    "/Users/dhoolie/programs/NFT-minter-frontend/node_modules/@openzeppelin/contracts/utils/introspection/ERC165.sol": {
+      "lastModificationDate": 1657556731574,
       "contentHash": "0e7db055ce108f9da7bb6686a00287c0",
       "sourceName": "@openzeppelin/contracts/utils/introspection/ERC165.sol",
       "solcConfig": {
-        "version": "0.8.4",
+        "version": "0.8.9",
         "settings": {
           "optimizer": {
             "enabled": false,
@@ -889,12 +889,12 @@
         "ERC165"
       ]
     },
-    "/Users/dhoolie/programs/nft-minter-frontend/node_modules/@openzeppelin/contracts/utils/introspection/IERC165.sol": {
-      "lastModificationDate": 1645719850083,
+    "/Users/dhoolie/programs/NFT-minter-frontend/node_modules/@openzeppelin/contracts/utils/introspection/IERC165.sol": {
+      "lastModificationDate": 1657556731723,
       "contentHash": "03e6768535ac4da0e9756f1d8a4a018a",
       "sourceName": "@openzeppelin/contracts/utils/introspection/IERC165.sol",
       "solcConfig": {
-        "version": "0.8.4",
+        "version": "0.8.9",
         "settings": {
           "optimizer": {
             "enabled": false,
@@ -924,12 +924,197 @@
         "IERC165"
       ]
     },
-    "/Users/dhoolie/programs/nft-minter-frontend/contracts/Counters.sol": {
-      "lastModificationDate": 1646857691837,
+    "/Users/dhoolie/programs/NFT-minter-frontend/node_modules/@openzeppelin/contracts/token/ERC1155/IERC1155.sol": {
+      "lastModificationDate": 1657556731715,
+      "contentHash": "d5a8f6e07ca38ec384856cfe9f08a867",
+      "sourceName": "@openzeppelin/contracts/token/ERC1155/IERC1155.sol",
+      "solcConfig": {
+        "version": "0.8.9",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "../../utils/introspection/IERC165.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "IERC1155"
+      ]
+    },
+    "/Users/dhoolie/programs/NFT-minter-frontend/node_modules/@openzeppelin/contracts/token/ERC1155/IERC1155Receiver.sol": {
+      "lastModificationDate": 1657556731719,
+      "contentHash": "9f8822b72fe2702979e40160cb6d9636",
+      "sourceName": "@openzeppelin/contracts/token/ERC1155/IERC1155Receiver.sol",
+      "solcConfig": {
+        "version": "0.8.9",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "../../utils/introspection/IERC165.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "IERC1155Receiver"
+      ]
+    },
+    "/Users/dhoolie/programs/NFT-minter-frontend/node_modules/@openzeppelin/contracts/token/ERC1155/extensions/IERC1155MetadataURI.sol": {
+      "lastModificationDate": 1657556731717,
+      "contentHash": "9148c2e10c4efb12c71a7f080da5559b",
+      "sourceName": "@openzeppelin/contracts/token/ERC1155/extensions/IERC1155MetadataURI.sol",
+      "solcConfig": {
+        "version": "0.8.9",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "../IERC1155.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "IERC1155MetadataURI"
+      ]
+    },
+    "/Users/dhoolie/programs/NFT-minter-frontend/node_modules/@openzeppelin/contracts/access/Ownable.sol": {
+      "lastModificationDate": 1657556731773,
+      "contentHash": "e436cea06129be2c73cda4b1acc848b5",
+      "sourceName": "@openzeppelin/contracts/access/Ownable.sol",
+      "solcConfig": {
+        "version": "0.8.9",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "../utils/Context.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "Ownable"
+      ]
+    },
+    "/Users/dhoolie/programs/NFT-minter-frontend/contracts/SFTFactory.sol": {
+      "lastModificationDate": 1662394344481,
+      "contentHash": "2c22aec74d57d4a7ee55dcc14efe4339",
+      "sourceName": "contracts/SFTFactory.sol",
+      "solcConfig": {
+        "version": "0.8.9",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "./SFT.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.4"
+      ],
+      "artifacts": [
+        "SFTFactory"
+      ]
+    },
+    "/Users/dhoolie/programs/NFT-minter-frontend/contracts/Counters.sol": {
+      "lastModificationDate": 1657556374676,
       "contentHash": "036bfb284e2789d10e32c2ef8a695961",
       "sourceName": "contracts/Counters.sol",
       "solcConfig": {
-        "version": "0.8.4",
+        "version": "0.8.9",
         "settings": {
           "optimizer": {
             "enabled": false,
@@ -961,12 +1146,12 @@
         "Counters"
       ]
     },
-    "/Users/dhoolie/programs/nft-minter-frontend/contracts/SafeMath.sol": {
-      "lastModificationDate": 1646857691842,
+    "/Users/dhoolie/programs/NFT-minter-frontend/contracts/SafeMath.sol": {
+      "lastModificationDate": 1657556374678,
       "contentHash": "f57796b04c6d90733c3629e9201296f7",
       "sourceName": "contracts/SafeMath.sol",
       "solcConfig": {
-        "version": "0.8.4",
+        "version": "0.8.9",
         "settings": {
           "optimizer": {
             "enabled": false,
@@ -996,12 +1181,12 @@
         "SafeMath"
       ]
     },
-    "/Users/dhoolie/programs/nft-minter-frontend/contracts/EnumerableMap.sol": {
-      "lastModificationDate": 1646857691839,
+    "/Users/dhoolie/programs/NFT-minter-frontend/contracts/EnumerableMap.sol": {
+      "lastModificationDate": 1657556374676,
       "contentHash": "61413df35af0befb0f7d22d9b5060c8a",
       "sourceName": "contracts/EnumerableMap.sol",
       "solcConfig": {
-        "version": "0.8.4",
+        "version": "0.8.9",
         "settings": {
           "optimizer": {
             "enabled": false,
@@ -1031,12 +1216,12 @@
         "EnumerableMap"
       ]
     },
-    "/Users/dhoolie/programs/nft-minter-frontend/contracts/EnumerableSet.sol": {
-      "lastModificationDate": 1646857691839,
+    "/Users/dhoolie/programs/NFT-minter-frontend/contracts/EnumerableSet.sol": {
+      "lastModificationDate": 1657556374676,
       "contentHash": "44c3df7144f28c524018dfb95d554076",
       "sourceName": "contracts/EnumerableSet.sol",
       "solcConfig": {
-        "version": "0.8.4",
+        "version": "0.8.9",
         "settings": {
           "optimizer": {
             "enabled": false,
@@ -1064,6 +1249,123 @@
       ],
       "artifacts": [
         "EnumerableSet"
+      ]
+    },
+    "/Users/dhoolie/programs/NFT-minter-frontend/node_modules/@openzeppelin/contracts/token/ERC1155/ERC1155.sol": {
+      "lastModificationDate": 1657556731551,
+      "contentHash": "9be05ac5a08ad0370e3cc36665ca490c",
+      "sourceName": "@openzeppelin/contracts/token/ERC1155/ERC1155.sol",
+      "solcConfig": {
+        "version": "0.8.9",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "./IERC1155.sol",
+        "./IERC1155Receiver.sol",
+        "./extensions/IERC1155MetadataURI.sol",
+        "../../utils/Address.sol",
+        "../../utils/Context.sol",
+        "../../utils/introspection/ERC165.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "ERC1155"
+      ]
+    },
+    "/Users/dhoolie/programs/NFT-minter-frontend/contracts/SFT.sol": {
+      "lastModificationDate": 1662394344481,
+      "contentHash": "57c3e64b3b1c2b2eb98e70846586e32b",
+      "sourceName": "contracts/SFT.sol",
+      "solcConfig": {
+        "version": "0.8.9",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "@openzeppelin/contracts/token/ERC1155/ERC1155.sol",
+        "@openzeppelin/contracts/access/Ownable.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "SFT"
+      ]
+    },
+    "/Users/dhoolie/programs/NFT-minter-frontend/contracts/CollectionFactory.sol": {
+      "lastModificationDate": 1665607894146,
+      "contentHash": "14eeacbb1165e413740f688eac5b8d35",
+      "sourceName": "contracts/CollectionFactory.sol",
+      "solcConfig": {
+        "version": "0.8.9",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "./SFT.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.4"
+      ],
+      "artifacts": [
+        "CollectionFactory"
       ]
     }
   }

@@ -1,5 +1,5 @@
 import React from 'react';
-import NavBarWallet from '../NavBarWallet';
+import NavBarWallet from '../Pages/Nav/NavBarWallet';
 
 const WalletLayout = ({children})=>{
     return <div className='wallet-layout'>
@@ -10,7 +10,6 @@ const WalletLayout = ({children})=>{
                     {children}
                 </div>    
             </div>
-
 }
 
 export default WalletLayout;

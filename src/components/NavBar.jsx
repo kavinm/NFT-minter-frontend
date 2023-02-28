@@ -12,7 +12,7 @@ const NavBar=()=>{
         <div className='row m-0 p-0'>
             <div className='col-md-12 d-flex align-items-center justify-content-center'>
                 <div className='nav-area'>
-                    <img src={logo} id="kpmg-logo" />
+                    <img onClick={()=>navigate("/")} style={{cursor:'pointer'}} src={logo} id="kpmg-logo" />
                     <button className='btn' onClick={()=>navigate('/discover')}><h5>LAUNCH APP</h5></button>
                 </div>
             </div>

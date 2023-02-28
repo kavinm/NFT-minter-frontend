@@ -1,0 +1,10 @@
+artifacts
+cache
+contracts
+node_modules
+test
+.env
+.dockerignore
+.git
+.gitignore
+Dockerfile
