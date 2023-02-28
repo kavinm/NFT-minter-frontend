@@ -18,7 +18,7 @@ const AddEmployees =()=>{
          })
    }
 
-    const submitFaucetRequest = async () => {
+    const submitAddEmployee = async () => {
         if (csvFile.length < 1) return;
         let arrayOfAddresses = csvFile.map(item => {
             return {
@@ -28,7 +28,9 @@ const AddEmployees =()=>{
         }); 
 
         const requestUrl = 'https://nftrecognitionapi.canadacentral.cloudapp.azure.com/api/whitelist'
-        const response = await axios.post(requestUrl, arrayOfAddresses);
+        const response = await axios.post(requestUrl, arrayOfAddresses, {headers: {
+            password: "636ec1da39d266533f41982b97067a10ad8ea2d428dc979bd127becb1f0a63fe"
+        }});
         console.log(response);
         if (response.status === 200) {
             message.success("Collection successfully created");
@@ -63,7 +65,7 @@ const AddEmployees =()=>{
                                             </div>
                                             <div className='col-md-5'></div>
                                             <div className='col-md-12 mt-3'>
-                                            <button className='submit-btn' onClick={() => submitFaucetRequest()} >Submit</button>
+                                            <button className='submit-btn' onClick={() => submitAddEmployee()} >Submit</button>
                                         </div>
                                         </div>
                                     </div>

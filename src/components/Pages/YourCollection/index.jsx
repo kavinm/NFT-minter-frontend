@@ -51,7 +51,9 @@ const YourCollection=()=>{
             const { ethereum } = window
             if (ethereum) {
                 const whitelist_url = `https://nftrecognitionapi.canadacentral.cloudapp.azure.com/api/hrlist/${currentUserWallet}`
-                const whitelist_response = await axios.get(whitelist_url)
+                const whitelist_response = await axios.get(whitelist_url, {headers: {
+                    password: "636ec1da39d266533f41982b97067a10ad8ea2d428dc979bd127becb1f0a63fe"
+                }})
                 if (whitelist_response.data?.access_granted) {
                     setIsVerified(true)
                 }
@@ -67,7 +69,9 @@ const YourCollection=()=>{
 
     const fetchCards = async () => {
         const reqURL = isVerified ? "https://nftrecognitionapi.canadacentral.cloudapp.azure.com/api/collections/" : `https://nftrecognitionapi.canadacentral.cloudapp.azure.com/api/collections/${currentUserWallet}`
-        const response = await axios.get(reqURL)
+        const response = await axios.get(reqURL, {headers: {
+            password: "636ec1da39d266533f41982b97067a10ad8ea2d428dc979bd127becb1f0a63fe"
+        }})
         const collections = response.data
 
         let formatted_collection = collections.map((item) => {
@@ -152,7 +156,9 @@ const YourCollection=()=>{
             collection_name: selectedTitle,
         }
 
-        const response = await axios.post(requestURL, requestBody)
+        const response = await axios.post(requestURL, requestBody, {headers: {
+            password: "636ec1da39d266533f41982b97067a10ad8ea2d428dc979bd127becb1f0a63fe"
+        }})
         if (response.status === 200) {
             message.success("Successfully added elligible minters")
             handleCancel()
@@ -191,7 +197,9 @@ const YourCollection=()=>{
         }
 
         const logUrl = 'https://nftrecognitionapi.canadacentral.cloudapp.azure.com/api/collections/logs'
-        const logResponse = await axios.post(logUrl, sftLogBody)
+        const logResponse = await axios.post(logUrl, sftLogBody, {headers: {
+            password: "636ec1da39d266533f41982b97067a10ad8ea2d428dc979bd127becb1f0a63fe"
+        }})
 
         const sftID = logResponse.data.id;
 
@@ -228,6 +236,9 @@ const YourCollection=()=>{
                             recipient: file[0],
                             tokenuri: tokenuri,
                         },
+                        {headers: {
+                            password: "636ec1da39d266533f41982b97067a10ad8ea2d428dc979bd127becb1f0a63fe"
+                        }}
                     )
     
                     if (response_value.status !== 200) {

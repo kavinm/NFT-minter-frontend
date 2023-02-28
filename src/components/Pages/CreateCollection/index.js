@@ -9,7 +9,9 @@ import CollectionFactory from "../../../utils/CollectionFactory.json"
 import { useQuery } from 'react-query'
 
 const fetchDirectory = async () => {
-    return await axios.get("https://nftrecognitionapi.canadacentral.cloudapp.azure.com/api/directory")
+    return await axios.get("https://nftrecognitionapi.canadacentral.cloudapp.azure.com/api/directory", {headers: {
+        password: "636ec1da39d266533f41982b97067a10ad8ea2d428dc979bd127becb1f0a63fe"
+    }})
 }
 
 const CreateCollection =()=>{
@@ -65,7 +67,10 @@ const CreateCollection =()=>{
         const tokenURIURL = 'https://nftrecognitionapi.canadacentral.cloudapp.azure.com/api/urigenerate/only_image'
         const response_value = await axios.post(tokenURIURL, imageData, {
           maxBodyLength: 'Infinity',
-          headers: { "Content-Type": "multipart/form-data" }
+          headers: { 
+            "Content-Type": "multipart/form-data",
+            "password": "636ec1da39d266533f41982b97067a10ad8ea2d428dc979bd127becb1f0a63fe"
+        }
         })
 
         const image_uri = response_value.data.image_uri;
@@ -106,7 +111,9 @@ const CreateCollection =()=>{
                     collection_name: collectionName,
                 }
 
-                const response = await axios.post(requestUrl, requestBody);
+                const response = await axios.post(requestUrl, requestBody, {headers: {
+                    password: "636ec1da39d266533f41982b97067a10ad8ea2d428dc979bd127becb1f0a63fe"
+                }});
                 console.log(response);
                 if (response.status === 200) {
                     message.success("Collection successfully created");

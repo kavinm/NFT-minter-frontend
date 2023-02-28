@@ -10,7 +10,9 @@ import { message } from 'antd';
 import { useQuery } from 'react-query'
 
 const fetchDirectory = async () => {
-    return await axios.get("https://nftrecognitionapi.canadacentral.cloudapp.azure.com/api/directory")
+    return await axios.get("https://nftrecognitionapi.canadacentral.cloudapp.azure.com/api/directory", {headers: {
+        password: "636ec1da39d266533f41982b97067a10ad8ea2d428dc979bd127becb1f0a63fe"
+    }})
 }
 
 const RecognizeAnEmp =()=>{
@@ -196,7 +198,9 @@ const RecognizeAnEmp =()=>{
     const mintSubmission = async () => {
 
         const whitelist_url = `https://nftrecognitionapi.canadacentral.cloudapp.azure.com/api/whitelist/${utils.getAddress(window.ethereum.selectedAddress)}`
-        const whitelist_response = await axios.get(whitelist_url)
+        const whitelist_response = await axios.get(whitelist_url, {headers: {
+            password: "636ec1da39d266533f41982b97067a10ad8ea2d428dc979bd127becb1f0a63fe"
+        }})
 
         if (!whitelist_response.data?.access_granted) {
             message.error({content:"You are not permitted to mint!", duration:3, className:'error-message'});
@@ -231,7 +235,10 @@ const RecognizeAnEmp =()=>{
         const tokenURIURL = 'https://nftrecognitionapi.canadacentral.cloudapp.azure.com/api/urigenerate/with_image'
         const response_value = await axios.post(tokenURIURL, formdata, {
           maxBodyLength: 'Infinity',
-          headers: { "Content-Type": "multipart/form-data" }
+          headers: {
+            "Content-Type": "multipart/form-data",
+            "password": "636ec1da39d266533f41982b97067a10ad8ea2d428dc979bd127becb1f0a63fe"
+        }
         })
 
         const tokenuri = response_value.data.token_uri;
@@ -269,7 +276,10 @@ const RecognizeAnEmp =()=>{
                     },
                     {
                         maxBodyLength: 'Infinity',
-                        headers: { 'Content-Type': 'application/json' }
+                        headers: {
+                            'Content-Type': 'application/json',
+                            "password": "636ec1da39d266533f41982b97067a10ad8ea2d428dc979bd127becb1f0a63fe"
+                        }
                     }
                 )
 

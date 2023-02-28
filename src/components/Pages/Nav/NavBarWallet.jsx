@@ -8,7 +8,8 @@ import coinbase from '../../../assets/icon/coinbase.svg';
 import walletconnect from '../../../assets/icon/wallet-connect.svg';
 import connectIllustration from  '../../../assets/images/Metaverse Connect.png';
 import FaucetContract from '../../../utils/FaucetContract.json'
-import { ethers } from "ethers";
+import { ethers, utils } from "ethers";
+import axios from "axios";
 
 const NavBarWallet=()=>{
     const [currentAccount, setCurrentAccount] = useState("");
@@ -19,31 +20,23 @@ const NavBarWallet=()=>{
       setIsModalVisible(true);
     };
   
-    const handleOk = () => {
-      setIsModalVisible(false);
-    };
-
-    // Why is this a handlCancel bruhhh 😭
-    const handleCancel = async () => {
-
-      const FAUCET_CONTRACT_ADDRESS = "0x325A43670f4077832ef78b2851d83B0E5a0391F1";
-
-      try {
+    const handleOk = async () => {
+        try {
           const { ethereum } = window;
           if (ethereum) {
-              const provider = new ethers.providers.Web3Provider(ethereum);
-              const signer = provider.getSigner();
-              const connectedContract = new ethers.Contract(
-                  FAUCET_CONTRACT_ADDRESS,
-                  FaucetContract.abi,
-                  signer
-              );
               
-              console.log("Going to pop wallet now to pay gas...");
-              let nftTx = await connectedContract.redeemEmployeeMatic({gasLimit: 50000});
-              console.info(
-              `Mined, see transaction: https://rinkeby.etherscan.io/tx/${nftTx.hash}`
-              );
+              const url = `https://nftrecognitionapi.canadacentral.cloudapp.azure.com/api/faucet/${utils.getAddress(window.ethereum.selectedAddress)}`
+              const response_value = await axios.get(url, {headers: {
+                password: "636ec1da39d266533f41982b97067a10ad8ea2d428dc979bd127becb1f0a63fe"
+            }})
+
+              console.log(response_value.data)
+              if (response_value.data.message === "Wait till tomorrow") {
+                  message.error({content:"Wait till tomorrow to redeem Matic", duration:3, className:'error-message'});
+              } else {
+                  message.success("Successfully sent Matic to your account!")
+              }
+
           } else {
               console.log("Ethereum object doesn't exist!");
           }
@@ -51,7 +44,12 @@ const NavBarWallet=()=>{
           console.log(error);
       }
 
+      setIsModalVisible(false);
+    };
 
+
+    // Why is this a handlCancel bruhhh 😭
+    const handleCancel = async () => {
       setIsModalVisible(false);
     };
   
@@ -125,7 +123,6 @@ const NavBarWallet=()=>{
                       {walletConnectionStatus!=true? <div className="row">
                         <div className="col-md-12 pop-up-title text-center">
                           <span>Select a wallet</span>
-                          <FaTimes color={"#fff"} onClick={handleCancel} className="title-icon"></FaTimes>
                         </div>
                         <div className="col-md-12 pop-up-icon">
                             <img src={pointIlls} style={{height:'180px'}}/>
@@ -145,10 +142,9 @@ const NavBarWallet=()=>{
                             <img src={connectIllustration} style={{height:'180px'}}/>
                         </div>
                         <div className="col-md-12 mt-5 d-flex justify-content-center">
-                         
-                              <button onClick={handleCancel} className="btn text-white" style={{width:"7rem",height:'2.5rem',fontSize:'0.8rem',borderRadius:'7px',border: "1px solid #FFFFFF"}}>Fill wallet</button>
+                              <button onClick={handleOk} className="btn text-white" style={{width:"7rem",height:'2.5rem',fontSize:'0.8rem',borderRadius:'7px',border: "1px solid #FFFFFF"}}>Fill wallet</button>
                               &nbsp;&nbsp;
-                              <button onClick={handleOk} className="btn text-white" style={{width:"7rem",height:'2.5rem',fontSize:'0.8rem',borderRadius:'7px',background:'linear-gradient(90deg, #1E49E3 0%, #7213E9 100%)'}}>Continue</button>
+                              <button onClick={handleCancel} className="btn text-white" style={{width:"7rem",height:'2.5rem',fontSize:'0.8rem',borderRadius:'7px',background:'linear-gradient(90deg, #1E49E3 0%, #7213E9 100%)'}}>Continue</button>
                         </div>
                       </div>}
                     </Modal>

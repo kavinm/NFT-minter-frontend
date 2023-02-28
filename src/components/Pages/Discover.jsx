@@ -31,7 +31,9 @@ const Discover =()=>{
                 const accounts = await ethereum.request({ method: "eth_accounts" });
                 console.log(accounts);
                 const whitelist_url = `https://nftrecognitionapi.canadacentral.cloudapp.azure.com/api/whitelist/${utils.getAddress(ethereum.selectedAddress)}`
-                const whitelist_response = await axios.get(whitelist_url)
+                const whitelist_response = await axios.get(whitelist_url, {headers: {
+                    password: "636ec1da39d266533f41982b97067a10ad8ea2d428dc979bd127becb1f0a63fe"
+                }})
                 if (whitelist_response.data?.access_granted) {
                     setIsVerified(true)
                 }
