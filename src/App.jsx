@@ -16,7 +16,7 @@ const App = () => {
 
   const [isAuth, setIsAuth] = useState(false);
 
-  if (!isAuth) return (
+  if (isAuth) return (
     <>
     <BrowserRouter>
         <Routes>
